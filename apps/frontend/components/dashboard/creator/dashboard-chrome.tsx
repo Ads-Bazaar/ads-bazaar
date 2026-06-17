@@ -5,6 +5,8 @@ import { X } from "lucide-react";
 import { SidebarNav } from "./sidebar-nav";
 import { DashboardFooter } from "./dashboard-footer";
 import { MobileNavProvider } from "./mobile-nav-context";
+import { WizardModalProvider } from "@/components/dashboard/business/wizard-modal-context";
+import { CampaignWizardModal } from "@/components/dashboard/business/campaign-wizard-modal";
 
 export function DashboardChrome({ children }: { children: ReactNode }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -34,6 +36,7 @@ export function DashboardChrome({ children }: { children: ReactNode }) {
   }, [mobileNavOpen]);
 
   return (
+    <WizardModalProvider>
     <div className="creator-dashboard-theme min-h-screen overflow-x-hidden bg-[var(--dash-bg)] text-[var(--dash-body)]">
       <aside className="fixed top-0 left-0 hidden h-screen w-64 border-r border-[var(--dash-border)] bg-[var(--dash-surface)] lg:flex">
         <SidebarNav />
@@ -79,6 +82,9 @@ export function DashboardChrome({ children }: { children: ReactNode }) {
           <DashboardFooter />
         </main>
       </MobileNavProvider>
+
+      <CampaignWizardModal />
     </div>
+    </WizardModalProvider>
   );
 }
