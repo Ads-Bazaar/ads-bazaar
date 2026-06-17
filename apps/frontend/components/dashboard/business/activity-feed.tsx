@@ -15,7 +15,7 @@ export function ActivityFeed({ items }: { items: ActivityItem[] }) {
           Recent Activity
         </h2>
         <Link
-          href="/dashboard/analytics"
+          href="/dashboard/business/analytics"
           className="rounded text-xs font-bold text-[var(--dash-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-accent)] hover:underline"
         >
           VIEW LOG

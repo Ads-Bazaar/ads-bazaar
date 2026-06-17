@@ -37,7 +37,7 @@ export function CampaignsTable({
           Active Campaigns
         </h2>
         <Link
-          href="/dashboard/campaigns"
+          href="/dashboard/business/campaigns"
           className="rounded text-xs font-bold text-[var(--dash-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-accent)] hover:underline"
         >
           VIEW ALL
