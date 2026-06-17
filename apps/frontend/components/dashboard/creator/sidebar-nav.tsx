@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useWizardModal } from "@/components/dashboard/business/wizard-modal-context";
 import {
   Archive,
   BarChart3,
@@ -40,6 +41,7 @@ function isActiveHref(pathname: string, href: string) {
 export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   const router = useRouter();
+  const { openWizard } = useWizardModal();
 
   return (
     <div className="flex h-full flex-col gap-4 px-4 py-6">
@@ -76,13 +78,16 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
         })}
       </nav>
 
-      <Link
-        href="/dashboard/creator/campaigns/new"
-        onClick={onNavigate}
-        className="mt-4 flex min-h-11 items-center justify-center rounded-lg bg-[var(--dash-accent-strong)] py-3 text-center font-bold text-[var(--dash-on-accent-strong)] transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-accent)]"
+      <button
+        type="button"
+        onClick={() => {
+          onNavigate?.();
+          openWizard();
+        }}
+        className="mt-4 flex min-h-11 w-full items-center justify-center rounded-lg bg-[var(--dash-accent-strong)] py-3 text-center font-bold text-[var(--dash-on-accent-strong)] transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-accent)]"
       >
         New Campaign
-      </Link>
+      </button>
 
       <div className="mt-auto flex flex-col gap-1">
         <Link
