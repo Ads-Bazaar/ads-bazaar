@@ -86,8 +86,12 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
 
       <div className="mt-auto flex flex-col gap-1">
         <Link
-          href="/help"
-          onClick={onNavigate}
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            onNavigate?.();
+          }}
+          title="Coming soon"
           className="flex min-h-11 items-center gap-3 rounded-lg px-3 py-2 text-[15px] font-medium text-[var(--dash-muted)] transition-colors hover:bg-[var(--dash-border)] hover:text-[var(--dash-heading)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-accent)]"
         >
           <HelpCircle className="size-5" aria-hidden="true" />
