@@ -45,7 +45,7 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
     <div className="flex h-full flex-col gap-4 px-4 py-6">
       <div className="mb-4 px-2">
         <h1 className="text-[20px] font-bold tracking-tight text-[var(--dash-heading)]">
-          AdsBazaar Business
+          AdsBazaar Creator
         </h1>
         <p className="text-[12px] font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)] opacity-70">
           Creator Economy Hub
