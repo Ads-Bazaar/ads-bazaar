@@ -15,10 +15,10 @@ function MediaKitAction({
     <button
       type="button"
       className={`flex items-center justify-center gap-2 py-3 text-sm font-bold transition-colors ${
-          variant === "black"
-            ? "bg-black text-white border-black"
-            : "bg-white text-black border border-[var(--dash-border)]"
-        }`}
+        variant === "black"
+          ? "bg-[var(--dash-bg)] text-[var(--dash-heading)] border border-[var(--dash-border)]"
+          : "bg-[var(--dash-heading)] text-[var(--dash-bg)] border border-[var(--dash-border)]"
+      }`}
     >
       <Icon className="size-4" aria-hidden="true" />
       {children}
@@ -57,8 +57,12 @@ export function DigitalMediaKit({ mediaKit }: { mediaKit: MediaKit }) {
       </div>
 
       <div className="flex flex-col gap-2 p-4">
-        <MediaKitAction variant="white" icon={FileText}>Update Media Kit</MediaKitAction>
-        <MediaKitAction variant="black" icon={Eye}>Public Link</MediaKitAction>
+        <MediaKitAction variant="white" icon={FileText}>
+          Update Media Kit
+        </MediaKitAction>
+        <MediaKitAction variant="black" icon={Eye}>
+          Public Link
+        </MediaKitAction>
       </div>
     </section>
   );
