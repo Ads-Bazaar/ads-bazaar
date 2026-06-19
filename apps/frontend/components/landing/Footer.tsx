@@ -18,7 +18,7 @@ export function Footer() {
           {/* Platform Links */}
           <div className="flex flex-col gap-4">
             <h4 className="font-geist font-semibold text-[12px] uppercase tracking-[0.05em] text-on-surface mb-2">Platform</h4>
-            <a href="#" className="font-geist text-[14px] text-on-surface-variant hover:text-on-surface">Marketplace</a>
+            <a href="/marketplace" className="font-geist text-[14px] text-on-surface-variant hover:text-on-surface">Marketplace</a>
             <a href="#" className="font-geist text-[14px] text-on-surface-variant hover:text-on-surface">Campaign Dashboard</a>
             <a href="#" className="font-geist text-[14px] text-on-surface-variant hover:text-on-surface">Smart Contracts</a>
           </div>
