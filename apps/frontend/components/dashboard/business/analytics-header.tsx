@@ -2,17 +2,7 @@ import { Calendar, ChevronDown, Download } from "lucide-react";
 
 export function AnalyticsHeader() {
   return (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-      <div>
-        <h1 className="font-[family-name:var(--font-sora)] text-[28px] font-semibold text-[var(--dash-heading)]">
-          Analytics &amp; ROI
-        </h1>
-        <p className="mt-1 max-w-sm text-sm text-[var(--dash-muted)]">
-          Track your campaign efficiency and growth across the decentralized network.
-        </p>
-      </div>
-
-      <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-wrap items-center gap-3 sm:justify-end">
         <button
           type="button"
           disabled
@@ -33,7 +23,6 @@ export function AnalyticsHeader() {
           <Download className="size-4" aria-hidden="true" />
           <span>Export Report</span>
         </button>
-      </div>
     </div>
   );
 }
