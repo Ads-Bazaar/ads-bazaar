@@ -1,13 +1,7 @@
 "use client";
 
-import { Briefcase, FileText, type LucideIcon } from "lucide-react";
+import { Briefcase } from "lucide-react";
 import type { MarketplaceCampaign } from "./marketplace-data";
-
-// Map string iconId to corresponding LucideIcon
-const iconMap: Record<string, LucideIcon> = {
-  briefcase: Briefcase,
-  "file-text": FileText,
-};
 
 type MarketplaceCampaignCardProps = {
   campaign: MarketplaceCampaign;
@@ -20,9 +14,6 @@ export function MarketplaceCampaignCard({ campaign }: MarketplaceCampaignCardPro
       ? "border-primary-container/30"
       : "border-outline-variant";
 
-  // Resolve campaign icon (default to Briefcase)
-  const Icon = (campaign.iconId && iconMap[campaign.iconId]) || Briefcase;
-
   // Format Ref ID if present
   const displayRefId = campaign.refId
     ? campaign.refId.startsWith("ID:")
@@ -30,21 +21,15 @@ export function MarketplaceCampaignCard({ campaign }: MarketplaceCampaignCardPro
       : `ID: ${campaign.refId}`
     : null;
 
-  // Applicant avatars calculation
-  const maxVisibleAvatars = 2;
-  const totalAvatars = campaign.applicantAvatars.length;
-  const visibleAvatars = campaign.applicantAvatars.slice(0, maxVisibleAvatars);
-  const overflowCount = totalAvatars - maxVisibleAvatars;
-
   return (
     <article
       className={`border ${borderClass} bg-surface-container p-5 flex flex-col transition-colors hover:border-primary-container/40`}
     >
       {/* Header Row */}
       <div className="flex items-start justify-between mb-4">
-        {/* Left - Icon placeholder */}
+        {/* Left - Icon placeholder (always Briefcase per PR review feedback) */}
         <div className="size-10 border border-outline-variant bg-surface-container-high flex items-center justify-center">
-          <Icon className="size-5 text-on-surface-variant" aria-hidden="true" />
+          <Briefcase className="size-5 text-on-surface-variant" aria-hidden="true" />
         </div>
 
         {/* Right - Status Area */}
@@ -88,10 +73,10 @@ export function MarketplaceCampaignCard({ campaign }: MarketplaceCampaignCardPro
           </span>
           <div className="mt-0.5 flex items-baseline">
             <span className="font-sora text-lg font-bold text-on-surface">
-              {campaign.payoutAmount}
+              {campaign.payout}
             </span>
             <span className="text-xs font-bold text-on-surface-variant ml-1">
-              {campaign.payoutCurrency}
+              {campaign.currency}
             </span>
           </div>
         </div>
@@ -109,29 +94,14 @@ export function MarketplaceCampaignCard({ campaign }: MarketplaceCampaignCardPro
 
       {/* Footer Row */}
       <div className="flex items-center justify-between mt-4 pt-4 border-t border-outline-variant">
-        {/* Left - Applicant Avatars */}
+        {/* Left - Applicant Avatars (rendered as plain circles from count) */}
         <div className="flex -space-x-1.5">
-          {visibleAvatars.map((avatar, idx) => (
-            <div
-              key={idx}
-              className="size-6 rounded-full bg-surface-container-high border-2 border-surface-container overflow-hidden flex items-center justify-center shrink-0"
-            >
-              {avatar.startsWith("/") || avatar.startsWith("http") ? (
-                <img
-                  src={avatar}
-                  alt={`Applicant ${idx + 1}`}
-                  className="size-full object-cover"
-                  onError={(e) => {
-                    // Hide individual image if it fails to load
-                    e.currentTarget.style.display = "none";
-                  }}
-                />
-              ) : null}
-            </div>
+          {Array.from({ length: Math.min(campaign.applicantAvatars, 2) }).map((_, i) => (
+            <div key={i} className="size-6 rounded-full bg-surface-container-high border-2 border-surface-container shrink-0" />
           ))}
-          {totalAvatars > maxVisibleAvatars && (
+          {campaign.applicantAvatars > 2 && (
             <div className="size-6 rounded-full bg-surface-container-high border-2 border-surface-container flex items-center justify-center text-[8px] font-bold text-on-surface-variant shrink-0">
-              +{overflowCount}
+              +{campaign.applicantAvatars - 2}
             </div>
           )}
         </div>
@@ -160,3 +130,4 @@ export function MarketplaceCampaignCard({ campaign }: MarketplaceCampaignCardPro
     </article>
   );
 }
+
