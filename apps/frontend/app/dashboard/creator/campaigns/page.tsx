@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react"
 import { Inbox } from "lucide-react"
+import { DashboardHeader } from "@/components/dashboard/creator/dashboard-header"
 import { CampaignsPageHeader } from "@/components/dashboard/creator/campaigns-page-header"
 import {
   CampaignStatusTabs,
@@ -57,7 +58,9 @@ export default function CreatorCampaignsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
+    <>
+      <DashboardHeader eyebrow="Manage your gigs" title="Campaigns" />
+      <div className="flex flex-col gap-8">
       <CampaignsPageHeader
         searchValue={search}
         onSearchChange={handleSearchChange}
@@ -100,5 +103,6 @@ export default function CreatorCampaignsPage() {
         onPageChange={setPage}
       />
     </div>
+    </>
   )
 }
