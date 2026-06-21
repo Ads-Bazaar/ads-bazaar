@@ -43,6 +43,8 @@
   --dash-on-accent: #293500;
   --dash-accent-strong: #c8f232;
   --dash-on-accent-strong: #576c00;
+  --dash-danger: #ffb4ab;
+  --dash-on-danger: #690005;
 }
 
 @theme {
