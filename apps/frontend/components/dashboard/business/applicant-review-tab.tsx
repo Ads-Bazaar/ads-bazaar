@@ -26,63 +26,65 @@ export function ApplicantReviewTab({ campaign }: { campaign: CampaignDetail }) {
           </button>
         </div>
 
-        <table className="w-full border-collapse text-left">
-          <thead className="border-y border-[var(--dash-border)]">
-            <tr>
-              <th className="px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)]">
-                Creator
-              </th>
-              <th className="px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)]">
-                Reach
-              </th>
-              <th className="px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)]">
-                Bid
-              </th>
-              <th className="px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)]">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[var(--dash-border)]">
-            {campaign.applicants.map((applicant) => (
-              <tr key={applicant.id} className="transition-colors hover:bg-[var(--dash-bg)]">
-                <td className="px-4 py-4">
-                  <div className="flex items-center gap-3">
-                    <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[var(--dash-border)] text-xs font-semibold text-[var(--dash-heading)]">
-                      {initials(applicant.name)}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-[var(--dash-heading)]">{applicant.name}</p>
-                      <p className="text-xs text-[var(--dash-muted)]">{applicant.handle}</p>
-                    </div>
-                  </div>
-                </td>
-                <td className="px-4 py-4 text-sm text-[var(--dash-body)]">{applicant.reach}</td>
-                <td className="px-4 py-4 text-sm font-bold text-[var(--dash-accent)]">{applicant.bid}</td>
-                <td className="px-4 py-4">
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      disabled
-                      title="Coming soon"
-                      className="border border-[var(--dash-border)] px-3 py-1.5 text-xs font-bold text-[var(--dash-muted)] transition-colors hover:border-red-400 hover:text-red-400 disabled:cursor-not-allowed"
-                    >
-                      Reject
-                    </button>
-                    <button
-                      type="button"
-                      disabled
-                      title="Coming soon"
-                      className="bg-[var(--dash-accent-strong)] px-3 py-1.5 text-xs font-bold text-[var(--dash-on-accent-strong)] disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      Approve
-                    </button>
-                  </div>
-                </td>
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[500px] border-collapse text-left">
+            <thead className="border-y border-[var(--dash-border)]">
+              <tr>
+                <th className="px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)]">
+                  Creator
+                </th>
+                <th className="px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)]">
+                  Reach
+                </th>
+                <th className="px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)]">
+                  Bid
+                </th>
+                <th className="px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)]">
+                  Action
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-[var(--dash-border)]">
+              {campaign.applicants.map((applicant) => (
+                <tr key={applicant.id} className="transition-colors hover:bg-[var(--dash-bg)]">
+                  <td className="px-4 py-4">
+                    <div className="flex items-center gap-3">
+                      <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[var(--dash-border)] text-xs font-semibold text-[var(--dash-heading)]">
+                        {initials(applicant.name)}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-[var(--dash-heading)]">{applicant.name}</p>
+                        <p className="text-xs text-[var(--dash-muted)]">{applicant.handle}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 text-sm text-[var(--dash-body)]">{applicant.reach}</td>
+                  <td className="px-4 py-4 text-sm font-bold text-[var(--dash-accent)]">{applicant.bid}</td>
+                  <td className="px-4 py-4">
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        disabled
+                        title="Coming soon"
+                        className="border border-[var(--dash-border)] px-3 py-1.5 text-xs font-bold text-[var(--dash-muted)] transition-colors hover:border-red-400 hover:text-red-400 disabled:cursor-not-allowed"
+                      >
+                        Reject
+                      </button>
+                      <button
+                        type="button"
+                        disabled
+                        title="Coming soon"
+                        className="bg-[var(--dash-accent-strong)] px-3 py-1.5 text-xs font-bold text-[var(--dash-on-accent-strong)] disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        Approve
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <h2 className="mt-8 mb-4 text-sm font-semibold text-[var(--dash-heading)]">
