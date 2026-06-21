@@ -1,32 +1,64 @@
+import { Timer, TrendingUp } from "lucide-react";
+import { ClaimableCard } from "@/components/dashboard/creator/claimable-card";
+import {
+  connectedWallet,
+  currentCycle,
+  networkStatus,
+  offRampFeatures,
+  payoutHistory,
+  payoutSummary,
+} from "@/components/dashboard/creator/creator-payouts-data";
 import { DashboardHeader } from "@/components/dashboard/creator/dashboard-header";
+import { OffRampPanel } from "@/components/dashboard/creator/off-ramp-panel";
+import { PayoutHistoryTable } from "@/components/dashboard/creator/payout-history-table";
+import { PayoutsNetworkStatus } from "@/components/dashboard/creator/payouts-network-status";
+import { StatCard } from "@/components/dashboard/creator/stat-card";
+import { WalletPanel } from "@/components/dashboard/creator/wallet-panel";
 
-/**
- * Placeholder route. Full implementation tracked in
- * https://github.com/Ads-Bazaar/ads-bazaar/issues/19 — see that issue for the
- * file structure, components, design tokens, and acceptance criteria before
- * building this page out.
- */
 export default function CreatorPayoutsPage() {
   return (
     <>
-      <DashboardHeader eyebrow="Your earnings" title="Payouts & Earnings" />
-
-      <div className="flex flex-col items-center justify-center gap-2 border border-[var(--dash-border)] bg-[var(--dash-surface)] px-6 py-20 text-center">
-        <p className="text-sm font-medium text-[var(--dash-heading)]">
-          This page is under construction.
-        </p>
-        <p className="max-w-md text-sm text-[var(--dash-muted)]">
-          Full implementation is tracked in{" "}
-          <a
-            href="https://github.com/Ads-Bazaar/ads-bazaar/issues/19"
-            className="text-[var(--dash-accent)] hover:underline"
-          >
-            Issue #19
-          </a>
-          . Replace this file according to that spec — do not create a
-          competing route elsewhere.
-        </p>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <DashboardHeader eyebrow="Your earnings" title="Payouts & Earnings" />
+        <div className="text-left sm:text-right">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)]">
+            {currentCycle.endsLabel}
+          </p>
+          <p className="text-sm font-bold text-[var(--dash-heading)]">
+            {currentCycle.endsDate}
+          </p>
+        </div>
       </div>
+
+      <div className="grid grid-cols-12 gap-6">
+        <StatCard
+          className="col-span-12 sm:col-span-6 lg:col-span-4"
+          delta={payoutSummary.totalEarnedDelta}
+          icon={TrendingUp}
+          iconTone="accent"
+          label="Total Earned"
+          value={payoutSummary.totalEarned}
+        />
+
+        <ClaimableCard amount={payoutSummary.availableToClaim} />
+
+        <StatCard
+          className="col-span-12 sm:col-span-6 lg:col-span-4"
+          delta={payoutSummary.pendingArrival}
+          icon={Timer}
+          iconTone="muted"
+          label="Pending Verification"
+          value={payoutSummary.pendingVerification}
+        />
+
+        <WalletPanel wallet={connectedWallet} />
+
+        <OffRampPanel features={offRampFeatures} />
+
+        <PayoutHistoryTable items={payoutHistory} />
+      </div>
+
+      <PayoutsNetworkStatus status={networkStatus} />
     </>
   );
 }

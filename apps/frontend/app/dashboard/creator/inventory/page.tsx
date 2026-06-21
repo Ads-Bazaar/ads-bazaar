@@ -1,31 +1,30 @@
 import { DashboardHeader } from "@/components/dashboard/creator/dashboard-header";
+import { ConnectedChannels } from "@/components/dashboard/creator/connected-channels";
+import { DigitalMediaKit } from "@/components/dashboard/creator/digital-media-kit";
+import { AudienceInsights } from "@/components/dashboard/creator/audience-insights";
+import { SyncSchedule } from "@/components/dashboard/creator/sync-schedule";
+import {
+  audienceInsights,
+  connectedChannels,
+  mediaKit,
+  syncNote,
+  syncSchedule,
+  totalActiveConnections,
+} from "@/components/dashboard/creator/creator-inventory-data";
 
-/**
- * Placeholder route. Full implementation tracked in
- * https://github.com/Ads-Bazaar/ads-bazaar/issues/18 — see that issue for the
- * file structure, components, design tokens, and acceptance criteria before
- * building this page out.
- */
 export default function CreatorInventoryPage() {
   return (
     <>
       <DashboardHeader eyebrow="Your digital presence" title="Inventory" />
 
-      <div className="flex flex-col items-center justify-center gap-2 border border-[var(--dash-border)] bg-[var(--dash-surface)] px-6 py-20 text-center">
-        <p className="text-sm font-medium text-[var(--dash-heading)]">
-          This page is under construction.
-        </p>
-        <p className="max-w-md text-sm text-[var(--dash-muted)]">
-          Full implementation is tracked in{" "}
-          <a
-            href="https://github.com/Ads-Bazaar/ads-bazaar/issues/18"
-            className="text-[var(--dash-accent)] hover:underline"
-          >
-            Issue #18
-          </a>
-          . Replace this file according to that spec — do not create a
-          competing route elsewhere.
-        </p>
+      <div className="grid grid-cols-12 gap-6">
+        <ConnectedChannels
+          channels={connectedChannels}
+          activeCount={totalActiveConnections}
+        />
+        <DigitalMediaKit mediaKit={mediaKit} />
+        <AudienceInsights insights={audienceInsights} />
+        <SyncSchedule items={syncSchedule} note={syncNote} />
       </div>
     </>
   );

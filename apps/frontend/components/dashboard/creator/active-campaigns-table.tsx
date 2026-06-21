@@ -51,7 +51,7 @@ export function ActiveCampaignsTable({
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse text-left">
+          <table className="w-full min-w-[500px] border-collapse text-left">
             <thead className="border-b border-[var(--dash-border)]">
               <tr>
                 <th className="pb-4 text-xs font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)]">
@@ -79,7 +79,7 @@ export function ActiveCampaignsTable({
                   <tr key={campaign.id}>
                     <td className="py-4">
                       <div className="flex items-center gap-3">
-                        <div className="flex size-8 shrink-0 items-center justify-center rounded border border-[var(--dash-border)] bg-[#262626]">
+                        <div className="flex size-8 shrink-0 items-center justify-center rounded border border-[var(--dash-border)] bg-[var(--dash-bg)]">
                           <Icon className="size-[18px] text-[var(--dash-body)]" aria-hidden="true" />
                         </div>
                         <div>
