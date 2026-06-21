@@ -61,48 +61,48 @@ export default function CreatorCampaignsPage() {
     <>
       <DashboardHeader eyebrow="Manage your gigs" title="Campaigns" />
       <div className="flex flex-col gap-8">
-      <CampaignsPageHeader
-        searchValue={search}
-        onSearchChange={handleSearchChange}
-      />
+        <CampaignsPageHeader
+          searchValue={search}
+          onSearchChange={handleSearchChange}
+        />
 
-      <CampaignStatusTabs
-        active={filter}
-        onChange={handleFilterChange}
-        activeCount={activeCount}
-        disputedCount={disputedCount}
-      />
+        <CampaignStatusTabs
+          active={filter}
+          onChange={handleFilterChange}
+          activeCount={activeCount}
+          disputedCount={disputedCount}
+        />
 
-      {pageItems.length > 0 ? (
-        <div className="flex flex-col gap-4">
-          {pageItems.map((campaign) => (
-            <CampaignListRow
-              key={campaign.id}
-              campaign={campaign}
-              onSubmitProof={(id) => console.log("submit proof", id)}
-              onResolveDispute={(id) => console.log("resolve dispute", id)}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="flex flex-col items-center justify-center gap-3 border border-[var(--dash-border)] bg-[var(--dash-surface)] py-20 text-center">
-          <Inbox className="size-10 text-[var(--dash-muted)]" />
-          <p className="font-semibold text-[var(--dash-heading)]">
-            No campaigns found
-          </p>
-          <p className="max-w-xs text-sm text-[var(--dash-muted)]">
-            Try adjusting your search or filter to find what you&apos;re
-            looking for.
-          </p>
-        </div>
-      )}
+        {pageItems.length > 0 ? (
+          <div className="flex flex-col gap-4">
+            {pageItems.map((campaign) => (
+              <CampaignListRow
+                key={campaign.id}
+                campaign={campaign}
+                onSubmitProof={(id) => console.log("submit proof", id)}
+                onResolveDispute={(id) => console.log("resolve dispute", id)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-3 border border-[var(--dash-border)] bg-[var(--dash-surface)] py-20 text-center">
+            <Inbox className="size-10 text-[var(--dash-muted)]" />
+            <p className="font-semibold text-[var(--dash-heading)]">
+              No campaigns found
+            </p>
+            <p className="max-w-xs text-sm text-[var(--dash-muted)]">
+              Try adjusting your search or filter to find what you&apos;re
+              looking for.
+            </p>
+          </div>
+        )}
 
-      <CampaignsPagination
-        currentPage={safePage}
-        totalPages={totalPages}
-        onPageChange={setPage}
-      />
-    </div>
+        <CampaignsPagination
+          currentPage={safePage}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
+      </div>
     </>
   )
 }
