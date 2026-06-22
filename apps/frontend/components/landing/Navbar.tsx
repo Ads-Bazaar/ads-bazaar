@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Bell, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { ConnectWalletButton } from "@/components/wallet/connect-wallet-button";
+import { NotificationBell } from "@/components/notifications/notification-bell";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -47,9 +48,7 @@ export function Navbar() {
 
         {/* Actions */}
         <div className="hidden md:flex items-center gap-6">
-          <button aria-label="Notifications" className="text-on-surface-variant hover:text-on-surface transition-colors">
-            <Bell className="w-5 h-5" />
-          </button>
+          <NotificationBell variant="landing" />
           <ConnectWalletButton />
         </div>
 

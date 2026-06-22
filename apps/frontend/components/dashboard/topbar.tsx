@@ -1,6 +1,7 @@
 "use client";
 
-import { Menu, Bell, LayoutGrid } from "lucide-react";
+import { Menu, LayoutGrid } from "lucide-react";
+import { NotificationBell } from "@/components/notifications/notification-bell";
 
 export default function TopBar() {
   const handleToggle = () => {
@@ -8,13 +9,13 @@ export default function TopBar() {
   };
 
   return (
-    <header className="h-[60px] border-b border-[#444934] bg-[#1c1b1b] flex items-center justify-between px-6 z-30">
+    <header className="h-[60px] border-b border-outline-variant bg-surface-container-low flex items-center justify-between px-6 z-30">
       {/* Left side */}
       <div className="flex items-center space-x-3">
         {/* Mobile Hamburger menu */}
         <button
           onClick={handleToggle}
-          className="md:hidden p-1.5 rounded-[4px] hover:bg-[#2a2a2a] text-[#e5e2e1] transition-colors"
+          className="md:hidden p-1.5 rounded-[4px] hover:bg-surface-container-high text-on-surface transition-colors"
           aria-label="Toggle sidebar"
         >
           <Menu className="w-5 h-5" />
@@ -22,9 +23,9 @@ export default function TopBar() {
 
         {/* Network indicator */}
         <div className="flex items-center space-x-2">
-          <span className="w-2 h-2 rounded-full bg-[#4ade80]" aria-hidden="true" />
-          <span className="font-geist text-sm text-[#c5c9ae]">
-            Active: <span className="text-[#e5e2e1]">Stellar Mainnet</span>
+          <span className="w-2 h-2 rounded-full bg-[var(--db-primary-container)]" aria-hidden="true" />
+          <span className="font-geist text-sm text-on-surface-variant">
+            Active: <span className="text-on-surface">Stellar Mainnet</span>
           </span>
         </div>
       </div>
@@ -32,15 +33,12 @@ export default function TopBar() {
       {/* Right side */}
       <div className="flex items-center space-x-4">
         {/* Icon buttons hidden on < 480px */}
-        <button
-          className="hidden min-[480px]:inline-flex p-1.5 rounded-[4px] hover:bg-[#2a2a2a] text-[#c5c9ae] hover:text-[#e5e2e1] transition-colors"
-          aria-label="Notifications"
-        >
-          <Bell className="w-5 h-5" />
-        </button>
+        <div className="hidden min-[480px]:inline-flex">
+          <NotificationBell variant="dashboard" />
+        </div>
 
         <button
-          className="hidden min-[480px]:inline-flex p-1.5 rounded-[4px] hover:bg-[#2a2a2a] text-[#c5c9ae] hover:text-[#e5e2e1] transition-colors"
+          className="hidden min-[480px]:inline-flex p-1.5 rounded-[4px] hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"
           aria-label="Wallet/Portfolio shortcut"
         >
           <LayoutGrid className="w-5 h-5" />
@@ -48,7 +46,7 @@ export default function TopBar() {
 
         {/* New Campaign CTA */}
         <button
-          className="bg-[#c8f232] text-[#293500] font-geist text-sm font-semibold px-4 h-[36px] rounded-[4px] hover:bg-[#b8e02b] transition-colors duration-150 whitespace-nowrap"
+          className="bg-primary-container text-on-primary font-geist text-sm font-semibold px-4 h-[36px] rounded-[4px] hover:opacity-90 transition-opacity duration-150 whitespace-nowrap"
         >
           New Campaign
         </button>
