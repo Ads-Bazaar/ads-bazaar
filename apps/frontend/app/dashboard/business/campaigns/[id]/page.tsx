@@ -1,3 +1,4 @@
+import { DashboardHeader } from "@/components/dashboard/business/dashboard-header";
 import { CampaignDetailHeader } from "@/components/dashboard/business/campaign-detail-header";
 import { CampaignTabsBar } from "@/components/dashboard/business/campaign-tabs-bar";
 import { CampaignTabsContent } from "@/components/dashboard/business/campaign-tabs-content";
@@ -17,6 +18,7 @@ export default function CampaignDetailPage({
 
   return (
     <CampaignTabsProvider>
+      <DashboardHeader eyebrow="Campaign details" title={campaign.name} />
       <div className="grid grid-cols-12 gap-6">
         <div className="col-span-12 lg:col-span-8">
           <CampaignDetailHeader campaign={campaign} />
@@ -40,3 +42,4 @@ export default function CampaignDetailPage({
     </CampaignTabsProvider>
   );
 }
+
