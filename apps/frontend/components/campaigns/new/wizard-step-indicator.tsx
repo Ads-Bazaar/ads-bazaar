@@ -30,6 +30,7 @@ export function WizardStepIndicator({ steps, currentStep, onStepClick }: WizardS
                 <button
                   type="button"
                   onClick={() => onStepClick?.(stepNumber)}
+                  aria-label={`Go to ${step.label}`}
                   className="relative z-10 flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full text-sm font-bold transition-colors"
                   style={{
                     backgroundColor: "#c8f232",
@@ -42,6 +43,8 @@ export function WizardStepIndicator({ steps, currentStep, onStepClick }: WizardS
                 <button
                   type="button"
                   disabled
+                  aria-current="step"
+                  aria-label={`Current step: ${step.label}`}
                   className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-colors"
                   style={{
                     backgroundColor: "#c8f232",
@@ -52,6 +55,7 @@ export function WizardStepIndicator({ steps, currentStep, onStepClick }: WizardS
                 </button>
               ) : (
                 <div
+                  aria-label={`Future step: ${step.label}`}
                   className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-colors"
                   style={{
                     backgroundColor: "rgba(255,255,255,0.08)",
