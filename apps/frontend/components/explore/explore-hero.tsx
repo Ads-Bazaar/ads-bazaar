@@ -1,6 +1,11 @@
-import { hashtagPills } from "./explore-data";
+import { hashtagPills, type TrendingCampaignCategory } from "./explore-data";
 
-export function ExploreHero() {
+type ExploreHeroProps = {
+  activeTag: TrendingCampaignCategory | null;
+  onTagClick: (category: TrendingCampaignCategory) => void;
+};
+
+export function ExploreHero({ activeTag, onTagClick }: ExploreHeroProps) {
   return (
     <section>
       <h1 className="font-sora text-[48px] lg:text-[64px] font-[900] italic text-on-surface text-center leading-[1.05] max-w-[700px] mx-auto">
@@ -9,11 +14,17 @@ export function ExploreHero() {
       <div className="flex flex-wrap justify-center gap-3 mt-8">
         {hashtagPills.map((pill) => (
           <button
-            key={pill}
+            key={pill.category}
             type="button"
-            className="border border-outline-variant bg-surface-container-high px-4 py-2 text-sm font-semibold text-on-surface-variant hover:border-primary-container hover:text-primary-container transition-colors cursor-pointer"
+            onClick={() => onTagClick(pill.category)}
+            aria-pressed={activeTag === pill.category}
+            className={`border border-outline-variant px-4 py-2 text-sm font-semibold transition-colors cursor-pointer ${
+              activeTag === pill.category
+                ? "bg-primary-container text-on-primary"
+                : "bg-surface-container-high text-on-surface-variant hover:border-primary-container hover:text-primary-container"
+            }`}
           >
-            {pill}
+            {pill.label}
           </button>
         ))}
       </div>
