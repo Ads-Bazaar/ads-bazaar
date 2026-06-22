@@ -26,15 +26,41 @@ export function WizardStepIndicator({ steps, currentStep, onStepClick }: WizardS
               )}
 
               {/* Step circle */}
-              <div
-                className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-colors"
-                style={{
-                  backgroundColor: isCompleted || isActive ? "#c8f232" : "rgba(255,255,255,0.08)",
-                  color: isCompleted || isActive ? "#293500" : "rgba(255,255,255,0.4)",
-                }}
-              >
-                {isCompleted ? <Check size={16} strokeWidth={3} /> : stepNumber}
-              </div>
+              {isCompleted ? (
+                <button
+                  type="button"
+                  onClick={() => onStepClick?.(stepNumber)}
+                  className="relative z-10 flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full text-sm font-bold transition-colors"
+                  style={{
+                    backgroundColor: "#c8f232",
+                    color: "#293500",
+                  }}
+                >
+                  <Check size={16} strokeWidth={3} />
+                </button>
+              ) : isActive ? (
+                <button
+                  type="button"
+                  disabled
+                  className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-colors"
+                  style={{
+                    backgroundColor: "#c8f232",
+                    color: "#293500",
+                  }}
+                >
+                  {stepNumber}
+                </button>
+              ) : (
+                <div
+                  className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-colors"
+                  style={{
+                    backgroundColor: "rgba(255,255,255,0.08)",
+                    color: "rgba(255,255,255,0.4)",
+                  }}
+                >
+                  {stepNumber}
+                </div>
+              )}
 
               {/* Right connector */}
               {index < steps.length - 1 && (
