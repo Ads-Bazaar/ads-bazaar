@@ -11,19 +11,17 @@ export const metadata: Metadata = {
   title: "Analytics",
 };
 import { AnalyticsHeader } from "@/components/dashboard/business/analytics-header";
+import { DashboardHeader } from "@/components/dashboard/business/dashboard-header";
 import { AnalyticsStatCard } from "@/components/dashboard/business/analytics-stat-card";
 import { EngagementSpendChart } from "@/components/dashboard/business/engagement-spend-chart";
 import { PlatformSplitCard } from "@/components/dashboard/business/platform-split-card";
 import { TopCampaignsTable } from "@/components/dashboard/business/top-campaigns-table";
 import { RegionalReachCard } from "@/components/dashboard/business/regional-reach-card";
 
-export const metadata: Metadata = {
-  title: "Analytics",
-};
-
 export default function BusinessAnalyticsPage() {
   return (
     <div className="flex flex-col gap-6">
+      <DashboardHeader eyebrow="Performance insights" title="Analytics & ROI" />
       <AnalyticsHeader />
 
       {/* Stat cards row */}

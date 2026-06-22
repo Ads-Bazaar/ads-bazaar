@@ -2,10 +2,16 @@
 
 import type { PlatformShare } from "./analytics-data";
 
-const SIZE = 160;
-const RADIUS = 62;
-const STROKE_WIDTH = 20;
-const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+const SIZE = 208; // viewBox (bigger box)
+const INSET = 18; // distance from viewBox edge to the rect path
+const STROKE = 18;
+const RX = 14; // small corner radius → sharper, more square "box" ring
+
+const W = SIZE - INSET * 2; // square side
+// Perimeter of a rounded square: 4 straight edges (minus corners) + 4 quarter-arcs.
+const PERIMETER = 4 * W - RX * (8 - 2 * Math.PI);
+// Offset so the first segment starts near the top-center of the box.
+const START_SHIFT = W / 2 - RX;
 
 const SEGMENT_COLORS = ["var(--dash-accent)", "#4b5563", "#374151"];
 
@@ -17,14 +23,12 @@ export function PlatformSplitCard({ platforms }: { platforms: PlatformShare[] })
     const fraction = platform.percentage / 100;
     const start = cumulative;
     cumulative += fraction;
-    
-    const dashLength = fraction * CIRCUMFERENCE;
-    const offset = -(start * CIRCUMFERENCE);
-    
+    const dash = fraction * PERIMETER;
+    const offset = -(start * PERIMETER + START_SHIFT);
     return {
       key: platform.name,
       color: SEGMENT_COLORS[index] ?? SEGMENT_COLORS[SEGMENT_COLORS.length - 1],
-      dashArray: `${dashLength} ${CIRCUMFERENCE}`,
+      dashArray: `${dash} ${PERIMETER - dash}`,
       dashOffset: offset,
     };
   });
@@ -35,34 +39,36 @@ export function PlatformSplitCard({ platforms }: { platforms: PlatformShare[] })
         <p className="text-xs font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)]">
           Platform Split
         </p>
-        <p className="mt-0.5 text-xs text-[var(--dash-muted)]">Performance distribution</p>
+        <p className="text-xs text-[var(--dash-muted)]">Performance distribution</p>
       </div>
 
-      <div className="relative mx-auto mt-6 flex flex-1 items-center justify-center">
-        <div className="relative" style={{ width: SIZE, height: SIZE }}>
-          <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} aria-hidden="true" className="-rotate-90">
-            {segments.map((segment) => (
-              <circle
-                key={segment.key}
-                cx={SIZE / 2}
-                cy={SIZE / 2}
-                r={RADIUS}
-                fill="none"
-                stroke={segment.color}
-                strokeWidth={STROKE_WIDTH}
-                strokeDasharray={segment.dashArray}
-                strokeDashoffset={segment.dashOffset}
-              />
-            ))}
-          </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-            <span className="text-xl font-semibold text-[var(--dash-heading)]">{lead.percentage}%</span>
-            <span className="text-xs text-[var(--dash-muted)]">{lead.name} Dominance</span>
-          </div>
+      <div className="relative mx-auto mt-4" style={{ width: SIZE, height: SIZE }}>
+        <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} aria-hidden="true">
+          {segments.map((segment) => (
+            <rect
+              key={segment.key}
+              x={INSET}
+              y={INSET}
+              width={W}
+              height={W}
+              rx={RX}
+              ry={RX}
+              fill="none"
+              stroke={segment.color}
+              strokeWidth={STROKE}
+              strokeLinecap="butt"
+              strokeDasharray={segment.dashArray}
+              strokeDashoffset={segment.dashOffset}
+            />
+          ))}
+        </svg>
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+          <span className="text-xl font-semibold text-[var(--dash-heading)]">{lead.percentage}%</span>
+          <span className="text-xs text-[var(--dash-muted)]">{lead.name} Dominance</span>
         </div>
       </div>
 
-      <div className="mt-6 flex flex-col gap-3">
+      <div className="mt-4 flex flex-col gap-3">
         {platforms.map((platform) => (
           <div key={platform.name} className="flex items-center gap-2">
             <span
