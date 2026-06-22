@@ -6,6 +6,10 @@ import {
   topCampaigns,
   regionRows,
 } from "@/components/dashboard/business/analytics-data";
+
+export const metadata: Metadata = {
+  title: "Analytics",
+};
 import { AnalyticsHeader } from "@/components/dashboard/business/analytics-header";
 import { AnalyticsStatCard } from "@/components/dashboard/business/analytics-stat-card";
 import { EngagementSpendChart } from "@/components/dashboard/business/engagement-spend-chart";
