@@ -1,12 +1,5 @@
-import {
-  analyticsStats,
-  spendEngagementSeries,
-  platformShares,
-  topCampaigns,
-  regionRows,
-} from "@/components/dashboard/business/analytics-data";
+import { analyticsStats, spendEngagementSeries, platformShares, topCampaigns, regionRows } from "@/components/dashboard/business/analytics-data";
 import { AnalyticsHeader } from "@/components/dashboard/business/analytics-header";
-import { DashboardHeader } from "@/components/dashboard/business/dashboard-header";
 import { AnalyticsStatCard } from "@/components/dashboard/business/analytics-stat-card";
 import { EngagementSpendChart } from "@/components/dashboard/business/engagement-spend-chart";
 import { PlatformSplitCard } from "@/components/dashboard/business/platform-split-card";
@@ -16,7 +9,6 @@ import { RegionalReachCard } from "@/components/dashboard/business/regional-reac
 export default function BusinessAnalyticsPage() {
   return (
     <div className="flex flex-col gap-6">
-      <DashboardHeader eyebrow="Performance insights" title="Analytics & ROI" />
       <AnalyticsHeader />
 
       {/* Stat cards row */}
