@@ -3,9 +3,10 @@ import { Check } from "lucide-react";
 interface WizardStepIndicatorProps {
   steps: { label: string }[];
   currentStep: number; // 1-indexed
+  onStepClick?: (step: number) => void;
 }
 
-export function WizardStepIndicator({ steps, currentStep }: WizardStepIndicatorProps) {
+export function WizardStepIndicator({ steps, currentStep, onStepClick }: WizardStepIndicatorProps) {
   return (
     <div className="mb-8 flex items-start justify-between">
       {steps.map((step, index) => {
