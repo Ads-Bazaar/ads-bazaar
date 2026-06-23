@@ -39,34 +39,34 @@ export function BrandsCreators() {
         </div>
 
         {/* Right Column - Creators */}
-        <div className="bg-[#ffffff] p-[32px] md:p-[64px]">
-          <span className="font-geist font-[600] text-[12px] uppercase tracking-[0.05em] text-[#666666] mb-6 block">
+        <div className="bg-white p-[32px] md:p-[64px]">
+          <span className="font-geist font-[600] text-[12px] uppercase tracking-[0.05em] text-[var(--muted-dark)] mb-6 block">
             FOR CREATORS
           </span>
-          <h2 className="font-sora font-[600] text-[32px] text-[#131313] mb-12">
+          <h2 className="font-sora font-[600] text-[32px] text-background mb-12">
             Monetize Your Influence
           </h2>
           
           <div className="flex flex-col gap-10">
             <div className="flex gap-4">
-              <div className="mt-1"><Search className="w-6 h-6 text-[#131313]" /></div>
+              <div className="mt-1"><Search className="w-6 h-6 text-background" /></div>
               <div>
-                <h3 className="font-sora font-[600] text-[18px] text-[#131313] mb-2">Explore Gigs</h3>
-                <p className="font-geist text-[16px] text-[#4a4a4a]">Filter campaigns by niche, rate, and platform.</p>
+                <h3 className="font-sora font-[600] text-[18px] text-background mb-2">Explore Gigs</h3>
+                <p className="font-geist text-[16px] text-[var(--muted-dark)]">Filter campaigns by niche, rate, and platform.</p>
               </div>
             </div>
             <div className="flex gap-4">
-              <div className="mt-1"><Zap className="w-6 h-6 text-[#131313]" /></div>
+              <div className="mt-1"><Zap className="w-6 h-6 text-background" /></div>
               <div>
-                <h3 className="font-sora font-[600] text-[18px] text-[#131313] mb-2">Execute Fast</h3>
-                <p className="font-geist text-[16px] text-[#4a4a4a]">Submit content proof and trigger smart releases.</p>
+                <h3 className="font-sora font-[600] text-[18px] text-background mb-2">Execute Fast</h3>
+                <p className="font-geist text-[16px] text-[var(--muted-dark)]">Submit content proof and trigger smart releases.</p>
               </div>
             </div>
             <div className="flex gap-4">
-              <div className="mt-1"><Wallet className="w-6 h-6 text-[#131313]" /></div>
+              <div className="mt-1"><Wallet className="w-6 h-6 text-background" /></div>
               <div>
-                <h3 className="font-sora font-[600] text-[18px] text-[#131313] mb-2">Instant Payout</h3>
-                <p className="font-geist text-[16px] text-[#4a4a4a]">Receive XLM or stablecoins directly to your wallet.</p>
+                <h3 className="font-sora font-[600] text-[18px] text-background mb-2">Instant Payout</h3>
+                <p className="font-geist text-[16px] text-[var(--muted-dark)]">Receive XLM or stablecoins directly to your wallet.</p>
               </div>
             </div>
           </div>
