@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { marketplaceCampaigns } from "./marketplace-data";
+import { MarketplaceCampaignCard } from "./marketplace-campaign-card";
 
 export function MarketplaceGrid() {
   return (
@@ -8,17 +9,9 @@ export function MarketplaceGrid() {
         <Link
           key={campaign.id}
           href={`/marketplace/${campaign.id}`}
-          className="border border-outline-variant bg-surface-container p-5 block hover:border-primary-container transition-colors"
+          className="block"
         >
-          <p className="text-sm font-semibold text-on-surface">
-            {campaign.title}
-          </p>
-          <p className="text-xs text-on-surface-variant mt-1">
-            {campaign.description}
-          </p>
-          <p className="mt-4 font-sora text-lg font-bold text-on-surface">
-            {campaign.payout}
-          </p>
+          <MarketplaceCampaignCard campaign={campaign} />
         </Link>
       ))}
     </div>
