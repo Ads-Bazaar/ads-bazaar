@@ -29,7 +29,7 @@ export default function CampaignDetailPage({
           </div>
           <aside className="col-span-12 lg:col-span-5 flex flex-col gap-6">
             <EscrowSidebar campaign={campaign} />
-            <ApplicationForm />
+            <ApplicationForm campaignId={campaign.id} />
             <CampaignHelpCard />
           </aside>
         </div>
