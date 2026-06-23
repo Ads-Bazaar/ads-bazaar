@@ -79,23 +79,32 @@ export function Navbar() {
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-surface-container border-b border-outline-variant px-6 py-4 flex flex-col gap-4">
+        <div className="md:hidden overflow-visible bg-surface-container border-b border-outline-variant px-6 py-4 flex flex-col gap-4">
           <a
             href="/marketplace"
             className="text-[15px] text-on-surface py-2 font-medium"
+            onClick={() => setIsMobileMenuOpen(false)}
           >
             Marketplace
           </a>
           <a
             href="/explore"
             className="text-[15px] text-on-surface-variant py-2"
+            onClick={() => setIsMobileMenuOpen(false)}
           >
             Explore
           </a>
-          <a href="/stats" className="text-[15px] text-on-surface-variant py-2">
+          <a
+            href="/stats"
+            className="text-[15px] text-on-surface-variant py-2"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             Stats
           </a>
-          <ConnectWalletButton />
+          <div className="flex items-center justify-between gap-3 pt-2 border-t border-outline-variant mt-2">
+            <NotificationBell variant="landing" />
+            <ConnectWalletButton />
+          </div>
         </div>
       )}
     </nav>
