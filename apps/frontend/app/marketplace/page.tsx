@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
 import { MarketplaceHero } from "@/components/marketplace/marketplace-hero";
@@ -11,14 +11,30 @@ import { MarketplacePagination } from "@/components/marketplace/marketplace-pagi
 import { MarketplaceNewsletter } from "@/components/marketplace/marketplace-newsletter";
 import { marketplaceCampaigns } from "@/components/marketplace/marketplace-data";
 
+const PAGE_SIZE = 6;
+
 export default function MarketplacePage() {
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
 
-  const filtered = marketplaceCampaigns.filter(
-    (c) =>
-      search.trim() === "" ||
-      c.title.toLowerCase().includes(search.trim().toLowerCase())
+  const filtered = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    return marketplaceCampaigns.filter(
+      (c) => query === "" || c.title.toLowerCase().includes(query),
+    );
+  }, [search]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const paged = filtered.slice(
+    (safePage - 1) * PAGE_SIZE,
+    safePage * PAGE_SIZE,
   );
+
+  function handleSearchChange(value: string) {
+    setSearch(value);
+    setPage(1);
+  }
 
   return (
     <>
@@ -27,11 +43,15 @@ export default function MarketplacePage() {
         <MarketplaceHero />
         <MarketplaceFilters
           searchValue={search}
-          onSearchChange={setSearch}
+          onSearchChange={handleSearchChange}
         />
         <MarketplaceGridHeader count={filtered.length} />
-        <MarketplaceGrid campaigns={filtered} />
-        <MarketplacePagination totalPages={12} />
+        <MarketplaceGrid campaigns={paged} />
+        <MarketplacePagination
+          currentPage={safePage}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
       </main>
       <MarketplaceNewsletter />
       <Footer />
