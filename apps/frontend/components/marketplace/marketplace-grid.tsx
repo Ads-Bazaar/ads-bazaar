@@ -1,3 +1,4 @@
+import { Search } from "lucide-react";
 import Link from "next/link";
 import type { MarketplaceCampaign } from "./marketplace-data";
 import { MarketplaceCampaignCard } from "./marketplace-campaign-card";
@@ -9,9 +10,16 @@ type MarketplaceGridProps = {
 export function MarketplaceGrid({ campaigns }: MarketplaceGridProps) {
   if (campaigns.length === 0) {
     return (
-      <div className="border border-outline-variant bg-surface-container py-16 text-center">
-        <p className="text-on-surface-variant text-sm">
-          No campaigns match your search. Try a different keyword.
+      <div className="flex flex-col items-center justify-center gap-3 py-20 text-center">
+        <Search
+          className="size-10 text-on-surface-variant"
+          aria-hidden="true"
+        />
+        <p className="text-sm font-semibold text-on-surface">
+          No campaigns found
+        </p>
+        <p className="max-w-xs text-sm text-on-surface-variant">
+          Try adjusting your search to find what you are looking for.
         </p>
       </div>
     );
