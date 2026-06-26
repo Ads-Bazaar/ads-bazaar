@@ -13,7 +13,7 @@ import {
   payoutHistory,
   payoutSummary,
 } from "@/components/dashboard/creator/creator-payouts-data";
-import { DashboardHeader } from "@/components/dashboard/creator/dashboard-header";
+import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
 import { OffRampPanel } from "@/components/dashboard/creator/off-ramp-panel";
 import { PayoutHistoryTable } from "@/components/dashboard/creator/payout-history-table";
 import { PayoutsNetworkStatus } from "@/components/dashboard/creator/payouts-network-status";

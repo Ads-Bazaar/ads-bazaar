@@ -1,4 +1,4 @@
-import { DashboardHeader } from "@/components/dashboard/business/dashboard-header";
+import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
 import { CampaignDetailHeader } from "@/components/dashboard/business/campaign-detail-header";
 import { CampaignTabsBar } from "@/components/dashboard/business/campaign-tabs-bar";
 import { CampaignTabsContent } from "@/components/dashboard/business/campaign-tabs-content";

@@ -1,5 +1,5 @@
 import { ClipboardCheck, TrendingUp, Users } from "lucide-react";
-import { DashboardHeader } from "@/components/dashboard/business/dashboard-header";
+import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
 import { StatCard } from "@/components/dashboard/creator/stat-card";
 import { CampaignsTable } from "@/components/dashboard/business/campaigns-table";
 import { ActivityFeed } from "@/components/dashboard/business/activity-feed";

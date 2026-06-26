@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { DashboardHeader } from "@/components/dashboard/creator/dashboard-header";
+import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
+import type { Metadata } from "next";
 import { analyticStats, growthSeries, ageGroups, topLocations, channels, topCampaigns } from "@/components/dashboard/creator/creator-analytics-data";
 
 export const metadata: Metadata = {

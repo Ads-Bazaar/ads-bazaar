@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { DashboardHeader } from "@/components/dashboard/business/dashboard-header";
+import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
+import type { Metadata } from "next";
 import { ProfileSection } from "@/components/dashboard/shared/profile-section";
 
 export const metadata: Metadata = {

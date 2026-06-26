@@ -1,7 +1,7 @@
 "use client"
 import { useMemo, useState } from "react"
 import { Inbox } from "lucide-react"
-import { DashboardHeader } from "@/components/dashboard/creator/dashboard-header"
+import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header"
 import { CampaignsPageHeader } from "@/components/dashboard/creator/campaigns-page-header"
 import {
   CampaignStatusTabs,

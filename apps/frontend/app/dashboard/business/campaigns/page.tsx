@@ -1,4 +1,4 @@
-import { DashboardHeader } from "@/components/dashboard/business/dashboard-header";
+import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
 
 /**
  * Placeholder route. Full implementation tracked in
