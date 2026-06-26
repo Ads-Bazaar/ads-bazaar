@@ -31,8 +31,8 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-2xl border border-[var(--dash-border)] bg-white p-6 text-[var(--dash-bg)]">
-        <h2 className="text-xl font-bold text-[var(--dash-bg)]">
+      <div className="rounded-2xl border border-[rgba(255,255,255,0.1)] bg-white p-6 text-[#131313]">
+        <h2 className="text-xl font-bold text-[#131313]">
           Budget &amp; Payout
         </h2>
 
@@ -116,7 +116,7 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
               </p>
               <p className="mt-1 text-[32px] font-black leading-none text-[var(--dash-bg)]">
                 {payoutPerCreator}{" "}
-                <span className="text-lg font-semibold text-[var(--dash-muted)]">
+                <span className="text-lg font-semibold text-[#66706c]">
                   {data.asset}
                 </span>
               </p>
@@ -141,11 +141,16 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
                 {data.totalBudget.toLocaleString()} {data.asset}
               </strong>{" "}
               will be locked in a secure{" "}
-              <a href="#" className="underline">
+              <a
+                href="https://soroban.stellar.org/docs"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-primary transition-colors"
+              >
                 Soroban smart contract
-              </a>
-              . Funds are only released to creators upon successful validation
-              of campaign milestones.
+              </a>.
+              Funds are only released to creators upon successful validation of
+              campaign milestones.
             </p>
           </div>
         </div>
@@ -160,7 +165,7 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
               Budget Flexibility
             </span>
           </div>
-          <p className="text-[12px] leading-relaxed text-[var(--dash-muted)]">
+          <p className="text-[12px] leading-relaxed text-[rgba(255,255,255,0.45)]">
             You can top up the escrow at any time to add more creator slots
             after the campaign starts.
           </p>
@@ -172,7 +177,7 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
               Asset Support
             </span>
           </div>
-          <p className="text-[12px] leading-relaxed text-[var(--dash-muted)]">
+          <p className="text-[12px] leading-relaxed text-[rgba(255,255,255,0.45)]">
             AdsBazaar supports Stellar native assets and anchored tokens for
             instant cross-border payouts.
           </p>

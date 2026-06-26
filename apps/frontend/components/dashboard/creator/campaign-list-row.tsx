@@ -50,16 +50,22 @@ function OutlineButton({
   children,
   onClick,
   tone = "default",
+  disabled = false,
+  title,
 }: {
   children: React.ReactNode
   onClick?: () => void
   tone?: "default" | "danger"
+  disabled?: boolean
+  title?: string
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`h-11 shrink-0 whitespace-nowrap rounded border px-5 text-xs font-bold uppercase tracking-[0.05em] transition-colors ${
+      disabled={disabled}
+      title={title}
+      className={`h-11 shrink-0 whitespace-nowrap rounded border px-5 text-xs font-bold uppercase tracking-[0.05em] transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
         tone === "danger"
           ? "border-[var(--dash-danger)] text-[var(--dash-danger)] hover:bg-[var(--dash-danger)] hover:text-[var(--dash-on-danger)]"
           : "border-[var(--dash-border)] text-[var(--dash-heading)] hover:border-[var(--dash-muted)]"
@@ -74,16 +80,22 @@ function FilledButton({
   children,
   onClick,
   tone = "accent",
+  disabled = false,
+  title,
 }: {
   children: React.ReactNode
   onClick?: () => void
   tone?: "accent" | "danger"
+  disabled?: boolean
+  title?: string
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`h-11 shrink-0 whitespace-nowrap rounded px-5 text-xs font-bold uppercase tracking-[0.05em] transition-opacity hover:opacity-90 ${
+      disabled={disabled}
+      title={title}
+      className={`h-11 shrink-0 whitespace-nowrap rounded px-5 text-xs font-bold uppercase tracking-[0.05em] transition-opacity disabled:cursor-not-allowed disabled:opacity-50 hover:opacity-90 ${
         tone === "danger"
           ? "bg-[var(--dash-danger)] text-[var(--dash-on-danger)]"
           : "bg-[var(--dash-accent-strong)] text-[var(--dash-on-accent-strong)]"
@@ -111,7 +123,6 @@ export function CampaignListRow({
 
   return (
     <div className="flex flex-col gap-4 border border-[var(--dash-border)] bg-[var(--dash-surface)] p-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-      {/* Icon + name + subtitle */}
       <div className="flex min-w-0 flex-1 items-center gap-4">
         <div className="flex size-12 shrink-0 items-center justify-center rounded border border-[var(--dash-border)] bg-[#262626]">
           <Icon className="size-5 text-[var(--dash-body)]" />
@@ -122,7 +133,6 @@ export function CampaignListRow({
         </div>
       </div>
 
-      {/* Payout */}
       <div className="flex shrink-0 flex-row items-baseline justify-between gap-2 sm:block sm:w-28">
         <p className="text-xs font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)]">
           Payout
@@ -135,7 +145,6 @@ export function CampaignListRow({
         </p>
       </div>
 
-      {/* Status badge */}
       <div className="flex shrink-0 flex-row items-center justify-between gap-2 sm:block sm:w-28">
         <p className="text-xs font-semibold uppercase tracking-[0.05em] text-[var(--dash-muted)] sm:mb-1.5">
           Status
@@ -147,7 +156,6 @@ export function CampaignListRow({
         </span>
       </div>
 
-      {/* Status-dependent middle column */}
       <div className="flex shrink-0 flex-col gap-1.5 sm:w-36">
         {campaign.status === "active" && (
           <>
@@ -160,7 +168,6 @@ export function CampaignListRow({
             <ProgressBar percent={campaign.progress ?? 0} tone="accent" />
           </>
         )}
-
         {campaign.status === "review" && (
           <>
             <p className="text-xs text-[var(--dash-muted)]">
@@ -170,7 +177,6 @@ export function CampaignListRow({
             <ProgressBar percent={100} tone="accent" />
           </>
         )}
-
         {campaign.status === "completed" && (
           <>
             <p className="text-xs text-[var(--dash-muted)]">
@@ -180,7 +186,6 @@ export function CampaignListRow({
             <ProgressBar percent={100} tone="dim" />
           </>
         )}
-
         {campaign.status === "disputed" && (
           <>
             <p className="text-xs font-bold uppercase tracking-[0.05em] text-[var(--dash-danger)]">
@@ -194,12 +199,15 @@ export function CampaignListRow({
         )}
       </div>
 
-      {/* Actions */}
       <div className="flex shrink-0 flex-col gap-2 xs:flex-row sm:w-auto">
         {campaign.status === "active" && (
           <>
             <OutlineButton>View Brief</OutlineButton>
-            <FilledButton onClick={() => onSubmitProof?.(campaign.id)}>
+            <FilledButton
+              disabled
+              title="Coming soon"
+              onClick={() => onSubmitProof?.(campaign.id)}
+            >
               Submit Proof
             </FilledButton>
           </>
@@ -213,6 +221,8 @@ export function CampaignListRow({
         {campaign.status === "disputed" && (
           <FilledButton
             tone="danger"
+            disabled
+            title="Coming soon"
             onClick={() => onResolveDispute?.(campaign.id)}
           >
             Resolve Dispute

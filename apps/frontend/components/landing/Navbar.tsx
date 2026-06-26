@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Bell, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { ConnectWalletButton } from "@/components/wallet/connect-wallet-button";
+import { NotificationBell } from "@/components/notifications/notification-bell";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,22 +35,29 @@ export function Navbar() {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
-          <a href="/marketplace" className="text-[15px] text-on-surface-variant hover:text-on-surface transition-colors">
+          <a
+            href="/marketplace"
+            className="text-[15px] text-on-surface-variant hover:text-on-surface transition-colors"
+          >
             Marketplace
           </a>
-          <a href="/explore" className="text-[15px] text-on-surface-variant hover:text-on-surface transition-colors">
+          <a
+            href="/explore"
+            className="text-[15px] text-on-surface-variant hover:text-on-surface transition-colors"
+          >
             Explore
           </a>
-          <a href="#" className="text-[15px] text-on-surface-variant hover:text-on-surface transition-colors">
+          <a
+            href="/stats"
+            className="text-[15px] text-on-surface-variant hover:text-on-surface transition-colors"
+          >
             Stats
           </a>
         </div>
 
         {/* Actions */}
         <div className="hidden md:flex items-center gap-6">
-          <button aria-label="Notifications" className="text-on-surface-variant hover:text-on-surface transition-colors">
-            <Bell className="w-5 h-5" />
-          </button>
+          <NotificationBell variant="landing" />
           <ConnectWalletButton />
         </div>
 
@@ -60,18 +68,43 @@ export function Navbar() {
             aria-label="Toggle menu"
             className="text-on-surface-variant"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-surface-container border-b border-outline-variant px-6 py-4 flex flex-col gap-4">
-          <a href="/marketplace" className="text-[15px] text-on-surface py-2 font-medium">Marketplace</a>
-          <a href="/explore" className="text-[15px] text-on-surface-variant py-2">Explore</a>
-          <a href="#" className="text-[15px] text-on-surface-variant py-2">Stats</a>
-          <ConnectWalletButton />
+        <div className="md:hidden overflow-visible bg-surface-container border-b border-outline-variant px-6 py-4 flex flex-col gap-4">
+          <a
+            href="/marketplace"
+            className="text-[15px] text-on-surface py-2 font-medium"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Marketplace
+          </a>
+          <a
+            href="/explore"
+            className="text-[15px] text-on-surface-variant py-2"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Explore
+          </a>
+          <a
+            href="/stats"
+            className="text-[15px] text-on-surface-variant py-2"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Stats
+          </a>
+          <div className="flex items-center justify-between gap-3 pt-2 border-t border-outline-variant mt-2">
+            <NotificationBell variant="landing" />
+            <ConnectWalletButton />
+          </div>
         </div>
       )}
     </nav>
