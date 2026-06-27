@@ -1,7 +1,8 @@
 "use client"
 
-import { Search, Bell } from "lucide-react"
+import { Search } from "lucide-react"
 import { WalletChip } from "@/components/wallet/wallet-chip"
+import { NotificationBell } from "@/components/notifications/notification-bell"
 
 interface CampaignsPageHeaderProps {
   searchValue: string
@@ -26,13 +27,7 @@ export function CampaignsPageHeader({
       </div>
 
       <div className="flex shrink-0 items-center gap-3">
-        <button
-          type="button"
-          aria-label="Notifications"
-          className="flex size-11 items-center justify-center rounded text-[var(--dash-muted)] transition-colors hover:text-[var(--dash-heading)]"
-        >
-          <Bell className="size-5" />
-        </button>
+        <NotificationBell variant="dashboard" />
         <div className="hidden lg:block">
           <WalletChip />
         </div>

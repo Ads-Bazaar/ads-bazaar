@@ -1,5 +1,4 @@
 "use client"
-
 import { useMemo, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Inbox } from "lucide-react"
@@ -21,8 +20,6 @@ export default function CreatorCampaignsPage() {
   const [filter, setFilter] = useState<CampaignFilter>("all")
   const [page, setPage] = useState(1)
 
-  // Live totals — always reflect the FULL unfiltered dataset, not the
-  // currently selected tab or search term.
   const activeCount = useMemo(
     () => campaignsList.filter((c) => c.status === "active").length,
     [],
@@ -72,14 +69,12 @@ export default function CreatorCampaignsPage() {
           searchValue={search}
           onSearchChange={handleSearchChange}
         />
-
         <CampaignStatusTabs
           active={filter}
           onChange={handleFilterChange}
           activeCount={activeCount}
           disputedCount={disputedCount}
         />
-
         {pageItems.length > 0 ? (
           <div className="flex flex-col gap-4">
             {pageItems.map((campaign) => (
@@ -105,7 +100,6 @@ export default function CreatorCampaignsPage() {
             </p>
           </div>
         )}
-
         <CampaignsPagination
           currentPage={safePage}
           totalPages={totalPages}

@@ -39,7 +39,7 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
         <div className="mt-6 flex flex-col gap-5">
           {/* Asset Selector */}
           <div>
-            <label className="mb-2 block text-xs font-bold uppercase tracking-wide text-[#66706c]">
+            <label className="mb-2 block text-xs font-bold uppercase tracking-wide text-[var(--dash-muted)]">
               Payment Asset <span className="text-red-500">*</span>
             </label>
             <AssetSelector
@@ -55,7 +55,7 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
           {/* Budget + Slots */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#66706c]">
+              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--dash-muted)]">
                 Total Campaign Budget <span className="text-red-500">*</span>
               </label>
               <div className="relative">
@@ -67,9 +67,9 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
                     update({ totalBudget: Number(e.target.value) })
                   }
                   placeholder="5000"
-                  className="w-full rounded-lg border border-[rgba(0,0,0,0.12)] bg-[#f4f4f4] py-2.5 pl-3 pr-16 text-sm text-[#131313] outline-none focus:border-[#131313]"
+                  className="w-full rounded-lg border border-[var(--dash-border)] bg-[var(--dash-border)] py-2.5 pl-3 pr-16 text-sm text-[var(--dash-bg)] outline-none focus:border-[var(--dash-bg)]"
                 />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-[#a0a0a0]">
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-[var(--dash-muted)]">
                   {data.asset}
                 </span>
               </div>
@@ -81,7 +81,7 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
             </div>
 
             <div>
-              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[#66706c]">
+              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-[var(--dash-muted)]">
                 Number of Creator Slots <span className="text-red-500">*</span>
               </label>
               <input
@@ -98,7 +98,7 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
                   })
                 }
                 placeholder="10"
-                className="w-full rounded-lg border border-[rgba(0,0,0,0.12)] bg-[#f4f4f4] px-3 py-2.5 text-sm text-[#131313] outline-none focus:border-[#131313]"
+                className="w-full rounded-lg border border-[var(--dash-border)] bg-[var(--dash-border)] px-3 py-2.5 text-sm text-[var(--dash-bg)] outline-none focus:border-[var(--dash-bg)]"
               />
               {errors.creatorSlots && (
                 <p className="mt-1 text-xs text-red-500">
@@ -111,17 +111,17 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
           {/* Estimated Payout */}
           <div className="flex items-center justify-between rounded-lg border border-[rgba(0,0,0,0.1)] bg-[#f8f8f8] px-6 py-4">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-wide text-[#66706c]">
+              <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--dash-muted)]">
                 Estimated Payout Per Creator
               </p>
-              <p className="mt-1 text-[32px] font-black leading-none text-[#131313]">
+              <p className="mt-1 text-[32px] font-black leading-none text-[var(--dash-bg)]">
                 {payoutPerCreator}{" "}
                 <span className="text-lg font-semibold text-[#66706c]">
                   {data.asset}
                 </span>
               </p>
             </div>
-            <Calculator size={20} className="text-[#a0a0a0]" />
+            <Calculator size={20} className="text-[var(--dash-muted)]" />
           </div>
 
           {/* Escrow Notice */}
@@ -130,14 +130,14 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
             style={{ borderLeft: "4px solid rgba(0,0,0,0.15)" }}
           >
             <div className="mb-1.5 flex items-center gap-1.5">
-              <Lock size={13} className="text-[#66706c]" />
-              <span className="text-[11px] font-bold uppercase tracking-wide text-[#66706c]">
+              <Lock size={13} className="text-[var(--dash-muted)]" />
+              <span className="text-[11px] font-bold uppercase tracking-wide text-[var(--dash-muted)]">
                 Escrow Notice
               </span>
             </div>
-            <p className="text-[13px] leading-relaxed text-[#66706c]">
+            <p className="text-[13px] leading-relaxed text-[var(--dash-muted)]">
               Upon campaign launch, your selected budget of{" "}
-              <strong className="text-[#131313]">
+              <strong className="text-[var(--dash-bg)]">
                 {data.totalBudget.toLocaleString()} {data.asset}
               </strong>{" "}
               will be locked in a secure{" "}
@@ -158,7 +158,7 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
 
       {/* Info chips */}
       <div className="grid gap-3 sm:grid-cols-2">
-        <div className="rounded-xl border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.04)] p-4">
+        <div className="rounded-xl border border-[var(--dash-border)] bg-[rgba(255,255,255,0.04)] p-4">
           <div className="mb-2 flex items-center gap-2">
             <Info size={14} className="text-[#c8f232]" />
             <span className="text-[11px] font-bold uppercase tracking-wide text-[rgba(255,255,255,0.8)]">
@@ -170,7 +170,7 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
             after the campaign starts.
           </p>
         </div>
-        <div className="rounded-xl border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.04)] p-4">
+        <div className="rounded-xl border border-[var(--dash-border)] bg-[rgba(255,255,255,0.04)] p-4">
           <div className="mb-2 flex items-center gap-2">
             <RefreshCcw size={14} className="text-[#c8f232]" />
             <span className="text-[11px] font-bold uppercase tracking-wide text-[rgba(255,255,255,0.8)]">
@@ -185,7 +185,7 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
       </div>
 
       {/* Platform fee preview */}
-      <p className="text-center text-[11px] text-[rgba(255,255,255,0.35)]">
+      <p className="text-center text-[11px] text-[var(--dash-muted)]">
         Platform fee: {platformFee.toFixed(4)} {data.asset} (0.5% of budget)
       </p>
     </div>
