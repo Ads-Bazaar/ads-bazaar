@@ -1,32 +1,29 @@
 import { DashboardHeader } from "@/components/dashboard/business/dashboard-header";
+import { CampaignsPageHeader } from "@/components/dashboard/business/campaigns-page-header";
+import { CampaignsStatCards } from "@/components/dashboard/business/campaigns-stat-cards";
+import { CampaignsFilterBar } from "@/components/dashboard/business/campaigns-filter-bar";
+import { CampaignListCard } from "@/components/dashboard/business/campaign-list-card";
+import { CampaignsLoadMore } from "@/components/dashboard/business/campaigns-load-more";
+import { campaignsList } from "@/components/dashboard/business/campaigns-list-data";
 
-/**
- * Placeholder route. Full implementation tracked in
- * https://github.com/Ads-Bazaar/ads-bazaar/issues/49 — see that issue for the
- * file structure, components, design tokens, and acceptance criteria before
- * building this page out.
- */
 export default function BusinessCampaignsPage() {
   return (
     <>
       <DashboardHeader eyebrow="Manage your briefs" title="Campaigns" />
 
-      <div className="flex flex-col items-center justify-center gap-2 border border-[var(--dash-border)] bg-[var(--dash-surface)] px-6 py-20 text-center">
-        <p className="text-sm font-medium text-[var(--dash-heading)]">
-          This page is under construction.
-        </p>
-        <p className="max-w-md text-sm text-[var(--dash-muted)]">
-          Full implementation is tracked in{" "}
-          <a
-            href="https://github.com/Ads-Bazaar/ads-bazaar/issues/49"
-            className="text-[var(--dash-accent)] hover:underline"
-          >
-            Issue #49
-          </a>
-          . Replace this file according to that spec — do not add a sidebar or
-          layout wrapper, the business dashboard shell already provides it.
-        </p>
+      <CampaignsPageHeader />
+
+      <CampaignsStatCards />
+
+      <CampaignsFilterBar />
+
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {campaignsList.map((campaign) => (
+          <CampaignListCard key={campaign.id} campaign={campaign} />
+        ))}
       </div>
+
+      <CampaignsLoadMore />
     </>
   );
 }
