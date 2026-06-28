@@ -1,5 +1,11 @@
-import { DashboardHeader } from "@/components/dashboard/creator/dashboard-header";
+import type { Metadata } from "next";
+import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
+import type { Metadata } from "next";
 import { analyticStats, growthSeries, ageGroups, topLocations, channels, topCampaigns } from "@/components/dashboard/creator/creator-analytics-data";
+
+export const metadata: Metadata = {
+  title: "Analytics",
+};
 import { AnalyticsPageHeader } from "@/components/dashboard/creator/analytics-page-header";
 import { AnalyticsStatCards } from "@/components/dashboard/creator/analytics-stat-cards";
 import { FollowerGrowthChart } from "@/components/dashboard/creator/follower-growth-chart";

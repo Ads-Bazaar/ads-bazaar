@@ -1,5 +1,5 @@
 import { ClipboardCheck, TrendingUp, Users } from "lucide-react";
-import { DashboardHeader } from "@/components/dashboard/business/dashboard-header";
+import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
 import { StatCard } from "@/components/dashboard/creator/stat-card";
 import { CampaignsTable } from "@/components/dashboard/business/campaigns-table";
 import { ActivityFeed } from "@/components/dashboard/business/activity-feed";
@@ -30,8 +30,16 @@ export default function BusinessDashboardPage() {
           align="center"
           label="Active Campaigns"
           value={businessMetrics.activeCampaigns.value}
-          delta={businessMetrics.activeCampaigns.sub}
-        />
+        >
+          <div className="mt-2 flex flex-wrap items-center justify-center -space-x-1.5">
+            <div className="size-5 rounded-full border-2 border-[var(--dash-surface)] bg-[var(--dash-border)]" />
+            <div className="size-5 rounded-full border-2 border-[var(--dash-surface)] bg-[var(--dash-muted)]" />
+            <div className="size-5 rounded-full border-2 border-[var(--dash-surface)] bg-[var(--dash-body)]" />
+            <div className="flex size-5 items-center justify-center rounded-full border-2 border-[var(--dash-surface)] bg-[var(--dash-accent)] text-[8px] font-bold text-[var(--dash-on-accent)]">
+              +14
+            </div>
+          </div>
+        </StatCard>
 
         <StatCard
           className="col-span-12 sm:col-span-6 lg:col-span-3"

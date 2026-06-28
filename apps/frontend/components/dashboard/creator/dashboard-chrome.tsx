@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { X } from "lucide-react";
 import { SidebarNav } from "./sidebar-nav";
 import { DashboardFooter } from "./dashboard-footer";
-import { MobileNavProvider } from "./mobile-nav-context";
+import { MobileNavProvider } from "../shared/mobile-nav-context";
 import { WizardModalProvider } from "@/components/dashboard/business/wizard-modal-context";
 import { CampaignWizardModal } from "@/components/dashboard/business/campaign-wizard-modal";
 

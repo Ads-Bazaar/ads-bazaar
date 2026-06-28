@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { Timer, TrendingUp } from "lucide-react";
 import { ClaimableCard } from "@/components/dashboard/creator/claimable-card";
+
+export const metadata: Metadata = {
+  title: "Payouts",
+};
 import {
   connectedWallet,
   currentCycle,
@@ -8,7 +13,7 @@ import {
   payoutHistory,
   payoutSummary,
 } from "@/components/dashboard/creator/creator-payouts-data";
-import { DashboardHeader } from "@/components/dashboard/creator/dashboard-header";
+import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
 import { OffRampPanel } from "@/components/dashboard/creator/off-ramp-panel";
 import { PayoutHistoryTable } from "@/components/dashboard/creator/payout-history-table";
 import { PayoutsNetworkStatus } from "@/components/dashboard/creator/payouts-network-status";

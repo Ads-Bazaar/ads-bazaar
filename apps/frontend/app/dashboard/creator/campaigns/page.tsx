@@ -1,8 +1,7 @@
 "use client"
-
 import { useMemo, useState } from "react"
 import { Inbox } from "lucide-react"
-import { DashboardHeader } from "@/components/dashboard/creator/dashboard-header"
+import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header"
 import { CampaignsPageHeader } from "@/components/dashboard/creator/campaigns-page-header"
 import {
   CampaignStatusTabs,
@@ -19,8 +18,6 @@ export default function CreatorCampaignsPage() {
   const [filter, setFilter] = useState<CampaignFilter>("all")
   const [page, setPage] = useState(1)
 
-  // Live totals — always reflect the FULL unfiltered dataset, not the
-  // currently selected tab or search term.
   const activeCount = useMemo(
     () => campaignsList.filter((c) => c.status === "active").length,
     [],
@@ -65,22 +62,20 @@ export default function CreatorCampaignsPage() {
           searchValue={search}
           onSearchChange={handleSearchChange}
         />
-
         <CampaignStatusTabs
           active={filter}
           onChange={handleFilterChange}
           activeCount={activeCount}
           disputedCount={disputedCount}
         />
-
         {pageItems.length > 0 ? (
           <div className="flex flex-col gap-4">
             {pageItems.map((campaign) => (
               <CampaignListRow
                 key={campaign.id}
                 campaign={campaign}
-                onSubmitProof={(id) => console.log("submit proof", id)}
-                onResolveDispute={(id) => console.log("resolve dispute", id)}
+                onSubmitProof={() => {}}
+                onResolveDispute={() => {}}
               />
             ))}
           </div>
@@ -96,7 +91,6 @@ export default function CreatorCampaignsPage() {
             </p>
           </div>
         )}
-
         <CampaignsPagination
           currentPage={safePage}
           totalPages={totalPages}
