@@ -127,12 +127,12 @@ export function CampaignWizardModal() {
   const [showDiscardDialog, setShowDiscardDialog] = useState(false);
   const mainRef = useRef<HTMLElement>(null);
 
-  // Restore draft from sessionStorage when modal opens
+  // Restore draft from localStorage when modal opens
   useEffect(() => {
     if (!isOpen) return;
 
     try {
-      const saved = sessionStorage.getItem(DRAFT_KEY);
+      const saved = localStorage.getItem(DRAFT_KEY);
       if (saved) {
         const parsed = JSON.parse(saved) as WizardState;
         setState(parsed);
@@ -148,7 +148,7 @@ export function CampaignWizardModal() {
     if (!hydrated || !isOpen) return;
 
     try {
-      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(state));
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(state));
     } catch {
       // ignore
     }
@@ -228,7 +228,7 @@ export function CampaignWizardModal() {
   }
 
   function handleDiscard() {
-    sessionStorage.removeItem(DRAFT_KEY);
+    localStorage.removeItem(DRAFT_KEY);
     setState(initialState);
     handleClose();
   }
