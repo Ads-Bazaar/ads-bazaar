@@ -95,7 +95,7 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
           className="flex min-h-11 items-center gap-3 rounded-lg px-3 py-2 text-[15px] font-medium text-[var(--dash-muted)] transition-colors hover:bg-[var(--dash-border)] hover:text-[var(--dash-heading)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-accent)]"
         >
           <HelpCircle className="size-5" aria-hidden="true" />
-          <span>Help Center</span>
+          <span>Help Center</span> <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
         </Link>
         <button
           type="button"

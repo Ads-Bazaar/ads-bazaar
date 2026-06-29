@@ -126,7 +126,7 @@ export function CampaignListCard({ campaign }: { campaign: CampaignListItem }) {
             title="Coming soon"
             className="mt-4 w-full border border-[var(--dash-border)] py-3 text-center text-sm font-bold text-[var(--dash-heading)] opacity-60 cursor-not-allowed"
           >
-            {ctaLabels[status]}
+            {ctaLabels[status]} <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
           </button>
         ) : (
           <Link

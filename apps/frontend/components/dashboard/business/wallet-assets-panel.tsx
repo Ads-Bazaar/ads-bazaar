@@ -49,7 +49,7 @@ export function WalletAssetsPanel({ assets }: WalletAssetsPanelProps) {
         className="flex w-full items-center justify-center gap-2 border border-[var(--dash-border)] py-2.5 text-sm font-semibold text-[var(--dash-body)] hover:border-[var(--dash-accent)] hover:text-[var(--dash-accent)] transition-colors"
       >
         <ArrowLeftRight className="size-4" />
-        Swap Assets
+        Swap Assets <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
       </button>
     </div>
   );

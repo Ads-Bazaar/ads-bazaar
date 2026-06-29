@@ -75,6 +75,7 @@ export function TopPerformingTable({ campaigns }: { campaigns: TopCampaign[] }) 
                     className="disabled:cursor-not-allowed"
                   >
                     <MoreVertical className="size-4 text-[var(--dash-muted)]" aria-hidden="true" />
+                    <span className="text-[8px]">Soon</span>
                   </button>
                 </td>
               </tr>

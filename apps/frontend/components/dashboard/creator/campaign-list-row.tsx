@@ -208,7 +208,7 @@ export function CampaignListRow({
               title="Coming soon"
               onClick={() => onSubmitProof?.(campaign.id)}
             >
-              Submit Proof
+              Submit Proof <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
             </FilledButton>
           </>
         )}
@@ -225,7 +225,7 @@ export function CampaignListRow({
             title="Coming soon"
             onClick={() => onResolveDispute?.(campaign.id)}
           >
-            Resolve Dispute
+            Resolve Dispute <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
           </FilledButton>
         )}
       </div>

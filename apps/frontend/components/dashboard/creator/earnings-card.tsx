@@ -32,7 +32,7 @@ export function EarningsCard({
         className="mt-6 flex min-h-11 w-full items-center justify-center gap-2 rounded bg-[var(--dash-accent)] py-3 font-bold text-[var(--dash-on-accent)] transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-accent)] disabled:cursor-not-allowed disabled:opacity-60"
       >
         <Zap className="size-5" aria-hidden="true" />
-        Claim Payout
+        Claim Payout <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
       </button>
     </article>
   );

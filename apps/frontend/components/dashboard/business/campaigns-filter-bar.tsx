@@ -67,7 +67,7 @@ export function CampaignsFilterBar() {
           title="Coming soon"
           className="flex items-center gap-1.5 rounded-none border border-[var(--dash-border)] bg-[var(--dash-surface)] px-4 py-2 text-sm text-[var(--dash-muted)] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          Sort By: Newest
+          Sort By: Newest <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
           <ChevronDown className="size-3.5" aria-hidden="true" />
         </button>
       </div>

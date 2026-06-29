@@ -85,7 +85,7 @@ export function WalletSettingsSection() {
             aria-label="Toggle auto-claim payouts"
             className="flex size-10 shrink-0 items-center rounded-full bg-[var(--dash-border)] px-1 transition-colors disabled:cursor-not-allowed disabled:opacity-60"
           >
-            <span className="size-5 rounded-full bg-[var(--dash-surface)]" />
+            <span className="size-5 rounded-full bg-[var(--dash-surface)]" /> <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
           </button>
         </div>
       </div>

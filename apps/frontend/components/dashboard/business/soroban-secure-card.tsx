@@ -21,7 +21,7 @@ export function SorobanSecureCard() {
         title="Coming soon"
         aria-disabled="true"
       >
-        Network Explorer
+        Network Explorer <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
       </a>
     </div>
   );

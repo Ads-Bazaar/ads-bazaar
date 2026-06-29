@@ -45,7 +45,7 @@ export function ProfileSection({ profile }: { profile: UserProfile }) {
             title="Coming soon"
             className="mt-6 border border-[var(--dash-border)] px-4 py-2 text-sm font-semibold text-[var(--dash-body)] transition-colors hover:border-[var(--dash-accent)] hover:text-[var(--dash-accent)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-[var(--dash-border)] disabled:hover:text-[var(--dash-body)]"
           >
-            Edit Profile
+            Edit Profile <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
           </button>
         </div>
       </div>

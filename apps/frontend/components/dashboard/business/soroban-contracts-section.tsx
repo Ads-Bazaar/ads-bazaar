@@ -14,7 +14,7 @@ export function SorobanContractsSection({ contracts }: SorobanContractsSectionPr
           Active Soroban Contracts
         </h2>
         <a href="#" title="Coming soon" className="text-xs font-bold text-[var(--dash-accent)] hover:underline cursor-not-allowed pointer-events-none" aria-disabled="true">
-          View All Contracts
+          View All Contracts <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
         </a>
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

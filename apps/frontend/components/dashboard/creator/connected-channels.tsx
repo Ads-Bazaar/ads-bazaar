@@ -55,7 +55,7 @@ function ChannelCard({ channel }: { channel: ConnectedChannel }) {
             : "mt-auto w-full bg-[var(--dash-accent-strong)] py-2 text-sm font-bold text-[var(--dash-on-accent-strong)] transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-accent)] disabled:cursor-not-allowed disabled:opacity-60"
         }
       >
-        {isActive ? "Manage Account" : "Reconnect Token"}
+        {isActive ? "Manage Account" : "Reconnect Token"} <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
       </button>
     </article>
   );
@@ -94,7 +94,7 @@ export function ConnectedChannels({
             <Plus className="size-8 text-[var(--dash-muted)]" aria-hidden="true" />
           </div>
           <span className="text-sm font-bold text-[var(--dash-heading)]">
-            Link New Platform
+            Link New Platform <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
           </span>
           <span className="max-w-[160px] text-xs text-[var(--dash-muted)]">
             Connect X, Pinterest, or Facebook to sync data.

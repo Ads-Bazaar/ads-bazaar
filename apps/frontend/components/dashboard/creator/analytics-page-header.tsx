@@ -19,7 +19,7 @@ export function AnalyticsPageHeader() {
           className="flex items-center gap-2 border-2 border-[var(--dash-border)] bg-[var(--dash-surface)] px-4 py-2 text-sm text-[var(--dash-body)] disabled:cursor-not-allowed disabled:opacity-60"
         >
           <Calendar className="size-4" aria-hidden="true" />
-          Last 30 Days
+          Last 30 Days <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
           <ChevronDown className="size-4" aria-hidden="true" />
         </button>
         <button
@@ -29,7 +29,7 @@ export function AnalyticsPageHeader() {
           className="flex items-center gap-2 border-2 border-[var(--dash-border)] bg-[var(--dash-surface)] px-4 py-2 text-sm font-semibold text-[var(--dash-heading)] disabled:cursor-not-allowed disabled:opacity-60"
         >
           <Download className="size-4" aria-hidden="true" />
-          Export
+          Export <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
         </button>
       </div>
     </div>

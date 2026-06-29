@@ -39,7 +39,7 @@ export function Footer() {
               disabled
               className="cursor-default text-left font-geist text-[14px] text-on-surface-variant opacity-50"
             >
-              Smart Contracts
+              Smart Contracts <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
             </button>
           </div>
 
@@ -85,7 +85,7 @@ export function Footer() {
               disabled
               className="cursor-default text-left font-geist text-[14px] text-on-surface-variant opacity-50"
             >
-              Terms of Service
+              Terms of Service <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
             </button>
             <button
               type="button"
@@ -93,7 +93,7 @@ export function Footer() {
               disabled
               className="cursor-default text-left font-geist text-[14px] text-on-surface-variant opacity-50"
             >
-              Privacy Policy
+              Privacy Policy <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
             </button>
             <button
               type="button"
@@ -101,7 +101,7 @@ export function Footer() {
               disabled
               className="cursor-default text-left font-geist text-[14px] text-on-surface-variant opacity-50"
             >
-              Safety Center
+              Safety Center <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
             </button>
           </div>
         </div>

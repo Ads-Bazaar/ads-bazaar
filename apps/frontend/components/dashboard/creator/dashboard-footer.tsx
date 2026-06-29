@@ -61,7 +61,7 @@ function FooterLinkItem({ link }: { link: FooterLink }) {
       disabled
       className={`${baseClassName} cursor-default text-left opacity-50`}
     >
-      {link.label}
+      {link.label} <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
     </button>
   );
 }
