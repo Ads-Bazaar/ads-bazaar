@@ -81,8 +81,8 @@ export default function CreatorCampaignsPage() {
               <CampaignListRow
                 key={campaign.id}
                 campaign={campaign}
-                onSubmitProof={(id) => console.log("submit proof", id)}
-                onResolveDispute={(id) => console.log("resolve dispute", id)}
+                onSubmitProof={() => {}}
+                onResolveDispute={() => {}}
                 // Check if your CampaignListRow supports either onViewDetails or row click behavior:
                 onClick={() => handleViewDetails(campaign.id)}
               />
