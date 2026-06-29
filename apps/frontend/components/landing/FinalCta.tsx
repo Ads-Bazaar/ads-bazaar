@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useWallet } from "@/components/wallet/wallet-context";
+import { WalletErrorMessage } from "@/components/wallet/wallet-error-message";
 import { useOnboardingModal } from "@/components/onboarding/onboarding-modal-context";
 
 export function FinalCta() {
@@ -56,9 +57,7 @@ export function FinalCta() {
                 Cancel
               </button>
             </div>
-            {error && (
-              <p className="text-sm text-red-400 font-geist">{error}</p>
-            )}
+            {error && <WalletErrorMessage error={error} />}
           </div>
         ) : (
           <button

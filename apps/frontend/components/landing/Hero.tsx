@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useWallet } from "@/components/wallet/wallet-context";
+import { WalletErrorMessage } from "@/components/wallet/wallet-error-message";
 import { useOnboardingModal } from "@/components/onboarding/onboarding-modal-context";
 
 export function Hero() {
@@ -60,11 +61,7 @@ export function Hero() {
                   Cancel
                 </button>
               </div>
-              {error && (
-                <p className="text-sm text-red-400 font-geist max-w-[400px]">
-                  {error}
-                </p>
-              )}
+              {error && <WalletErrorMessage error={error} />}
             </div>
           ) : (
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">

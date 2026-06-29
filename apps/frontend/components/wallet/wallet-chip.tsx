@@ -3,12 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Wallet } from "lucide-react";
 import { useWallet } from "./wallet-context";
+import { WalletErrorMessage } from "./wallet-error-message";
 
 const shortenAddress = (address: string) =>
   `${address.slice(0, 4)}...${address.slice(-4)}`;
 
 export function WalletChip() {
-  const { wallet, isConnecting, connect, disconnect } = useWallet();
+  const { wallet, isConnecting, error, connect, disconnect } = useWallet();
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -65,6 +66,10 @@ export function WalletChip() {
             : "Connect"}
         </span>
       </button>
+
+      {error && !wallet && (
+        <WalletErrorMessage error={error} className="min-w-[280px]" />
+      )}
 
       {isOpen && wallet && (
         <div className="absolute right-0 top-full mt-2 z-50 min-w-[240px] rounded border border-[var(--dash-border)] bg-[var(--dash-surface)] p-4 shadow-lg">

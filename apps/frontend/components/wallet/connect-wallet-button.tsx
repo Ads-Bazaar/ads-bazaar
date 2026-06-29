@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useWallet } from "./wallet-context";
+import { WalletErrorMessage } from "./wallet-error-message";
 
 const shortenAddress = (address: string) =>
   `${address.slice(0, 4)}...${address.slice(-4)}`;
@@ -105,9 +106,7 @@ export function ConnectWalletButton() {
         {isConnecting ? "Connecting..." : "Connect Wallet"}
       </button>
       {error && (
-        <span className="absolute left-1/2 top-[calc(100%+8px)] -translate-x-1/2 w-max max-w-[260px] text-center text-xs text-red-400">
-          {error}
-        </span>
+        <WalletErrorMessage error={error} className="sm:min-w-[320px]" />
       )}
     </div>
   );
