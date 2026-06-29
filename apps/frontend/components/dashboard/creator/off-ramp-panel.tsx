@@ -34,7 +34,7 @@ export function OffRampPanel({ features }: { features: string[] }) {
         className="mt-auto flex w-full items-center justify-center gap-2 border border-[var(--dash-border)] py-3 text-sm font-bold text-[var(--dash-heading)] hover:bg-[var(--dash-border)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-accent)] disabled:cursor-not-allowed disabled:opacity-60"
       >
         <Settings className="size-4" aria-hidden="true" />
-        Configure Withdrawal
+        Configure Withdrawal <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
       </button>
     </article>
   );

@@ -19,7 +19,7 @@ export function MarketplaceNewsletter() {
             title="Coming soon"
             className="border border-outline-variant px-6 py-3 text-sm font-bold text-on-surface hover:border-primary-container hover:text-primary-container transition-colors"
           >
-            Subscribe
+            Subscribe <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
           </button>
         </div>
       </div>

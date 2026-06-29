@@ -42,8 +42,9 @@ export function TransactionHistoryTable({ transactions }: TransactionHistoryTabl
                   )}
                 </td>
                 <td className="px-4 py-4 text-right">
-                  <button type="button" disabled title="Coming soon" className="text-[var(--dash-muted)] hover:text-[var(--dash-accent)]">
+                  <button type="button" disabled title="Coming soon" className="text-[var(--dash-muted)] hover:text-[var(--dash-accent)] flex items-center gap-1">
                     <ArrowRight className="size-4 inline" aria-hidden="true" />
+                    <span className="text-[8px]">Soon</span>
                   </button>
                 </td>
               </tr>

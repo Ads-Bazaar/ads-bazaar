@@ -39,6 +39,7 @@ export function ContractCard({ contract }: ContractCardProps) {
           className="flex items-center gap-2 text-[var(--dash-muted)] hover:text-[var(--dash-accent)]"
         >
           <ExternalLink className="size-4" />
+          Soon
         </button>
       </div>
     </div>

@@ -28,7 +28,7 @@ export function PayoutHistoryTable({
             title="Coming soon"
             className="border border-[var(--dash-border)] px-3 py-1.5 text-xs font-bold text-[var(--dash-muted)] disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Export CSV
+            Export CSV <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
           </button>
           <button
             type="button"
@@ -36,7 +36,7 @@ export function PayoutHistoryTable({
             title="Coming soon"
             className="border border-[var(--dash-border)] px-3 py-1.5 text-xs font-bold text-[var(--dash-muted)] disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Filter
+            Filter <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
           </button>
         </div>
       </div>

@@ -39,7 +39,7 @@ export function DigitalMediaKit({ mediaKit }: { mediaKit: MediaKit }) {
           title="Coming soon"
           className="text-xs font-bold text-[var(--dash-accent)] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-accent)] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          Edit Info
+          Edit Info <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
         </button>
       </div>
 

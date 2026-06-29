@@ -52,7 +52,7 @@ export function TopCreators() {
         title="Coming soon"
         className="mt-4 w-full border border-outline-variant py-3 text-center text-sm font-semibold text-on-surface-variant hover:text-on-surface hover:border-primary-container transition-colors cursor-pointer"
       >
-        Discover More Creators
+        Discover More Creators <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
       </button>
     </section>
   );

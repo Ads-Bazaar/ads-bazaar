@@ -14,7 +14,7 @@ export function QuickOperationsPanel() {
           className="flex flex-col items-center justify-center gap-2 border border-[var(--dash-border)] py-4 text-xs font-semibold transition-colors hover:border-[var(--dash-accent)] hover:text-[var(--dash-accent)] disabled:cursor-not-allowed"
         >
           <CirclePlus className="size-5" aria-hidden="true" />
-          Add Funds
+          Add Funds <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
         </button>
         <button
           type="button"
@@ -23,7 +23,7 @@ export function QuickOperationsPanel() {
           className="flex flex-col items-center justify-center gap-2 border border-[var(--dash-border)] py-4 text-xs font-semibold transition-colors hover:border-[var(--dash-accent)] hover:text-[var(--dash-accent)] disabled:cursor-not-allowed"
         >
           <Pencil className="size-5" aria-hidden="true" />
-          Edit Brief
+          Edit Brief <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
         </button>
         <button
           type="button"
@@ -32,7 +32,7 @@ export function QuickOperationsPanel() {
           className="flex flex-col items-center justify-center gap-2 border border-red-400 py-4 text-xs font-semibold text-red-400 disabled:cursor-not-allowed"
         >
           <Flag className="size-5" aria-hidden="true" />
-          Raise Dispute
+          Raise Dispute <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
         </button>
         <button
           type="button"
@@ -41,7 +41,7 @@ export function QuickOperationsPanel() {
           className="flex flex-col items-center justify-center gap-2 border border-[var(--dash-border)] py-4 text-xs font-semibold transition-colors hover:border-[var(--dash-accent)] hover:text-[var(--dash-accent)] disabled:cursor-not-allowed"
         >
           <PauseCircle className="size-5" aria-hidden="true" />
-          Pause Campaign
+          Pause Campaign <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
         </button>
       </div>
     </section>

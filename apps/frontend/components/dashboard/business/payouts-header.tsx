@@ -13,7 +13,7 @@ export function PayoutsHeader() {
         className="flex shrink-0 items-center gap-2 bg-[var(--dash-accent)] px-5 py-3 font-bold text-[var(--dash-on-accent)] hover:opacity-90 transition-opacity"
       >
         <Plus size={16} />
-        Add Funds
+        Add Funds <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
       </button>
     </div>
   );

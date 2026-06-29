@@ -114,7 +114,7 @@ export function MarketplaceCampaignCard({ campaign }: MarketplaceCampaignCardPro
             title="Coming soon"
             className="bg-primary-container text-on-primary px-4 py-2 text-xs font-bold hover:opacity-90 transition-opacity rounded cursor-not-allowed"
           >
-            APPLY NOW
+            APPLY NOW <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
           </button>
         ) : (
           <button
@@ -123,7 +123,7 @@ export function MarketplaceCampaignCard({ campaign }: MarketplaceCampaignCardPro
             title="Coming soon"
             className="border border-outline-variant px-4 py-2 text-xs font-bold text-on-surface-variant hover:border-primary-container hover:text-primary-container transition-colors rounded cursor-not-allowed"
           >
-            VIEW BRIEF
+            VIEW BRIEF <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
           </button>
         )}
       </div>

@@ -25,6 +25,7 @@ export function RegionalReachCard({ regions }: { regions: RegionRow[] }) {
           className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[var(--dash-heading)] text-[var(--dash-bg)]"
         >
           <LocateFixed className="size-4" aria-hidden="true" />
+          <span className="text-[8px]">Soon</span>
         </button>
       </div>
 

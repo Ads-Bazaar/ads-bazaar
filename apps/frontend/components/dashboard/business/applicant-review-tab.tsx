@@ -22,7 +22,7 @@ export function ApplicantReviewTab({ campaign }: { campaign: CampaignDetail }) {
             title="Coming soon"
             className="text-xs font-bold text-[var(--dash-accent)] disabled:cursor-not-allowed disabled:opacity-60"
           >
-            View All &rarr;
+            View All &rarr; <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
           </button>
         </div>
 
@@ -68,7 +68,7 @@ export function ApplicantReviewTab({ campaign }: { campaign: CampaignDetail }) {
                         title="Coming soon"
                         className="border border-[var(--dash-border)] px-3 py-1.5 text-xs font-bold text-[var(--dash-muted)] transition-colors hover:border-red-400 hover:text-red-400 disabled:cursor-not-allowed"
                       >
-                        Reject
+                        Reject <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
                       </button>
                       <button
                         type="button"
@@ -76,7 +76,7 @@ export function ApplicantReviewTab({ campaign }: { campaign: CampaignDetail }) {
                         title="Coming soon"
                         className="bg-[var(--dash-accent-strong)] px-3 py-1.5 text-xs font-bold text-[var(--dash-on-accent-strong)] disabled:cursor-not-allowed disabled:opacity-60"
                       >
-                        Approve
+                        Approve <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
                       </button>
                     </div>
                   </td>
@@ -126,7 +126,7 @@ export function ApplicantReviewTab({ campaign }: { campaign: CampaignDetail }) {
                   title="Coming soon"
                   className="bg-[var(--dash-accent-strong)] px-3 py-1.5 text-xs font-bold text-[var(--dash-on-accent-strong)] disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Release Payout
+                  Release Payout <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
                 </button>
               </div>
             </div>
