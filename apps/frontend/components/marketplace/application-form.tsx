@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ChevronDown, CircleCheck } from "lucide-react";
 import { campaignDetailMock } from "./campaign-detail-data";
+import Link from "next/link";
 
 const PITCH_MIN_LENGTH = 20;
 
@@ -87,6 +88,14 @@ export function ApplicationForm({
             Your application is in. The brand will review your pitch and reach
             out if it&apos;s a match.
           </p>
+          <div className="flex flex-col gap-2 mt-4">
+            <Link
+              href="/marketplace"
+              className="text-sm font-semibold text-primary-container hover:underline text-center"
+            >
+              ← Browse more campaigns
+            </Link>
+          </div>
         </div>
       </div>
     );
