@@ -9,6 +9,7 @@ export type NotificationBellVariant = "landing" | "dashboard";
 type VariantClasses = {
   button: string;
   buttonHover: string;
+  badgeBg: string;
   badgeText: string;
   panel: string;
   panelHeaderBorder: string;
@@ -31,7 +32,8 @@ type VariantClasses = {
 const LANDING_VARIANT: VariantClasses = {
   button: "relative text-on-surface-variant",
   buttonHover: "hover:text-on-surface",
-  badgeText: "text-[#293500]",
+  badgeBg: "bg-[var(--db-danger)]",
+  badgeText: "text-[var(--db-on-danger)]",
   panel: "bg-surface-container border-outline-variant",
   panelHeaderBorder: "border-outline-variant",
   panelHeaderTitle: "text-on-surface",
@@ -55,7 +57,8 @@ const DASHBOARD_VARIANT: VariantClasses = {
     "relative flex size-11 items-center justify-center rounded text-[var(--dash-muted)]",
   buttonHover:
     "hover:text-[var(--dash-heading)] hover:bg-[var(--dash-surface)]",
-  badgeText: "text-[var(--dash-on-accent-strong)]",
+  badgeBg: "bg-[var(--dash-danger)]",
+  badgeText: "text-[var(--dash-on-danger)]",
   panel: "bg-[var(--dash-surface)] border-[var(--dash-border)]",
   panelHeaderBorder: "border-[var(--dash-border)]",
   panelHeaderTitle: "text-[var(--dash-heading)]",
@@ -184,7 +187,7 @@ export function NotificationBell({ variant, className }: NotificationBellProps) 
         {unreadCount > 0 && (
           <span
             aria-hidden="true"
-            className={`absolute right-1 top-1 inline-flex min-w-[18px] items-center justify-center rounded-full bg-[var(--db-danger,#ff5470)] px-1 text-[10px] font-bold leading-[14px] ${v.badgeText}`}
+            className={`absolute right-1 top-1 inline-flex min-w-[18px] items-center justify-center rounded-full px-1 text-[10px] font-bold leading-[14px] ${v.badgeBg} ${v.badgeText}`}
           >
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>

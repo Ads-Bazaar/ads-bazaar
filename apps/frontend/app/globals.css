@@ -26,6 +26,8 @@
   --db-on-surface-variant: #c5c9ae;
   --db-primary-container: #c8f232;
   --db-on-primary: #293500;
+  --db-danger: #ffb4ab;
+  --db-on-danger: #690005;
   --db-outline-variant: #444934;
 
   --font-geist: var(--font-geist-sans);
