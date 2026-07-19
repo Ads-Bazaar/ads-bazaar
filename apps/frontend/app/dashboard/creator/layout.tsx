@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sora } from "next/font/google";
-import { DashboardChrome } from "@/components/dashboard/creator/dashboard-chrome";
+import { DashboardChrome } from "@/components/dashboard/shared/dashboard-chrome";
+import { SidebarNav } from "@/components/dashboard/creator/sidebar-nav";
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +23,9 @@ export default function CreatorDashboardLayout({
 }>) {
   return (
     <div className={sora.variable}>
-      <DashboardChrome>{children}</DashboardChrome>
+      <DashboardChrome themeClass="creator-dashboard-theme" SidebarNav={SidebarNav}>
+        {children}
+      </DashboardChrome>
     </div>
   );
 }

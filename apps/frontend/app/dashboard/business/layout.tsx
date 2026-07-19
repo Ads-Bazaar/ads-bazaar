@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sora } from "next/font/google";
-import { DashboardChrome } from "@/components/dashboard/business/dashboard-chrome";
+import { DashboardChrome } from "@/components/dashboard/shared/dashboard-chrome";
+import { SidebarNav } from "@/components/dashboard/business/sidebar-nav";
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +23,9 @@ export default function BusinessDashboardLayout({
 }>) {
   return (
     <div className={sora.variable}>
-      <DashboardChrome>{children}</DashboardChrome>
+      <DashboardChrome themeClass="business-dashboard-theme" SidebarNav={SidebarNav}>
+        {children}
+      </DashboardChrome>
     </div>
   );
 }
