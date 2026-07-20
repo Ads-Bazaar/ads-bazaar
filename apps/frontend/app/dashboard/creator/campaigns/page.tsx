@@ -1,6 +1,5 @@
 "use client"
 import { useMemo, useState } from "react"
-import { useRouter } from "next/navigation"
 import { Inbox } from "lucide-react"
 import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header"
 import { CampaignsPageHeader } from "@/components/dashboard/creator/campaigns-page-header"
@@ -15,7 +14,6 @@ import { campaignsList } from "@/components/dashboard/creator/campaigns-list-dat
 const PAGE_SIZE = 4
 
 export default function CreatorCampaignsPage() {
-  const router = useRouter()
   const [search, setSearch] = useState("")
   const [filter, setFilter] = useState<CampaignFilter>("all")
   const [page, setPage] = useState(1)
@@ -56,11 +54,6 @@ export default function CreatorCampaignsPage() {
     setPage(1)
   }
 
-  // Navigates directly to the dynamic [id] route folder we just discussed
-  function handleViewDetails(id: string) {
-    router.push(`/dashboard/creator/campaigns/${id}`)
-  }
-
   return (
     <>
       <DashboardHeader eyebrow="Manage your gigs" title="Campaigns" />
@@ -83,8 +76,6 @@ export default function CreatorCampaignsPage() {
                 campaign={campaign}
                 onSubmitProof={() => {}}
                 onResolveDispute={() => {}}
-                // Check if your CampaignListRow supports either onViewDetails or row click behavior:
-                onClick={() => handleViewDetails(campaign.id)}
               />
             ))}
           </div>
