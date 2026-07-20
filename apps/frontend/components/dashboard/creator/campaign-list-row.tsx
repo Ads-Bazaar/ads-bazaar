@@ -6,6 +6,7 @@ interface CampaignListRowProps {
   campaign: CampaignListItem
   onSubmitProof?: (id: string) => void
   onResolveDispute?: (id: string) => void
+  onClick?: () => void
 }
 
 const STATUS_BADGE_CLASSES: Record<CampaignListItem["status"], string> = {

@@ -1,4 +1,4 @@
-import { DashboardHeader } from "@/components/dashboard/creator/dashboard-header";
+import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
 
 interface PageParams {
   id: string;
