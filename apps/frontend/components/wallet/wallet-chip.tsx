@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Wallet } from "lucide-react";
+import { useRole } from "@/components/role/role-context";
 import { useWallet } from "./wallet-context";
 import { WalletErrorMessage } from "./wallet-error-message";
 
@@ -10,6 +11,7 @@ const shortenAddress = (address: string) =>
 
 export function WalletChip() {
   const { wallet, isConnecting, error, connect, disconnect } = useWallet();
+  const { setRole } = useRole();
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -94,6 +96,7 @@ export function WalletChip() {
             type="button"
             onClick={() => {
               disconnect();
+              setRole(null);
               setIsOpen(false);
             }}
             className="w-full rounded border border-red-400/30 py-1.5 text-center text-sm font-semibold text-red-400 transition-colors hover:bg-red-400/10 hover:text-red-300"
