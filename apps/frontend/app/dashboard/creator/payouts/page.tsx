@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Timer, TrendingUp } from "lucide-react";
 import { ClaimableCard } from "@/components/dashboard/creator/claimable-card";
 import {
@@ -14,6 +15,10 @@ import { PayoutHistoryTable } from "@/components/dashboard/creator/payout-histor
 import { PayoutsNetworkStatus } from "@/components/dashboard/creator/payouts-network-status";
 import { StatCard } from "@/components/dashboard/creator/stat-card";
 import { WalletPanel } from "@/components/dashboard/creator/wallet-panel";
+
+export const metadata: Metadata = {
+  title: "Payouts",
+};
 
 export default function CreatorPayoutsPage() {
   return (

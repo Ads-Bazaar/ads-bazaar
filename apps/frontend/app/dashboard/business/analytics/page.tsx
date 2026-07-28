@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   analyticsStats,
   spendEngagementSeries,
@@ -12,6 +13,10 @@ import { EngagementSpendChart } from "@/components/dashboard/business/engagement
 import { PlatformSplitCard } from "@/components/dashboard/business/platform-split-card";
 import { TopCampaignsTable } from "@/components/dashboard/business/top-campaigns-table";
 import { RegionalReachCard } from "@/components/dashboard/business/regional-reach-card";
+
+export const metadata: Metadata = {
+  title: "Analytics",
+};
 
 export default function BusinessAnalyticsPage() {
   return (

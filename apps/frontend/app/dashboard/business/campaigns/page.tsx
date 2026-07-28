@@ -11,12 +11,6 @@ export const metadata: Metadata = {
   title: "Campaigns",
 };
 
-/**
- * Placeholder route. Full implementation tracked in
- * https://github.com/Ads-Bazaar/ads-bazaar/issues/49 — see that issue for the
- * file structure, components, design tokens, and acceptance criteria before
- * building this page out.
- */
 export default function BusinessCampaignsPage() {
   return (
     <>

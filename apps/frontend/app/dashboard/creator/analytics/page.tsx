@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
 import { analyticStats, growthSeries, ageGroups, topLocations, channels, topCampaigns } from "@/components/dashboard/creator/creator-analytics-data";
 import { AnalyticsPageHeader } from "@/components/dashboard/creator/analytics-page-header";
@@ -7,6 +8,10 @@ import { AgeDistributionPanel } from "@/components/dashboard/creator/age-distrib
 import { TopLocationsPanel } from "@/components/dashboard/creator/top-locations-panel";
 import { ChannelPerformanceSection } from "@/components/dashboard/creator/channel-performance-section";
 import { TopPerformingTable } from "@/components/dashboard/creator/top-performing-table";
+
+export const metadata: Metadata = {
+  title: "Analytics",
+};
 
 export default function CreatorAnalyticsPage() {
   return (

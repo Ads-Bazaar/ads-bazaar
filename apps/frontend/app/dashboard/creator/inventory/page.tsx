@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
 import { ConnectedChannels } from "@/components/dashboard/creator/connected-channels";
 import { DigitalMediaKit } from "@/components/dashboard/creator/digital-media-kit";
@@ -11,6 +12,10 @@ import {
   syncSchedule,
   totalActiveConnections,
 } from "@/components/dashboard/creator/creator-inventory-data";
+
+export const metadata: Metadata = {
+  title: "Inventory",
+};
 
 export default function CreatorInventoryPage() {
   return (

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { DashboardHeader } from '@/components/dashboard/shared/dashboard-header';
 import { PayoutsHeader } from '@/components/dashboard/business/payouts-header';
 import { EscrowStatCard } from '@/components/dashboard/business/escrow-stat-card';
