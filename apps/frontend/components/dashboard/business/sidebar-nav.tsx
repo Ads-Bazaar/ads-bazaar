@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useWizardModal } from "./wizard-modal-context";
+import { useRole } from "@/components/role/role-context";
 import {
+  ArrowLeftRight,
   BarChart3,
   HelpCircle,
   LayoutDashboard,
@@ -40,6 +42,7 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   const router = useRouter();
   const { openWizard } = useWizardModal();
+  const { setRole } = useRole();
 
   return (
     <div className="flex h-full flex-col gap-4 px-4 py-6">
@@ -85,6 +88,18 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
       </button>
 
       <div className="mt-auto flex flex-col gap-1">
+        <button
+          type="button"
+          onClick={() => {
+            onNavigate?.();
+            setRole("creator");
+            router.push("/dashboard/creator");
+          }}
+          className="flex min-h-11 items-center gap-3 rounded-lg px-3 py-2 text-left text-[13px] font-medium text-[var(--dash-muted)] opacity-70 transition-colors hover:bg-[var(--dash-border)] hover:text-[var(--dash-heading)] hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-accent)]"
+        >
+          <ArrowLeftRight className="size-4" aria-hidden="true" />
+          <span>Switch to Creator Dashboard</span>
+        </button>
         <Link
           href="#"
           onClick={(e) => {
