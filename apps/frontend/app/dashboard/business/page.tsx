@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { ClipboardCheck, TrendingUp, Users } from "lucide-react";
 import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
 import { StatCard } from "@/components/dashboard/creator/stat-card";
@@ -8,6 +9,10 @@ import {
   businessCampaigns,
   businessActivity,
 } from "@/components/dashboard/business/business-dashboard-data";
+
+export const metadata: Metadata = {
+  title: "Business Dashboard",
+};
 
 export default function BusinessDashboardPage() {
   return (

@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
-
-export const metadata: Metadata = {
-  title: "Campaign Details — AdsBazaar",
-};
 import { campaignDetailMock } from "@/components/marketplace/campaign-detail-data";
 import { CampaignDetailHeader } from "@/components/marketplace/campaign-detail-header";
 import { CampaignHeroImage } from "@/components/marketplace/campaign-hero-image";
@@ -14,6 +10,18 @@ import { EscrowSidebar } from "@/components/marketplace/escrow-sidebar";
 import { ApplicationForm } from "@/components/marketplace/application-form";
 import { CampaignHelpCard } from "@/components/marketplace/campaign-help-card";
 import { Breadcrumb } from "@/components/marketplace/breadcrumb";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const campaign = campaignDetailMock;
+  return {
+    title: `${campaign.title} — AdsBazaar Marketplace`,
+    description: campaign.brief,
+  };
+}
 
 export default function CampaignDetailPage({
   params,

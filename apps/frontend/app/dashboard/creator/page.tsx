@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { ClipboardCheck } from "lucide-react";
 import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
 import { StatCard } from "@/components/dashboard/creator/stat-card";
@@ -14,6 +15,10 @@ import {
   creatorProofsSubmitted,
   creatorTrustScore,
 } from "@/components/dashboard/creator/creator-dashboard-data";
+
+export const metadata: Metadata = {
+  title: "Creator Dashboard",
+};
 
 export default function CreatorDashboardPage() {
   return (

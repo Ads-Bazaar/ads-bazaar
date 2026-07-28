@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { DashboardHeader } from "@/components/dashboard/shared/dashboard-header";
 import { CampaignsPageHeader } from "@/components/dashboard/business/campaigns-page-header";
 import { CampaignsStatCards } from "@/components/dashboard/business/campaigns-stat-cards";
@@ -6,6 +7,16 @@ import { CampaignListCard } from "@/components/dashboard/business/campaign-list-
 import { CampaignsLoadMore } from "@/components/dashboard/business/campaigns-load-more";
 import { campaignsList } from "@/components/dashboard/business/campaigns-list-data";
 
+export const metadata: Metadata = {
+  title: "Campaigns",
+};
+
+/**
+ * Placeholder route. Full implementation tracked in
+ * https://github.com/Ads-Bazaar/ads-bazaar/issues/49 — see that issue for the
+ * file structure, components, design tokens, and acceptance criteria before
+ * building this page out.
+ */
 export default function BusinessCampaignsPage() {
   return (
     <>
