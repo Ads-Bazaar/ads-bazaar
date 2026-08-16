@@ -56,7 +56,13 @@ export function StepCampaignBrief({
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
-      update({ imageUrl: URL.createObjectURL(file) });
+      // Use FileReader to convert to a base64 data URL so the image
+      // survives page reloads (blob: URLs are ephemeral per-tab).
+      const reader = new FileReader();
+      reader.onload = () => {
+        update({ imageUrl: reader.result as string });
+      };
+      reader.readAsDataURL(file);
     }
   }
 
