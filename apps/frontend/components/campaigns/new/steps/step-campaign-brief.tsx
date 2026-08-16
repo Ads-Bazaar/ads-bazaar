@@ -137,15 +137,17 @@ export function StepCampaignBrief({
             </div>
           ) : (
             <div>
-              <div
+              <button
+                type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-[rgba(0,0,0,0.2)] bg-[#f8f8f8] py-8 transition hover:bg-[#f0f0f0]"
+                aria-label="Upload campaign image"
+                className="flex w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-[rgba(0,0,0,0.2)] bg-[#f8f8f8] py-8 transition hover:bg-[#f0f0f0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--dash-bg)] focus-visible:ring-offset-2"
               >
                 <Upload size={32} className="text-[var(--dash-muted)]" />
                 <p className="text-sm text-[var(--dash-muted)]">
                   Click to upload or drag &amp; drop
                 </p>
-              </div>
+              </button>
               <input
                 type="text"
                 value={urlInput}
