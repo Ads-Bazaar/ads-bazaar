@@ -191,7 +191,7 @@ export function CampaignWizardModal() {
   }
 
   function nextStep() {
-    if (state.currentStep === 5) return;
+    if (state.currentStep === 5) return; // guarded — step 5 CTA is disabled until contract integration
     const stepErrors = validateStep(state.currentStep, state);
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors);
@@ -331,20 +331,26 @@ export function CampaignWizardModal() {
             Saved as draft automatically
           </span>
 
-          <button
-            type="button"
-            onClick={nextStep}
-            className="flex min-h-10 items-center gap-2 rounded-full bg-[var(--dash-accent-strong)] px-5 text-sm font-bold text-[var(--dash-on-accent-strong)] transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-accent)]"
-          >
-            {state.currentStep === 5 ? (
-              <>
-                <Lock size={14} aria-hidden="true" />
-                Fund Escrow &amp; Launch
-              </>
-            ) : (
-              <>Next Step →</>
-            )}
-          </button>
+          {state.currentStep === 5 ? (
+            <button
+              type="button"
+              disabled
+              title="Coming soon — Soroban contract integration required"
+              className="flex min-h-10 items-center gap-2 rounded-full bg-[var(--dash-accent-strong)] px-5 text-sm font-bold text-[var(--dash-on-accent-strong)] disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              <Lock size={14} aria-hidden="true" />
+              Fund Escrow &amp; Launch{" "}
+              <span className="text-[10px] font-normal opacity-60">(Coming soon)</span>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={nextStep}
+              className="flex min-h-10 items-center gap-2 rounded-full bg-[var(--dash-accent-strong)] px-5 text-sm font-bold text-[var(--dash-on-accent-strong)] transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--dash-accent)]"
+            >
+              Next Step →
+            </button>
+          )}
         </nav>
       </div>
 

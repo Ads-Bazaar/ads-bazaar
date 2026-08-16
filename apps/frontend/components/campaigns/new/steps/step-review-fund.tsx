@@ -315,6 +315,12 @@ export function StepReviewFund({ data, onGoToStep }: StepReviewFundProps) {
           <span className="text-[12px] text-[rgba(255,255,255,0.35)]">Stellar Mainnet</span>
         </div>
       </div>
+
+      {/* Coming-soon notice */}
+      <div className="rounded-xl border border-[var(--dash-border)] bg-[var(--dash-surface)] px-4 py-3 text-[13px] text-[var(--dash-muted)]">
+        <span className="font-semibold text-[var(--dash-heading)]">Soroban contract integration coming soon.</span>{" "}
+        Your campaign brief is saved as a draft. Escrow funding and on-chain campaign creation will be available once the contract deployment is complete.
+      </div>
     </div>
   );
 }
