@@ -54,7 +54,18 @@ export function WalletProvider({ children }: { children: ReactNode }) {
         throw new Error("Install Freighter to connect a Stellar wallet.");
       }
 
-      const access = await requestAccess();
+      // Wrap requestAccess() in a race against a 30-second timeout so a
+      // dismissed or never-resolving Freighter popup cannot leave
+      // isConnecting stuck true indefinitely.
+      const CONNECT_TIMEOUT_MS = 30_000;
+      const timeoutPromise = new Promise<never>((_, reject) =>
+        setTimeout(
+          () => reject(new Error("Wallet connection timed out. Please try again.")),
+          CONNECT_TIMEOUT_MS,
+        ),
+      );
+
+      const access = await Promise.race([requestAccess(), timeoutPromise]);
       if (access.error || !access.address) {
         const msg =
           access.error &&
