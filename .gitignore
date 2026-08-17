@@ -21,11 +21,13 @@ apps/backend/dist/
 # production
 build
 
-# foundry
+# foundry / soroban
 packages/contracts/out/
 packages/contracts/cache/
 packages/contracts/broadcast/
 packages/contracts/lib/
+packages/contracts/target/
+packages/contracts/test_snapshots/
 
 # misc
 .DS_Store
