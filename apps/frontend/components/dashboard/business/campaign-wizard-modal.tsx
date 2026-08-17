@@ -135,6 +135,10 @@ export function CampaignWizardModal() {
       const saved = localStorage.getItem(DRAFT_KEY);
       if (saved) {
         const parsed = JSON.parse(saved) as WizardState;
+        // Strip blob: URLs from restored draft — they're invalid after reload
+        if (parsed.brief.imageUrl?.startsWith('blob:')) {
+          parsed.brief.imageUrl = null;
+        }
         setState(parsed);
       }
     } catch {
@@ -148,7 +152,15 @@ export function CampaignWizardModal() {
     if (!hydrated || !isOpen) return;
 
     try {
-      localStorage.setItem(DRAFT_KEY, JSON.stringify(state));
+      // Strip blob: URLs from the draft — they don't survive page reload
+      const draft = {
+        ...state,
+        brief: {
+          ...state.brief,
+          imageUrl: state.brief.imageUrl?.startsWith('blob:') ? null : state.brief.imageUrl,
+        },
+      };
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
     } catch {
       // ignore
     }
