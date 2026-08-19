@@ -22,12 +22,17 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
     onChange({ ...data, ...patch });
   }
 
+  const validTotalBudget =
+    Number.isFinite(data.totalBudget) && data.totalBudget > 0
+      ? data.totalBudget
+      : 0;
+
   const payoutPerCreator =
-    data.totalBudget > 0 && data.creatorSlots > 0
-      ? (data.totalBudget / data.creatorSlots).toFixed(2)
+    validTotalBudget > 0 && data.creatorSlots > 0
+      ? (validTotalBudget / data.creatorSlots).toFixed(2)
       : "0.00";
 
-  const platformFee = data.totalBudget * 0.005;
+  const platformFee = validTotalBudget * 0.005;
 
   return (
     <div className="flex flex-col gap-4">
@@ -138,7 +143,7 @@ export function StepBudget({ data, onChange, errors }: StepBudgetProps) {
             <p className="text-[13px] leading-relaxed text-[var(--dash-muted)]">
               Upon campaign launch, your selected budget of{" "}
               <strong className="text-[var(--dash-bg)]">
-                {data.totalBudget.toLocaleString()} {data.asset}
+                {validTotalBudget.toLocaleString()} {data.asset}
               </strong>{" "}
               will be locked in a secure{" "}
               <a
