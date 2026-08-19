@@ -292,8 +292,8 @@ function CompleteStep({
         You&apos;re all set!
       </h1>
       <p className="text-[15px] text-on-surface-variant mt-3 max-w-[400px]">
-        Your decentralised identity is now live on the Stellar network. You are
-        ready to explore the marketplace.
+        Your profile is saved on this device. Connect your wallet each visit to
+        access your dashboard.
       </p>
 
       <div className="flex flex-col sm:flex-row gap-3 w-full mt-8">
