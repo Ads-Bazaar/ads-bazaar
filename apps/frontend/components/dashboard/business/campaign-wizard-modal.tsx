@@ -20,7 +20,7 @@ const STEPS = [
 
 const DRAFT_KEY = "adsbazaar_campaign_draft";
 
-interface WizardState {
+export interface WizardState {
   currentStep: number;
   brief: {
     title: string;
@@ -50,6 +50,54 @@ interface WizardState {
     linkSocialPost: boolean;
     viewCountThreshold: boolean;
   };
+}
+
+export function isValidWizardState(obj: unknown): obj is WizardState {
+  if (typeof obj !== "object" || obj === null) return false;
+  const draft = obj as Record<string, unknown>;
+
+  if (
+    typeof draft.currentStep !== "number" ||
+    !Number.isInteger(draft.currentStep) ||
+    draft.currentStep < 1 ||
+    draft.currentStep > 5
+  ) {
+    return false;
+  }
+
+  if (typeof draft.brief !== "object" || draft.brief === null) return false;
+  const brief = draft.brief as Record<string, unknown>;
+  if (typeof brief.title !== "string") return false;
+  if (typeof brief.description !== "string") return false;
+  if (brief.imageUrl !== null && typeof brief.imageUrl !== "string") return false;
+  if (!Array.isArray(brief.platforms) || !brief.platforms.every((p) => typeof p === "string")) return false;
+  if (typeof brief.startDate !== "string") return false;
+  if (typeof brief.endDate !== "string") return false;
+  if (typeof brief.campaignType !== "string") return false;
+
+  if (typeof draft.targeting !== "object" || draft.targeting === null) return false;
+  const targeting = draft.targeting as Record<string, unknown>;
+  if (!Array.isArray(targeting.categories) || !targeting.categories.every((c) => typeof c === "string")) return false;
+  if (typeof targeting.minAudienceSize !== "string") return false;
+  if (!Array.isArray(targeting.regions) || !targeting.regions.every((r) => typeof r === "string")) return false;
+  if (typeof targeting.requirements !== "string") return false;
+
+  if (typeof draft.budget !== "object" || draft.budget === null) return false;
+  const budget = draft.budget as Record<string, unknown>;
+  if (typeof budget.asset !== "string") return false;
+  if (typeof budget.totalBudget !== "number" || Number.isNaN(budget.totalBudget) || budget.totalBudget < 0) return false;
+  if (typeof budget.creatorSlots !== "number" || Number.isNaN(budget.creatorSlots) || budget.creatorSlots < 1) return false;
+
+  if (typeof draft.proof !== "object" || draft.proof === null) return false;
+  const proof = draft.proof as Record<string, unknown>;
+  if (!Array.isArray(proof.contentFormats) || !proof.contentFormats.every((f) => typeof f === "string")) return false;
+  if (typeof proof.deliverables !== "string") return false;
+  if (typeof proof.submissionDeadline !== "string") return false;
+  if (typeof proof.verificationType !== "string") return false;
+  if (typeof proof.linkSocialPost !== "boolean") return false;
+  if (typeof proof.viewCountThreshold !== "boolean") return false;
+
+  return true;
 }
 
 const initialState: WizardState = {
@@ -134,15 +182,26 @@ export function CampaignWizardModal() {
     try {
       const saved = localStorage.getItem(DRAFT_KEY);
       if (saved) {
-        const parsed = JSON.parse(saved) as WizardState;
-        // Strip blob: URLs from restored draft — they're invalid after reload
-        if (parsed.brief.imageUrl?.startsWith('blob:')) {
-          parsed.brief.imageUrl = null;
+        const parsed = JSON.parse(saved);
+        if (isValidWizardState(parsed)) {
+          // Strip blob: URLs from restored draft — they're invalid after reload
+          if (parsed.brief.imageUrl?.startsWith("blob:")) {
+            parsed.brief.imageUrl = null;
+          }
+          setState(parsed);
+        } else {
+          // Discard corrupt or mismatched draft
+          localStorage.removeItem(DRAFT_KEY);
+          setState(initialState);
         }
-        setState(parsed);
       }
     } catch {
-      // ignore
+      try {
+        localStorage.removeItem(DRAFT_KEY);
+      } catch {
+        // ignore
+      }
+      setState(initialState);
     }
     setHydrated(true);
   }, [isOpen]);
