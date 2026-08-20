@@ -7,14 +7,25 @@ import { EscrowPanel } from "@/components/dashboard/business/escrow-panel";
 import { QuickOperationsPanel } from "@/components/dashboard/business/quick-operations-panel";
 import { ActivityTimelinePanel } from "@/components/dashboard/business/activity-timeline-panel";
 import { MarketReachPanel } from "@/components/dashboard/business/market-reach-panel";
-import { campaignDetail } from "@/components/dashboard/business/campaign-detail-data";
+import { getBusinessCampaignDetailById, campaignDetail } from "@/components/dashboard/business/campaign-detail-data";
+import { notFound } from "next/navigation";
 
-export default function CampaignDetailPage({
+interface PageParams {
+  id: string;
+}
+
+export default async function CampaignDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<PageParams>;
 }) {
-  const campaign = campaignDetail; // always mock for now — params.id ignored
+  const { id } = await params;
+
+  const campaign = getBusinessCampaignDetailById(id);
+
+  if (!campaign) {
+    notFound();
+  }
 
   return (
     <CampaignTabsProvider>

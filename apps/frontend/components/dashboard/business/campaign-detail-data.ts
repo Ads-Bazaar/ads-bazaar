@@ -96,3 +96,11 @@ export const campaignDetail: CampaignDetail = {
     engagementProgress: 48,
   },
 };
+
+export function getBusinessCampaignDetailById(id: string): CampaignDetail | null {
+  if (id === campaignDetail.id) {
+    return campaignDetail;
+  }
+
+  return null;
+}
