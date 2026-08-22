@@ -105,11 +105,16 @@ export function MarketplaceFilters({
         {quickTags.map((tag) => (
           <button
             key={tag}
-            className="border border-outline-variant px-3 py-1.5 text-xs font-semibold text-on-surface-variant hover:border-primary-container hover:text-primary-container transition-colors cursor-pointer"
+            disabled
+            title="Coming soon"
+            className="border border-outline-variant px-3 py-1.5 text-xs font-semibold text-on-surface-variant/50 cursor-not-allowed"
           >
             {tag}
           </button>
         ))}
+        <span className="text-[10px] font-medium text-on-surface-variant/50 ml-1">
+          (Coming soon)
+        </span>
       </div>
     </div>
   );
