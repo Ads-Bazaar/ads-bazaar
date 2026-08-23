@@ -132,7 +132,7 @@ export function OnboardingWizardModal() {
 
         <main
           ref={mainRef}
-          className="flex-1 overflow-y-auto"
+          className="flex-1 overflow-y-auto no-scrollbar"
         >
           <div className="mx-auto flex max-w-[600px] flex-col items-center px-5 py-8">
             <StepIndicator variant="bars" totalSteps={3} currentStep={stepNumber} />

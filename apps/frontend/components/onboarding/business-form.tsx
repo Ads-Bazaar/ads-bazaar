@@ -284,43 +284,6 @@ export function BusinessForm({
             </div>
           </div>
         </div>
-
-        <div className="hidden md:flex flex-col justify-between w-[42%] p-8 border-l border-[var(--db-outline-variant)]">
-          <div className="self-end">
-            <svg
-              width="64"
-              height="64"
-              viewBox="0 0 64 64"
-              fill="none"
-              style={{ transform: "rotate(6deg)" }}
-            >
-              <path
-                d="M32 4L52 12V28C52 42 40 54 32 58C24 54 12 42 12 28V12L32 4Z"
-                stroke="#343332"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M24 32L30 38L40 26"
-                stroke="#343332"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <div>
-            <div className="w-8 h-0.5 bg-[var(--db-primary-container)] mb-4" />
-            <h3 className="font-sora text-[20px] font-semibold text-[var(--db-on-surface)]">
-              Verified for Creators.
-            </h3>
-            <p className="font-geist text-[14px] text-[var(--db-on-surface-variant)] mt-3 leading-relaxed">
-              Completing your profile unlocks the AdsBazaar verified badge,
-              increasing response rates from top-tier talent by 40%.
-            </p>
-          </div>
-        </div>
       </div>
     </form>
   );
