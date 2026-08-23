@@ -45,7 +45,7 @@ export function DashboardChrome({
   return (
     <WizardModalProvider>
       <div
-        className={`${themeClass} min-h-screen overflow-x-hidden bg-[var(--dash-bg)] text-[var(--dash-body)]`}
+        className={`${themeClass} min-h-screen overflow-x-clip bg-[var(--dash-bg)] text-[var(--dash-body)]`}
       >
         <aside className="fixed top-0 left-0 hidden h-screen w-64 border-r border-[var(--dash-border)] bg-[var(--dash-surface)] lg:flex">
           <SidebarNav />
@@ -84,7 +84,7 @@ export function DashboardChrome({
           <main
             ref={mainRef}
             tabIndex={-1}
-            className="mx-auto max-w-[1280px] px-4 py-6 outline-none sm:px-6 lg:ml-64 lg:px-8 lg:py-8"
+            className="mx-auto max-w-[1280px] px-4 pb-6 outline-none sm:px-6 lg:ml-64 lg:px-8 lg:pb-8"
           >
             {children}
 
