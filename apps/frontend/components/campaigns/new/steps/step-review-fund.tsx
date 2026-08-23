@@ -39,6 +39,18 @@ interface StepReviewFundProps {
   onGoToStep: (step: number) => void;
 }
 
+const EXPECTED_NETWORK = "PUBLIC"; // Freighter's identifier for Stellar mainnet
+
+function formatNetworkLabel(network: string | undefined): string {
+  if (!network) return "Unknown network";
+  const labels: Record<string, string> = {
+    PUBLIC: "Stellar Mainnet",
+    TESTNET: "Stellar Testnet",
+    FUTURENET: "Stellar Futurenet",
+  };
+  return labels[network] ?? network;
+}
+
 export function StepReviewFund({ data, onGoToStep }: StepReviewFundProps) {
   const { wallet } = useWallet();
   const { brief, targeting, budget, proof } = data;
@@ -46,6 +58,9 @@ export function StepReviewFund({ data, onGoToStep }: StepReviewFundProps) {
   const walletDisplay = wallet
     ? `${wallet.address.slice(0, 4)}...${wallet.address.slice(-4)}`
     : "No wallet connected";
+
+  const networkLabel = formatNetworkLabel(wallet?.network);
+  const isNetworkMismatch = !!wallet?.network && wallet.network !== EXPECTED_NETWORK;
 
   const creatorPool = budget.totalBudget;
   const platformFee = budget.totalBudget * 0.005;
@@ -310,9 +325,24 @@ export function StepReviewFund({ data, onGoToStep }: StepReviewFundProps) {
           </p>
         </div>
 
-        <div className="mt-5 flex items-center justify-between border-t border-[rgba(255,255,255,0.08)] pt-4">
-          <span className="font-mono text-[13px] text-[rgba(255,255,255,0.35)]">{walletDisplay}</span>
-          <span className="text-[12px] text-[rgba(255,255,255,0.35)]">Stellar Mainnet</span>
+        <div className="mt-5 flex flex-col gap-2 border-t border-[rgba(255,255,255,0.08)] pt-4">
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[13px] text-[rgba(255,255,255,0.35)]">{walletDisplay}</span>
+            <span
+              className={
+                isNetworkMismatch
+                  ? "text-[12px] font-semibold text-red-400"
+                  : "text-[12px] text-[rgba(255,255,255,0.35)]"
+              }
+            >
+              {networkLabel}
+            </span>
+          </div>
+          {isNetworkMismatch && (
+            <p className="text-[12px] font-semibold text-red-400">
+              Warning: your wallet is connected to {networkLabel}, not {formatNetworkLabel(EXPECTED_NETWORK)}. Funds may not lock as expected.
+            </p>
+          )}
         </div>
       </div>
 
