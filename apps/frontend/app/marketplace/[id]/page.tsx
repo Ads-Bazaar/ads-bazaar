@@ -13,12 +13,17 @@ import { ApplicationForm } from "@/components/marketplace/application-form";
 import { CampaignHelpCard } from "@/components/marketplace/campaign-help-card";
 import { Breadcrumb } from "@/components/marketplace/breadcrumb";
 
+interface PageParams {
+  id: string;
+}
+
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<PageParams>;
 }): Promise<Metadata> {
-  const marketplaceCampaign = findCampaignById(params.id);
+  const { id } = await params;
+  const marketplaceCampaign = findCampaignById(id);
   
   if (!marketplaceCampaign) {
     return {
@@ -33,18 +38,19 @@ export async function generateMetadata({
   };
 }
 
-export default function CampaignDetailPage({
+export default async function CampaignDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<PageParams>;
 }) {
-  const marketplaceCampaign = findCampaignById(params.id);
+  const { id } = await params;
+  const marketplaceCampaign = findCampaignById(id);
   
   if (!marketplaceCampaign) {
     notFound();
   }
 
-  const campaign = getCampaignDetailById(params.id) || {
+  const campaign = getCampaignDetailById(id) || {
     ...campaignDetailMock,
     id: marketplaceCampaign.id,
     title: marketplaceCampaign.title,

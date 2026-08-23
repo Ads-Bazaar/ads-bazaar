@@ -104,3 +104,26 @@ export function getBusinessCampaignDetailById(id: string): CampaignDetail | null
 
   return null;
 }
+
+export function buildCampaignDetailFromListItem(id: string, name: string, status: string): CampaignDetail {
+  return {
+    id,
+    name,
+    status: status as CampaignDetailStatus,
+    dateRange: "",
+    location: "Global (Stellar Ecosystem)",
+    description: "Campaign details coming soon.",
+    escrow: { total: "0 XLM", available: "0 XLM", reserved: "0 XLM" },
+    applicantCount: 0,
+    proofQueueCount: 0,
+    applicants: [],
+    proofQueue: [],
+    activity: [],
+    reach: {
+      totalImpressions: "—",
+      impressionsProgress: 0,
+      engagementRate: "—",
+      engagementProgress: 0,
+    },
+  };
+}
