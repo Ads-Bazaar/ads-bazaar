@@ -5,7 +5,7 @@ import { useOnboardingModal } from "@/components/onboarding/onboarding-modal-con
 
 const steps = [
   {
-    side: "brand",
+    side: "business",
     icon: FileText,
     title: "Define Brief",
     description: "Upload deliverables, timeline, and budget.",
@@ -17,7 +17,7 @@ const steps = [
     description: "Filter campaigns by niche, rate, and platform.",
   },
   {
-    side: "brand",
+    side: "business",
     icon: Lock,
     title: "Fund Escrow",
     description: "Lock funds safely in a Soroban contract.",
@@ -29,7 +29,7 @@ const steps = [
     description: "Submit content proof and trigger smart releases.",
   },
   {
-    side: "brand",
+    side: "business",
     icon: ShieldCheck,
     title: "Review & Approve",
     description: "Pay only once work is verified via social APIs.",
