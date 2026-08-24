@@ -106,10 +106,21 @@ export function getBusinessCampaignDetailById(id: string): CampaignDetail | null
 }
 
 export function buildCampaignDetailFromListItem(id: string, name: string, status: string): CampaignDetail {
+
+  const statusMap: Record<string, CampaignDetailStatus> = {
+    active: "active",
+    paused: "paused",
+    draft: "draft",
+    completed: "completed",
+    "under-review": "paused", 
+  };
+  
+  const mappedStatus: CampaignDetailStatus = statusMap[status] || "draft";
+
   return {
     id,
     name,
-    status: status as CampaignDetailStatus,
+    status: mappedStatus,
     dateRange: "",
     location: "Global (Stellar Ecosystem)",
     description: "Campaign details coming soon.",
