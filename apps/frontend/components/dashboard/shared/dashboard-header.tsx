@@ -14,7 +14,7 @@ export function DashboardHeader({
   const { openMobileNav } = useMobileNav();
 
   return (
-    <div className="mb-8 lg:mb-12">
+    <div className="sticky top-0 z-20 -mx-4 mb-8 bg-[var(--dash-bg)] px-4 pb-6 pt-6 sm:-mx-6 sm:px-6 lg:-mx-8 lg:mb-12 lg:px-8 lg:pt-8">
       <div className="mb-4 flex items-center justify-between gap-4 lg:hidden">
         <button
           type="button"

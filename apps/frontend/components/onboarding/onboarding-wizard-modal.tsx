@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { X, LayoutGrid, Sparkles } from "lucide-react";
+import { X, LayoutGrid, Sparkles, Tag } from "lucide-react";
 import { useOnboardingModal } from "./onboarding-modal-context";
 import { StepIndicator } from "./step-indicator";
 import { BusinessForm } from "./business-form";
@@ -117,56 +117,70 @@ export function OnboardingWizardModal() {
         aria-hidden="true"
       />
 
-      <div className="absolute inset-x-0 bottom-0 top-0 flex flex-col overflow-hidden bg-background sm:inset-x-4 sm:top-4 sm:rounded-t-2xl lg:inset-x-auto lg:left-1/2 lg:top-8 lg:w-full lg:max-w-[720px] lg:-translate-x-1/2 lg:rounded-2xl">
-        <header className="flex h-12 shrink-0 items-center justify-end border-b border-outline-variant px-5">
-          <button
-            type="button"
-            onClick={closeOnboarding}
-            aria-label="Close"
-            className="flex items-center gap-1.5 text-[13px] text-on-surface-variant transition hover:text-on-surface"
-          >
-            <X size={14} aria-hidden="true" />
-            Close
-          </button>
-        </header>
+      <div className="absolute inset-x-0 bottom-0 top-0 flex overflow-hidden bg-surface-container sm:inset-x-4 sm:top-4 sm:bottom-4 sm:rounded-[24px] lg:inset-x-auto lg:left-1/2 lg:top-1/2 lg:h-[min(680px,calc(100vh-64px))] lg:w-full lg:max-w-[900px] lg:-translate-x-1/2 lg:-translate-y-1/2 lg:rounded-[24px]">
+        {/* Decorative brand panel */}
+        <aside className="relative hidden w-[320px] shrink-0 overflow-hidden bg-[#0b0b0b] lg:block">
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-[-20%] top-[-10%] h-[75%] rounded-full bg-[radial-gradient(closest-side,var(--db-primary-container),transparent)] opacity-[0.22] blur-3xl"
+          />
+          <div className="absolute inset-x-0 bottom-10 flex flex-col items-center px-8 text-center">
+            <div className="mb-5 flex size-12 items-center justify-center rounded-[14px] border border-outline-variant/60 bg-surface-container-high">
+              <Tag className="size-5 text-primary-container" aria-hidden="true" />
+            </div>
+            <span className="font-sora text-[20px] font-bold text-on-surface">
+              AdsBazaar
+            </span>
+            <p className="mt-2 text-[13px] leading-relaxed text-on-surface-variant">
+              The trust layer for global creator campaigns — escrow-backed,
+              instantly paid.
+            </p>
+          </div>
+        </aside>
 
-        <main
-          ref={mainRef}
-          className="flex-1 overflow-y-auto"
-        >
-          <div className="mx-auto flex max-w-[600px] flex-col items-center px-5 py-8">
-            <StepIndicator variant="bars" totalSteps={3} currentStep={stepNumber} />
+        {/* Form panel */}
+        <div className="flex min-w-0 flex-1 flex-col">
+          <header className="flex h-14 shrink-0 items-center justify-between border-b border-outline-variant px-6">
+            <StepIndicator variant="minimal" totalSteps={3} currentStep={stepNumber} />
+            <button
+              type="button"
+              onClick={closeOnboarding}
+              aria-label="Close"
+              className="flex size-8 items-center justify-center rounded-full text-on-surface-variant transition hover:bg-surface-container-high hover:text-on-surface"
+            >
+              <X size={16} aria-hidden="true" />
+            </button>
+          </header>
 
-            {step === "role" && (
-              <RoleStep
-                intent={intent}
-                onSelect={selectRole}
-              />
-            )}
+          <main ref={mainRef} className="flex-1 overflow-y-auto no-scrollbar">
+            <div className="mx-auto flex max-w-[480px] flex-col items-center px-6 py-8 lg:items-stretch lg:text-left">
+              {step === "role" && (
+                <RoleStep
+                  intent={intent}
+                  onSelect={selectRole}
+                />
+              )}
 
-            {step === "form" && role === "business" && (
-              <div className="w-full">
-                <div className="rounded-[8px] border border-outline-variant bg-surface-container overflow-hidden">
+              {step === "form" && role === "business" && (
+                <div className="w-full">
                   <BusinessForm
                     data={businessData}
                     onChange={setBusinessData}
                     onSubmit={handleFormSubmit}
                     onBack={() => { setStep("role"); scrollToTop(); }}
                   />
+                  <p className="mt-6 text-center text-[13px] text-on-surface-variant">
+                    By continuing, you agree to our{" "}
+                    <span className="text-on-surface hover:underline cursor-pointer">
+                      Service Terms
+                    </span>
+                    .
+                  </p>
                 </div>
-                <p className="mt-6 text-center text-[13px] text-on-surface-variant">
-                  By continuing, you agree to our{" "}
-                  <span className="text-on-surface hover:underline cursor-pointer">
-                    Service Terms
-                  </span>
-                  .
-                </p>
-              </div>
-            )}
+              )}
 
-            {step === "form" && role === "creator" && (
-              <div className="w-full">
-                <div className="rounded-[8px] border border-outline-variant bg-surface-container overflow-hidden">
+              {step === "form" && role === "creator" && (
+                <div className="w-full">
                   <CreatorForm
                     data={creatorData}
                     onChange={setCreatorData}
@@ -174,17 +188,17 @@ export function OnboardingWizardModal() {
                     onSkip={() => handleComplete("/dashboard/creator")}
                   />
                 </div>
-              </div>
-            )}
+              )}
 
-            {step === "complete" && (
-              <CompleteStep
-                role={role!}
-                onNavigate={handleComplete}
-              />
-            )}
-          </div>
-        </main>
+              {step === "complete" && (
+                <CompleteStep
+                  role={role!}
+                  onNavigate={handleComplete}
+                />
+              )}
+            </div>
+          </main>
+        </div>
       </div>
     </div>
   );
@@ -211,13 +225,13 @@ function RoleStep({
         <button
           type="button"
           onClick={() => onSelect("business")}
-          className={`flex flex-1 flex-col rounded-[8px] border bg-surface-container p-6 text-left transition-all hover:border-primary-container ${
+          className={`group flex flex-1 flex-col rounded-2xl border bg-surface-container-high p-6 text-left transition-all hover:-translate-y-0.5 hover:border-primary-container ${
             intent === "business"
               ? "border-primary-container"
               : "border-outline-variant"
           }`}
         >
-          <div className="flex size-10 items-center justify-center rounded-[4px] bg-surface-container-high">
+          <div className="flex size-10 items-center justify-center rounded-xl bg-background transition-colors group-hover:bg-primary-container/10">
             <LayoutGrid size={20} className="text-on-surface" />
           </div>
           <h3 className="font-sora text-lg font-semibold text-on-surface mt-4">
@@ -235,13 +249,13 @@ function RoleStep({
         <button
           type="button"
           onClick={() => onSelect("creator")}
-          className={`flex flex-1 flex-col rounded-[8px] border bg-surface-container p-6 text-left transition-all hover:border-primary-container ${
+          className={`group flex flex-1 flex-col rounded-2xl border bg-surface-container-high p-6 text-left transition-all hover:-translate-y-0.5 hover:border-primary-container ${
             intent === "creator"
               ? "border-primary-container"
               : "border-outline-variant"
           }`}
         >
-          <div className="flex size-10 items-center justify-center rounded-[4px] bg-surface-container-high">
+          <div className="flex size-10 items-center justify-center rounded-xl bg-background transition-colors group-hover:bg-primary-container/10">
             <Sparkles size={20} className="text-on-surface" />
           </div>
           <h3 className="font-sora text-lg font-semibold text-on-surface mt-4">
@@ -272,9 +286,9 @@ function CompleteStep({
 
   return (
     <div className="flex flex-col items-center text-center">
-      <div className="flex size-16 items-center justify-center rounded-[8px] border border-primary-container bg-surface-container shadow-[0_0_24px_rgba(200,242,50,0.15)]">
+      <div className="flex size-16 items-center justify-center rounded-2xl bg-surface-container-high shadow-[0_0_32px_rgba(200,242,50,0.12)]">
         <svg
-          className="size-10 text-primary-container"
+          className="size-9 text-primary-container"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -288,7 +302,7 @@ function CompleteStep({
         </svg>
       </div>
 
-      <h1 className="font-sora text-[32px] font-extrabold text-on-surface leading-tight mt-6">
+      <h1 className="font-sora text-[28px] font-extrabold text-on-surface leading-tight mt-6">
         You&apos;re all set!
       </h1>
       <p className="text-[15px] text-on-surface-variant mt-3 max-w-[400px]">
@@ -300,14 +314,14 @@ function CompleteStep({
         <button
           type="button"
           onClick={() => onNavigate(dashboard)}
-          className="flex-1 h-[48px] bg-primary-container text-on-primary font-semibold text-[14px] uppercase tracking-[0.05em] rounded-[4px] hover:opacity-90 transition-opacity"
+          className="flex-1 h-[48px] bg-primary-container text-on-primary font-semibold text-[14px] rounded-full hover:opacity-90 transition-opacity"
         >
           Enter Dashboard →
         </button>
         <button
           type="button"
           onClick={() => onNavigate("/marketplace")}
-          className="flex-1 h-[48px] border border-on-surface text-on-surface font-semibold text-[14px] uppercase rounded-[4px] hover:bg-surface-container transition-colors"
+          className="flex-1 h-[48px] border border-on-surface text-on-surface font-semibold text-[14px] rounded-full hover:bg-surface-container-high transition-colors"
         >
           Browse Marketplace
         </button>

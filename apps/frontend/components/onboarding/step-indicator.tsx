@@ -1,7 +1,7 @@
 type StepIndicatorProps = {
   totalSteps: number;
   currentStep: number;
-  variant?: "dots" | "bars" | "labeled";
+  variant?: "dots" | "bars" | "labeled" | "minimal";
   label?: string;
 };
 
@@ -11,6 +11,32 @@ export function StepIndicator({
   variant = "dots",
   label,
 }: StepIndicatorProps) {
+  if (variant === "minimal") {
+    return (
+      <div className="flex items-center gap-3">
+        <div className="flex gap-1.5">
+          {Array.from({ length: totalSteps }, (_, i) => {
+            const step = i + 1;
+            const isFilled = step <= currentStep;
+            return (
+              <div
+                key={step}
+                className={`h-1 w-6 rounded-full transition-colors ${
+                  isFilled
+                    ? "bg-[var(--db-primary-container)]"
+                    : "bg-[var(--db-outline-variant)]"
+                }`}
+              />
+            );
+          })}
+        </div>
+        <span className="font-geist text-[11px] font-medium text-[var(--db-on-surface-variant)]">
+          {currentStep} of {totalSteps}
+        </span>
+      </div>
+    );
+  }
+
   if (variant === "dots") {
     return (
       <div className="flex items-center justify-center mb-8">

@@ -12,7 +12,6 @@ export default function LandingPage() {
     <div className="min-h-screen bg-background text-on-surface font-geist selection:bg-primary-container selection:text-on-primary">
       <Navbar />
       <Hero />
-      <FeatureCards />
       <UniversalPayouts />
       <BrandsCreators />
       <SeamlessWorkflow />

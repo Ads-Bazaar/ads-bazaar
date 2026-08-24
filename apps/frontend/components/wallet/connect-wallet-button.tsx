@@ -52,7 +52,7 @@ export function ConnectWalletButton() {
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
-          className="flex flex-col items-end bg-primary-container text-on-primary font-semibold text-[14px] px-5 py-2.5 rounded-[4px] hover:opacity-90 transition-opacity"
+          className="flex flex-col items-end bg-primary-container text-on-primary font-semibold text-[14px] px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity"
         >
           <span className="text-[10px] font-bold uppercase opacity-70 leading-none">
             {wallet.network}
@@ -63,7 +63,7 @@ export function ConnectWalletButton() {
         </button>
 
         {isOpen && (
-          <div className="absolute right-0 top-full mt-2 z-50 min-w-[240px] rounded-[4px] border border-outline-variant bg-surface-container p-4 shadow-lg">
+          <div className="absolute right-0 top-full mt-2 z-50 min-w-[240px] rounded-2xl border border-outline-variant bg-surface-container p-4 shadow-lg">
             <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-on-surface-variant">
               Network
             </p>
@@ -88,7 +88,7 @@ export function ConnectWalletButton() {
                 setRole(null);
                 setIsOpen(false);
               }}
-              className="w-full rounded-[2px] border border-red-400/30 py-1.5 text-center text-sm font-semibold text-red-400 transition-colors hover:bg-red-400/10 hover:text-red-300"
+              className="w-full rounded-full border border-red-400/30 py-1.5 text-center text-sm font-semibold text-red-400 transition-colors hover:bg-red-400/10 hover:text-red-300"
             >
               Disconnect
             </button>
@@ -104,7 +104,7 @@ export function ConnectWalletButton() {
         type="button"
         onClick={connect}
         disabled={isConnecting}
-        className="bg-primary-container text-on-primary font-semibold text-[14px] px-5 py-2.5 rounded-[4px] hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-wait"
+        className="bg-primary-container text-on-primary font-semibold text-[14px] px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-wait"
       >
         {isConnecting ? "Connecting..." : "Connect Wallet"}
       </button>
