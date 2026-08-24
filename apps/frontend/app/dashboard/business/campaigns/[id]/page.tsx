@@ -7,14 +7,30 @@ import { EscrowPanel } from "@/components/dashboard/business/escrow-panel";
 import { QuickOperationsPanel } from "@/components/dashboard/business/quick-operations-panel";
 import { ActivityTimelinePanel } from "@/components/dashboard/business/activity-timeline-panel";
 import { MarketReachPanel } from "@/components/dashboard/business/market-reach-panel";
-import { campaignDetail } from "@/components/dashboard/business/campaign-detail-data";
+import { getBusinessCampaignDetailById, buildCampaignDetailFromListItem } from "@/components/dashboard/business/campaign-detail-data";
+import { findBusinessCampaignById } from "@/components/dashboard/business/campaigns-list-data";
+import { notFound } from "next/navigation";
 
-export default function CampaignDetailPage({
+interface PageParams {
+  id: string;
+}
+
+export default async function CampaignDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<PageParams>;
 }) {
-  const campaign = campaignDetail; // always mock for now — params.id ignored
+  const { id } = await params;
+
+  let campaign = getBusinessCampaignDetailById(id);
+  
+  if (!campaign) {
+    const listItem = findBusinessCampaignById(id);
+    if (!listItem) {
+      notFound();
+    }
+    campaign = buildCampaignDetailFromListItem(id, listItem.title, listItem.status);
+  }
 
   return (
     <CampaignTabsProvider>
@@ -42,4 +58,3 @@ export default function CampaignDetailPage({
     </CampaignTabsProvider>
   );
 }
-

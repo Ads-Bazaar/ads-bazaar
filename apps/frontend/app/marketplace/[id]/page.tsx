@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
-import { campaignDetailMock } from "@/components/marketplace/campaign-detail-data";
+import { getCampaignDetailById, campaignDetailMock } from "@/components/marketplace/campaign-detail-data";
+import { findCampaignById } from "@/components/marketplace/marketplace-data";
 import { CampaignDetailHeader } from "@/components/marketplace/campaign-detail-header";
 import { CampaignHeroImage } from "@/components/marketplace/campaign-hero-image";
 import { CampaignBriefSection } from "@/components/marketplace/campaign-brief-section";
@@ -11,24 +13,49 @@ import { ApplicationForm } from "@/components/marketplace/application-form";
 import { CampaignHelpCard } from "@/components/marketplace/campaign-help-card";
 import { Breadcrumb } from "@/components/marketplace/breadcrumb";
 
+interface PageParams {
+  id: string;
+}
+
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<PageParams>;
 }): Promise<Metadata> {
-  const campaign = campaignDetailMock;
+  const { id } = await params;
+  const marketplaceCampaign = findCampaignById(id);
+  
+  if (!marketplaceCampaign) {
+    return {
+      title: "Campaign Not Found — AdsBazaar Marketplace",
+      description: "The campaign you're looking for doesn't exist.",
+    };
+  }
+
   return {
-    title: `${campaign.title} — AdsBazaar Marketplace`,
-    description: campaign.brief,
+    title: `${marketplaceCampaign.title} — AdsBazaar Marketplace`,
+    description: marketplaceCampaign.description,
   };
 }
 
-export default function CampaignDetailPage({
+export default async function CampaignDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<PageParams>;
 }) {
-  const campaign = campaignDetailMock;
+  const { id } = await params;
+  const marketplaceCampaign = findCampaignById(id);
+  
+  if (!marketplaceCampaign) {
+    notFound();
+  }
+
+  const campaign = getCampaignDetailById(id) || {
+    ...campaignDetailMock,
+    id: marketplaceCampaign.id,
+    title: marketplaceCampaign.title,
+    category: "MARKETPLACE", 
+  };
 
   return (
     <>

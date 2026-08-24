@@ -49,3 +49,11 @@ export const campaignDetailMock: CampaignDetail = {
     "TikTok Short",
   ],
 };
+
+export function getCampaignDetailById(id: string): CampaignDetail | null {
+  if (id === campaignDetailMock.id) {
+    return campaignDetailMock;
+  }
+  
+  return null;
+}
