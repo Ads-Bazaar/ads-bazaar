@@ -20,20 +20,20 @@ export function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
         isScrolled
-          ? "bg-surface-container border-b border-outline-variant"
-          : "bg-transparent border-b border-transparent"
+          ? "bg-background/80 backdrop-blur-md"
+          : "bg-transparent"
       }`}
     >
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-10 h-20 grid grid-cols-[1fr_auto_1fr] items-center">
         {/* Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center justify-self-start">
           <a href="/" className="font-sora font-bold text-xl text-on-surface">
             AdsBazaar
           </a>
         </div>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-8 justify-self-center">
           <a
             href="/marketplace"
             className="text-[15px] text-on-surface-variant hover:text-on-surface transition-colors"
@@ -55,12 +55,12 @@ export function Navbar() {
         </div>
 
         {/* Actions */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-6 justify-self-end">
           <ConnectWalletButton />
         </div>
 
         {/* Mobile Menu Toggle */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center justify-self-end">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
@@ -77,7 +77,7 @@ export function Navbar() {
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden overflow-visible bg-surface-container border-b border-outline-variant px-6 py-4 flex flex-col gap-4">
+        <div className="md:hidden overflow-visible bg-background/95 backdrop-blur-md px-6 py-4 flex flex-col gap-4">
           <a
             href="/marketplace"
             className="text-[15px] text-on-surface py-2 font-medium"
@@ -99,7 +99,7 @@ export function Navbar() {
           >
             Stats
           </a>
-          <div className="flex items-center justify-between gap-3 pt-2 border-t border-outline-variant mt-2">
+          <div className="flex items-center justify-between gap-3 pt-4">
             <ConnectWalletButton />
           </div>
         </div>

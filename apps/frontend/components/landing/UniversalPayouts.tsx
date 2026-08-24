@@ -1,13 +1,13 @@
 const destinations = [
-  { code: "NGN", name: "Nigerian Naira", color: "#10a151", text: "text-white", delay: "0s" },
-  { code: "KES", name: "Kenyan Shilling", color: "#ff0000", text: "text-white", delay: "0.4s" },
-  { code: "GHS", name: "Ghanaian Cedi", color: "#f9d616", text: "text-background", delay: "0.8s" },
-  { code: "PHP", name: "Philippine Peso", color: "#0038a8", text: "text-white", delay: "1.2s" },
+  { code: "NGN", symbol: "₦", name: "Nigerian Naira", color: "#10a151", text: "text-white", delay: "0s" },
+  { code: "KES", symbol: "KSh", name: "Kenyan Shilling", color: "#ff0000", text: "text-white", delay: "0.4s" },
+  { code: "GHS", symbol: "₵", name: "Ghanaian Cedi", color: "#f9d616", text: "text-background", delay: "0.8s" },
+  { code: "PHP", symbol: "₱", name: "Philippine Peso", color: "#0038a8", text: "text-white", delay: "1.2s" },
 ];
 
 export function UniversalPayouts() {
   return (
-    <section className="relative overflow-hidden py-16 md:py-[100px] px-6 bg-background border-y border-outline-variant">
+    <section className="relative overflow-hidden py-16 md:py-[100px] px-6 bg-background">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[600px] rounded-full bg-primary-container/5 blur-3xl"
@@ -114,11 +114,22 @@ export function UniversalPayouts() {
                   className="w-[48px] h-[48px] rounded-[12px] flex items-center justify-center shadow-sm"
                   style={{ backgroundColor: d.color }}
                 >
-                  <span className={`font-geist font-[800] text-[13px] ${d.text}`}>{d.code}</span>
+                  <span
+                    className={`font-geist font-[800] leading-none ${d.text} ${
+                      d.symbol.length > 1 ? "text-[13px]" : "text-[22px]"
+                    }`}
+                  >
+                    {d.symbol}
+                  </span>
                 </div>
-                <span className="font-geist font-[600] text-[11px] text-on-surface-variant text-center leading-tight">
-                  {d.name}
-                </span>
+                <div className="flex flex-col items-center gap-0.5">
+                  <span className="font-geist font-[600] text-[11px] text-on-surface-variant text-center leading-tight">
+                    {d.name}
+                  </span>
+                  <span className="font-geist text-[10px] uppercase tracking-[0.05em] text-on-surface-variant/60">
+                    {d.code}
+                  </span>
+                </div>
               </div>
             ))}
           </div>

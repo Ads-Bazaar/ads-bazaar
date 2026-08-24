@@ -1,18 +1,25 @@
 import Link from "next/link";
-import { AtSign, Globe, Share2 } from "lucide-react";
+import Image from "next/image";
+import { Mail, Tag } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-outline-variant bg-background">
+    <footer className="relative bg-background">
       <div className="mx-auto max-w-[1280px] px-6 py-16">
         <div className="mb-16 grid grid-cols-1 gap-10 md:grid-cols-4 md:gap-6">
           {/* Brand Column */}
           <div className="flex flex-col">
-            <Link href="/" className="mb-4 font-sora text-xl font-bold text-on-surface">
-              AdsBazaar
+            <Link href="/" className="mb-4 flex items-center gap-2.5">
+              <span className="flex size-8 items-center justify-center rounded-[10px] bg-surface-container-high">
+                <Tag className="size-4 text-primary-container" aria-hidden="true" />
+              </span>
+              <span className="font-sora text-xl font-bold text-on-surface">
+                AdsBazaar
+              </span>
             </Link>
-            <p className="max-w-[240px] font-geist text-[14px] text-on-surface-variant">
-              Building the future of decentralized creator economics on Stellar.
+            <p className="max-w-[240px] font-geist text-[14px] leading-relaxed text-on-surface-variant">
+              The trust layer for global creator campaigns — escrow-backed,
+              instantly paid, built on Stellar.
             </p>
           </div>
 
@@ -23,24 +30,22 @@ export function Footer() {
             </h4>
             <a
               href="/marketplace"
-              className="font-geist text-[14px] text-on-surface-variant hover:text-on-surface"
+              className="font-geist text-[14px] text-on-surface-variant transition-colors hover:text-on-surface"
             >
               Marketplace
             </a>
             <a
               href="/dashboard"
-              className="font-geist text-[14px] text-on-surface-variant hover:text-on-surface"
+              className="font-geist text-[14px] text-on-surface-variant transition-colors hover:text-on-surface"
             >
               Campaign Dashboard
             </a>
-            <button
-              type="button"
-              title="Coming soon"
-              disabled
-              className="cursor-default text-left font-geist text-[14px] text-on-surface-variant opacity-50"
-            >
-              Smart Contracts <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
-            </button>
+            <span className="font-geist text-[14px] text-on-surface-variant/50">
+              Smart Contracts{" "}
+              <span className="ml-1 rounded-full bg-surface-container-high px-2 py-0.5 text-[10px] text-on-surface-variant">
+                Soon
+              </span>
+            </span>
           </div>
 
           {/* Network Links */}
@@ -52,7 +57,7 @@ export function Footer() {
               href="https://stellar.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-geist text-[14px] text-on-surface-variant hover:text-on-surface"
+              className="font-geist text-[14px] text-on-surface-variant transition-colors hover:text-on-surface"
             >
               Stellar Hub
             </a>
@@ -60,7 +65,7 @@ export function Footer() {
               href="https://soroban.stellar.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-geist text-[14px] text-on-surface-variant hover:text-on-surface"
+              className="font-geist text-[14px] text-on-surface-variant transition-colors hover:text-on-surface"
             >
               Soroban SDK
             </a>
@@ -68,7 +73,7 @@ export function Footer() {
               href="https://stellar.org/anchors"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-geist text-[14px] text-on-surface-variant hover:text-on-surface"
+              className="font-geist text-[14px] text-on-surface-variant transition-colors hover:text-on-surface"
             >
               Global Anchors
             </a>
@@ -79,65 +84,61 @@ export function Footer() {
             <h4 className="mb-2 font-geist text-[12px] font-semibold uppercase tracking-[0.05em] text-on-surface">
               Legal
             </h4>
-            <button
-              type="button"
-              title="Coming soon"
-              disabled
-              className="cursor-default text-left font-geist text-[14px] text-on-surface-variant opacity-50"
-            >
-              Terms of Service <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
-            </button>
-            <button
-              type="button"
-              title="Coming soon"
-              disabled
-              className="cursor-default text-left font-geist text-[14px] text-on-surface-variant opacity-50"
-            >
-              Privacy Policy <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
-            </button>
-            <button
-              type="button"
-              title="Coming soon"
-              disabled
-              className="cursor-default text-left font-geist text-[14px] text-on-surface-variant opacity-50"
-            >
-              Safety Center <span className="text-[10px] opacity-60 ml-1">(Coming soon)</span>
-            </button>
+            {["Terms of Service", "Privacy Policy", "Safety Center"].map((label) => (
+              <span key={label} className="font-geist text-[14px] text-on-surface-variant/50">
+                {label}{" "}
+                <span className="ml-1 rounded-full bg-surface-container-high px-2 py-0.5 text-[10px] text-on-surface-variant">
+                  Soon
+                </span>
+              </span>
+            ))}
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-6 border-t border-outline-variant pt-8 md:flex-row md:justify-between">
+        <div
+          aria-hidden="true"
+          className="h-px w-full bg-gradient-to-r from-transparent via-outline-variant to-transparent"
+        />
+
+        <div className="flex flex-col items-center gap-6 pt-8 md:flex-row md:justify-between">
           <p className="font-geist text-[14px] text-on-surface-variant">
-            (c) 2024 AdsBazaar Inc. All rights reserved.
+            © 2024 AdsBazaar Inc. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <button
-              type="button"
-              title="Coming soon"
-              aria-label="Website"
-              disabled
-              className="cursor-default text-on-surface-variant opacity-50"
+          <div className="flex items-center gap-4">
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="AdsBazaar on Instagram"
+              className="rounded-[8px] overflow-hidden transition-transform duration-150 ease-out hover:-translate-y-0.5"
             >
-              <Globe className="h-5 w-5" />
-            </button>
-            <button
-              type="button"
-              title="Coming soon"
-              aria-label="Email"
-              disabled
-              className="cursor-default text-on-surface-variant opacity-50"
+              <Image src="/icons/instagram.svg" alt="" width={28} height={28} aria-hidden="true" />
+            </a>
+            <a
+              href="https://tiktok.com"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="AdsBazaar on TikTok"
+              className="rounded-[8px] overflow-hidden transition-transform duration-150 ease-out hover:-translate-y-0.5"
             >
-              <AtSign className="h-5 w-5" />
-            </button>
-            <button
-              type="button"
-              title="Coming soon"
-              aria-label="Share"
-              disabled
-              className="cursor-default text-on-surface-variant opacity-50"
+              <Image src="/icons/tiktok.svg" alt="" width={28} height={28} aria-hidden="true" />
+            </a>
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="AdsBazaar on YouTube"
+              className="rounded-[8px] overflow-hidden transition-transform duration-150 ease-out hover:-translate-y-0.5"
             >
-              <Share2 className="h-5 w-5" />
-            </button>
+              <Image src="/icons/youtube.svg" alt="" width={28} height={28} aria-hidden="true" />
+            </a>
+            <a
+              href="mailto:hello@adsbazaar.xyz"
+              aria-label="Email AdsBazaar"
+              className="flex size-7 items-center justify-center text-on-surface-variant transition-colors hover:text-on-surface"
+            >
+              <Mail className="size-5" aria-hidden="true" />
+            </a>
           </div>
         </div>
       </div>
