@@ -10,6 +10,12 @@ import {
 } from "@stellar/freighter-api";
 import { WalletContext, type WalletState } from "./wallet-context";
 
+// AdsBazaar's Soroban contracts are only deployed on Stellar Testnet right
+// now, so a Mainnet (or Futurenet) Freighter connection must be rejected.
+const REQUIRED_NETWORK = "TESTNET";
+const WRONG_NETWORK_MESSAGE =
+  "Wrong network detected. Switch your Freighter wallet to Testnet to use AdsBazaar.";
+
 export function WalletProvider({ children }: { children: ReactNode }) {
   const [wallet, setWallet] = useState<WalletState | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
@@ -31,10 +37,11 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       ]);
 
       if (!isMounted || addressResult.error || !addressResult.address) return;
+      if (networkResult.error || networkResult.network !== REQUIRED_NETWORK) return;
 
       setWallet({
         address: addressResult.address,
-        network: networkResult.error ? "Stellar" : networkResult.network,
+        network: networkResult.network,
       });
     };
 
@@ -77,9 +84,16 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       }
 
       const network = await getNetworkDetails();
+      if (network.error) {
+        throw new Error("Unable to read the connected wallet's network.");
+      }
+      if (network.network !== REQUIRED_NETWORK) {
+        throw new Error(WRONG_NETWORK_MESSAGE);
+      }
+
       const newWallet: WalletState = {
         address: access.address,
-        network: network.error ? "Stellar" : network.network,
+        network: network.network,
       };
       setWallet(newWallet);
       return newWallet;
