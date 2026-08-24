@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { ConnectWalletButton } from "@/components/wallet/connect-wallet-button";
-import { NotificationBell } from "@/components/notifications/notification-bell";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -57,7 +56,6 @@ export function Navbar() {
 
         {/* Actions */}
         <div className="hidden md:flex items-center gap-6">
-          <NotificationBell variant="landing" />
           <ConnectWalletButton />
         </div>
 
@@ -102,7 +100,6 @@ export function Navbar() {
             Stats
           </a>
           <div className="flex items-center justify-between gap-3 pt-2 border-t border-outline-variant mt-2">
-            <NotificationBell variant="landing" />
             <ConnectWalletButton />
           </div>
         </div>

@@ -145,18 +145,18 @@ export function CreatorForm({
   };
 
   const inputClass = (field: keyof CreatorFormData) =>
-    `w-full h-12 bg-[var(--db-surface-high)] border ${
+    `w-full h-[52px] bg-[var(--db-surface-high)] border ${
       errors[field] && touched.has(field)
         ? "border-[#ef4444]"
         : "border-[var(--db-outline-variant)]"
-    } rounded-[4px] px-3 text-[14px] font-geist text-[var(--db-on-surface)] outline-none transition-colors focus:border-[var(--db-primary-container)] placeholder:text-[var(--db-on-surface-variant)]`;
+    } rounded-xl px-4 text-[14px] font-geist text-[var(--db-on-surface)] outline-none transition-all focus:border-[var(--db-primary-container)] focus:ring-4 focus:ring-[var(--db-primary-container)]/10 placeholder:text-[var(--db-on-surface-variant)]`;
 
   const charsLeft = BIO_MAX - data.bio.length;
   const nearLimit = charsLeft <= 20;
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="p-8">
+      <div>
         <h2 className="font-sora text-[24px] font-semibold text-[var(--db-on-surface)]">
           Define your creator profile
         </h2>
@@ -167,7 +167,7 @@ export function CreatorForm({
 
         <div className="space-y-5">
           <div>
-            <label className="block font-geist text-[12px] font-semibold uppercase text-[var(--db-on-surface-variant)] mb-1">
+            <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
               Display Name
             </label>
             <input
@@ -186,7 +186,7 @@ export function CreatorForm({
 
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
-              <label className="block font-geist text-[12px] font-semibold uppercase text-[var(--db-on-surface-variant)] mb-1">
+              <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                 Category
               </label>
               <select
@@ -209,7 +209,7 @@ export function CreatorForm({
               )}
             </div>
             <div className="flex-1">
-              <label className="block font-geist text-[12px] font-semibold uppercase text-[var(--db-on-surface-variant)] mb-1">
+              <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                 Country
               </label>
               <select
@@ -235,7 +235,7 @@ export function CreatorForm({
 
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
-              <label className="block font-geist text-[12px] font-semibold uppercase text-[var(--db-on-surface-variant)] mb-1">
+              <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                 Audience Size
               </label>
               <div className="relative">
@@ -264,7 +264,7 @@ export function CreatorForm({
               )}
             </div>
             <div className="flex-1">
-              <label className="block font-geist text-[12px] font-semibold uppercase text-[var(--db-on-surface-variant)] mb-1">
+              <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                 Primary Social Link
               </label>
               <div className="relative">
@@ -290,7 +290,7 @@ export function CreatorForm({
           </div>
 
           <div>
-            <label className="block font-geist text-[12px] font-semibold uppercase text-[var(--db-on-surface-variant)] mb-1">
+            <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
               Short Bio
             </label>
             <textarea
@@ -304,13 +304,13 @@ export function CreatorForm({
             />
             <div className="flex items-center justify-end mt-1">
               <span
-                className={`font-geist text-[10px] uppercase ${
+                className={`font-geist text-[11px] ${
                   nearLimit
                     ? "text-[#ef4444]"
                     : "text-[var(--db-on-surface-variant)]"
                 }`}
               >
-                {data.bio.length} / {BIO_MAX} CHARACTERS
+                {data.bio.length} / {BIO_MAX} characters
               </span>
             </div>
             {errors.bio && touched.has("bio") && (
@@ -322,18 +322,18 @@ export function CreatorForm({
 
           <div className="flex gap-3 pt-2">
             <button
-              type="submit"
-              className="flex-1 h-12 rounded-[4px] bg-[var(--db-primary-container)] text-[var(--db-on-primary)] font-geist text-[13px] font-semibold hover:opacity-90 transition-opacity"
-            >
-              Complete Profile{" "}
-              <ArrowRight size={16} className="inline mb-[2px] ml-0.5" />
-            </button>
-            <button
               type="button"
               onClick={onSkip}
-              className="h-12 px-6 rounded-[4px] border border-[var(--db-on-surface)] text-[var(--db-on-surface)] font-geist text-[13px] font-semibold hover:bg-[var(--db-surface-high)] transition-colors"
+              className="h-[52px] px-6 rounded-full border border-[var(--db-outline-variant)] text-[var(--db-on-surface)] font-geist text-[14px] font-semibold hover:bg-[var(--db-surface-high)] transition-colors"
             >
               Skip for Now
+            </button>
+            <button
+              type="submit"
+              className="flex-1 h-[52px] rounded-full bg-[var(--db-primary-container)] text-[var(--db-on-primary)] font-geist text-[14px] font-semibold inline-flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity"
+            >
+              Complete Profile
+              <ArrowRight size={16} />
             </button>
           </div>
         </div>
