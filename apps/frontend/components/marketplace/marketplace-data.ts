@@ -187,3 +187,7 @@ export const marketplaceCampaigns: MarketplaceCampaign[] = [
 ];
 
 export const quickTags = ["WEB3 NATIVE", "E-COMMERCE", "TIKTOK TREND", "UGC"];
+
+export function findCampaignById(id: string): MarketplaceCampaign | null {
+  return marketplaceCampaigns.find(campaign => campaign.id === id) || null;
+}

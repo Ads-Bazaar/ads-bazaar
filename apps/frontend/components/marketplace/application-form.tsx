@@ -2,10 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { ChevronDown, CircleCheck } from "lucide-react";
-import { campaignDetailMock } from "./campaign-detail-data";
 import Link from "next/link";
 
 const PITCH_MIN_LENGTH = 20;
+
+const DEFAULT_CONTENT_FORMATS = [
+  "Video Review",
+  "Photography Posts",
+  "Instagram Stories",
+  "TikTok Short",
+];
 
 type FormErrors = {
   portfolioLink?: string;
@@ -14,9 +20,11 @@ type FormErrors = {
 };
 
 export function ApplicationForm({
-  campaignId = campaignDetailMock.id,
+  campaignId,
+  contentFormats = DEFAULT_CONTENT_FORMATS,
 }: {
-  campaignId?: string;
+  campaignId: string;
+  contentFormats?: string[];
 }) {
   const storageKey = `campaign-application:${campaignId}`;
 
@@ -147,7 +155,7 @@ export function ApplicationForm({
               <option value="" disabled>
                 Select a format
               </option>
-              {campaignDetailMock.contentFormats.map((format) => (
+              {contentFormats.map((format) => (
                 <option key={format} value={format}>
                   {format}
                 </option>
@@ -166,7 +174,7 @@ export function ApplicationForm({
             PITCH MESSAGE
           </label>
           <textarea
-            placeholder="Why are you a good fit for this wearable launch?"
+            placeholder="Why are you a good fit for this campaign?"
             value={pitchMessage}
             onChange={(e) => {
               setPitchMessage(e.target.value);

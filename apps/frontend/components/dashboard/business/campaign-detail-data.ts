@@ -96,3 +96,45 @@ export const campaignDetail: CampaignDetail = {
     engagementProgress: 48,
   },
 };
+
+export function getBusinessCampaignDetailById(id: string): CampaignDetail | null {
+  if (id === campaignDetail.id) {
+    return campaignDetail;
+  }
+
+  return null;
+}
+
+export function buildCampaignDetailFromListItem(id: string, name: string, status: string): CampaignDetail {
+
+  const statusMap: Record<string, CampaignDetailStatus> = {
+    active: "active",
+    paused: "paused",
+    draft: "draft",
+    completed: "completed",
+    "under-review": "paused", 
+  };
+  
+  const mappedStatus: CampaignDetailStatus = statusMap[status] || "draft";
+
+  return {
+    id,
+    name,
+    status: mappedStatus,
+    dateRange: "",
+    location: "Global (Stellar Ecosystem)",
+    description: "Campaign details coming soon.",
+    escrow: { total: "0 XLM", available: "0 XLM", reserved: "0 XLM" },
+    applicantCount: 0,
+    proofQueueCount: 0,
+    applicants: [],
+    proofQueue: [],
+    activity: [],
+    reach: {
+      totalImpressions: "—",
+      impressionsProgress: 0,
+      engagementRate: "—",
+      engagementProgress: 0,
+    },
+  };
+}

@@ -75,3 +75,7 @@ export const campaignsList: CampaignListItem[] = [
 ];
 
 export const filterTabs = ["All", "Active", "Scheduled", "Drafts", "Completed"] as const;
+
+export function findBusinessCampaignById(id: string): CampaignListItem | null {
+  return campaignsList.find(campaign => campaign.id === id) || null;
+}
