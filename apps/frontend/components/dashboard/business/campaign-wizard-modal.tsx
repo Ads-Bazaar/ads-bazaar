@@ -154,7 +154,7 @@ function validateStep(step: number, state: WizardState): Record<string, string> 
 
   if (step === 3) {
     if (!state.budget.asset) errors.asset = "Select a payment asset.";
-    if (state.budget.totalBudget <= 0) errors.totalBudget = "Budget must be greater than 0.";
+    if (!Number.isFinite(state.budget.totalBudget) || state.budget.totalBudget <= 0) errors.totalBudget = "Budget must be greater than 0.";
     if (state.budget.creatorSlots < 1) errors.creatorSlots = "At least 1 creator slot is required.";
   }
 
