@@ -62,8 +62,12 @@ export function StepReviewFund({ data, onGoToStep }: StepReviewFundProps) {
   const networkLabel = formatNetworkLabel(wallet?.network);
   const isNetworkMismatch = !!wallet?.network && wallet.network !== EXPECTED_NETWORK;
 
-  const creatorPool = budget.totalBudget;
-  const platformFee = budget.totalBudget * 0.005;
+  const validBudget =
+    Number.isFinite(budget.totalBudget) && budget.totalBudget > 0
+      ? budget.totalBudget
+      : 0;
+  const creatorPool = validBudget;
+  const platformFee = validBudget * 0.005;
   const networkGas = 0.0001;
   const total = creatorPool + platformFee + networkGas;
 
