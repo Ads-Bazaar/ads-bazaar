@@ -2,7 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { X, LayoutGrid, Sparkles, Tag } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Building2,
+  Check,
+  Megaphone,
+  ShieldCheck,
+  Sparkles,
+  WalletCards,
+  X,
+} from "lucide-react";
 import { useOnboardingModal } from "./onboarding-modal-context";
 import { StepIndicator } from "./step-indicator";
 import { BusinessForm } from "./business-form";
@@ -38,6 +48,7 @@ export function OnboardingWizardModal() {
   const { setRole: persistRole } = useRole();
   const router = useRouter();
   const mainRef = useRef<HTMLElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   const [step, setStep] = useState<Step>("role");
   const [role, setRole] = useState<Role>(null);
@@ -68,11 +79,33 @@ export function OnboardingWizardModal() {
 
   useEffect(() => {
     if (!isOpen) return;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeOnboarding();
+      if (e.key !== "Tab" || !dialogRef.current) return;
+
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    requestAnimationFrame(() => {
+      dialogRef.current?.querySelector<HTMLElement>("button")?.focus();
+    });
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused?.focus();
+    };
   }, [isOpen, closeOnboarding]);
 
   function scrollToTop() {
@@ -117,43 +150,64 @@ export function OnboardingWizardModal() {
         aria-hidden="true"
       />
 
-      <div className="absolute inset-x-0 bottom-0 top-0 flex overflow-hidden bg-surface-container sm:inset-x-4 sm:top-4 sm:bottom-4 sm:rounded-[24px] lg:inset-x-auto lg:left-1/2 lg:top-1/2 lg:h-[min(680px,calc(100vh-64px))] lg:w-full lg:max-w-[900px] lg:-translate-x-1/2 lg:-translate-y-1/2 lg:rounded-[24px]">
+      <div
+        ref={dialogRef}
+        className="absolute inset-0 flex overflow-hidden bg-surface-container shadow-2xl sm:inset-4 sm:rounded-3xl lg:inset-auto lg:left-1/2 lg:top-1/2 lg:h-[min(720px,calc(100vh-48px))] lg:w-[min(1040px,calc(100vw-48px))] lg:-translate-x-1/2 lg:-translate-y-1/2"
+      >
         {/* Decorative brand panel */}
-        <aside className="relative hidden w-[320px] shrink-0 overflow-hidden bg-[#0b0b0b] lg:block">
+        <aside className="relative hidden w-72 shrink-0 overflow-hidden border-r border-outline-variant bg-background lg:flex lg:flex-col lg:justify-between lg:p-8">
           <div
             aria-hidden="true"
-            className="absolute inset-x-[-20%] top-[-10%] h-[75%] rounded-full bg-[radial-gradient(closest-side,var(--db-primary-container),transparent)] opacity-[0.22] blur-3xl"
+            className="absolute -left-24 -top-32 size-96 rounded-full bg-[radial-gradient(closest-side,var(--db-primary-container),transparent)] opacity-15 blur-3xl"
           />
-          <div className="absolute inset-x-0 bottom-10 flex flex-col items-center px-8 text-center">
-            <div className="mb-5 flex size-12 items-center justify-center rounded-[14px] border border-outline-variant/60 bg-surface-container-high">
-              <Tag className="size-5 text-primary-container" aria-hidden="true" />
+          <div className="relative">
+            <div className="flex items-center gap-3">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-primary-container text-on-primary">
+                <Megaphone className="size-5" aria-hidden="true" />
+              </div>
+              <span className="font-sora text-lg font-bold text-on-surface">AdsBazaar</span>
             </div>
-            <span className="font-sora text-[20px] font-bold text-on-surface">
-              AdsBazaar
-            </span>
-            <p className="mt-2 text-[13px] leading-relaxed text-on-surface-variant">
-              The trust layer for global creator campaigns — escrow-backed,
-              instantly paid.
+            <p className="mt-12 text-xs font-semibold uppercase tracking-[0.18em] text-primary-container">
+              Built for both sides
             </p>
+            <h2 className="mt-3 font-sora text-2xl font-bold leading-tight text-on-surface">
+              Campaigns without the trust gap.
+            </h2>
+            <p className="mt-4 text-sm leading-6 text-on-surface-variant">
+              Create, collaborate, verify work, and release payments from one shared workflow.
+            </p>
+          </div>
+          <div className="relative space-y-4 border-t border-outline-variant pt-6">
+            {["Escrow-backed budgets", "Verified campaign delivery", "Fast global payouts"].map((item) => (
+              <div key={item} className="flex items-center gap-3 text-sm text-on-surface-variant">
+                <Check className="size-4 text-primary-container" aria-hidden="true" />
+                <span>{item}</span>
+              </div>
+            ))}
           </div>
         </aside>
 
         {/* Form panel */}
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="flex h-14 shrink-0 items-center justify-between border-b border-outline-variant px-6">
-            <StepIndicator variant="minimal" totalSteps={3} currentStep={stepNumber} />
+          <header className="flex h-16 shrink-0 items-center justify-between border-b border-outline-variant px-5 sm:px-8">
+            <div className="flex items-center gap-4">
+              <StepIndicator variant="minimal" totalSteps={3} currentStep={stepNumber} />
+              <span className="hidden text-xs text-on-surface-variant sm:inline">
+                {step === "role" ? "Choose a role" : step === "form" ? "Build your profile" : "Ready to go"}
+              </span>
+            </div>
             <button
               type="button"
               onClick={closeOnboarding}
               aria-label="Close"
-              className="flex size-8 items-center justify-center rounded-full text-on-surface-variant transition hover:bg-surface-container-high hover:text-on-surface"
+              className="flex size-11 items-center justify-center rounded-xl text-on-surface-variant transition-colors duration-100 hover:bg-surface-container-high hover:text-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-container"
             >
               <X size={16} aria-hidden="true" />
             </button>
           </header>
 
           <main ref={mainRef} className="flex-1 overflow-y-auto no-scrollbar">
-            <div className="mx-auto flex max-w-[480px] flex-col items-center px-6 py-8 lg:items-stretch lg:text-left">
+            <div className="mx-auto flex min-h-full max-w-2xl flex-col px-5 py-8 sm:px-8 sm:py-10 lg:justify-center lg:py-12">
               {step === "role" && (
                 <RoleStep
                   intent={intent}
@@ -185,6 +239,7 @@ export function OnboardingWizardModal() {
                     data={creatorData}
                     onChange={setCreatorData}
                     onSubmit={handleFormSubmit}
+                    onBack={() => { setStep("role"); scrollToTop(); }}
                     onSkip={() => handleComplete("/dashboard/creator")}
                   />
                 </div>
@@ -213,61 +268,59 @@ function RoleStep({
 }) {
   return (
     <>
-      <h1 className="font-sora text-[32px] font-extrabold text-on-surface text-center leading-tight">
-        Select your journey.
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-container">
+        Start here
+      </p>
+      <h1 className="mt-3 max-w-xl font-sora text-3xl font-bold leading-tight tracking-tight text-on-surface sm:text-4xl">
+        How will you use AdsBazaar?
       </h1>
-      <p className="text-[15px] text-on-surface-variant text-center mt-3 max-w-[480px]">
-        Welcome to the AdsBazaar ecosystem. Choose how you want to participate
-        in the creator economy.
+      <p className="mt-3 max-w-xl text-sm leading-6 text-on-surface-variant sm:text-base">
+        Pick a workspace. You can add the other role later without creating a new account.
       </p>
 
-      <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full">
+      <div className="mt-8 grid w-full gap-3">
         <button
           type="button"
           onClick={() => onSelect("business")}
-          className={`group flex flex-1 flex-col rounded-2xl border bg-surface-container-high p-6 text-left transition-all hover:-translate-y-0.5 hover:border-primary-container ${
+          className={`group grid min-h-36 w-full grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border bg-surface-container-high p-5 text-left transition-[border-color,background-color,transform] duration-100 hover:-translate-y-0.5 hover:border-primary-container focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-container focus-visible:ring-offset-2 focus-visible:ring-offset-surface-container active:translate-y-0 ${
             intent === "business"
               ? "border-primary-container"
               : "border-outline-variant"
           }`}
         >
-          <div className="flex size-10 items-center justify-center rounded-xl bg-background transition-colors group-hover:bg-primary-container/10">
-            <LayoutGrid size={20} className="text-on-surface" />
+          <div className="flex size-12 items-center justify-center rounded-xl bg-background text-primary-container transition-colors duration-100 group-hover:bg-primary-container group-hover:text-on-primary">
+            <Building2 size={22} aria-hidden="true" />
           </div>
-          <h3 className="font-sora text-lg font-semibold text-on-surface mt-4">
-            I am a Business
-          </h3>
-          <p className="text-sm text-on-surface-variant mt-2 leading-relaxed">
-            Launch creator campaigns, fund escrow, and manage creator
-            relationships from one dashboard.
-          </p>
-          <span className="text-[12px] font-semibold uppercase tracking-[0.05em] text-primary-container mt-5">
-            SELECT ROLE →
+          <span>
+            <span className="block font-sora text-lg font-semibold text-on-surface">Business workspace</span>
+            <span className="mt-1 block text-sm leading-6 text-on-surface-variant">Launch campaigns, manage applications, and fund payouts.</span>
+            <span className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-on-surface-variant">
+              <span>Campaign tools</span><span>Escrow controls</span>
+            </span>
           </span>
+          <ArrowRight className="size-5 text-primary-container transition-transform duration-100 group-hover:translate-x-1" aria-hidden="true" />
         </button>
 
         <button
           type="button"
           onClick={() => onSelect("creator")}
-          className={`group flex flex-1 flex-col rounded-2xl border bg-surface-container-high p-6 text-left transition-all hover:-translate-y-0.5 hover:border-primary-container ${
+          className={`group grid min-h-36 w-full grid-cols-[auto_1fr_auto] items-center gap-4 rounded-2xl border bg-surface-container-high p-5 text-left transition-[border-color,background-color,transform] duration-100 hover:-translate-y-0.5 hover:border-primary-container focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-container focus-visible:ring-offset-2 focus-visible:ring-offset-surface-container active:translate-y-0 ${
             intent === "creator"
               ? "border-primary-container"
               : "border-outline-variant"
           }`}
         >
-          <div className="flex size-10 items-center justify-center rounded-xl bg-background transition-colors group-hover:bg-primary-container/10">
-            <Sparkles size={20} className="text-on-surface" />
+          <div className="flex size-12 items-center justify-center rounded-xl bg-background text-primary-container transition-colors duration-100 group-hover:bg-primary-container group-hover:text-on-primary">
+            <Sparkles size={22} aria-hidden="true" />
           </div>
-          <h3 className="font-sora text-lg font-semibold text-on-surface mt-4">
-            I am a Creator
-          </h3>
-          <p className="text-sm text-on-surface-variant mt-2 leading-relaxed">
-            Discover campaigns, apply with your profile, submit content, and get
-            paid instantly.
-          </p>
-          <span className="text-[12px] font-semibold uppercase tracking-[0.05em] text-primary-container mt-5">
-            SELECT ROLE →
+          <span>
+            <span className="block font-sora text-lg font-semibold text-on-surface">Creator workspace</span>
+            <span className="mt-1 block text-sm leading-6 text-on-surface-variant">Find paid briefs, submit your work, and track earnings.</span>
+            <span className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-on-surface-variant">
+              <span>Campaign discovery</span><span>Fast payouts</span>
+            </span>
           </span>
+          <ArrowRight className="size-5 text-primary-container transition-transform duration-100 group-hover:translate-x-1" aria-hidden="true" />
         </button>
       </div>
     </>
@@ -285,43 +338,36 @@ function CompleteStep({
     role === "business" ? "/dashboard/business" : "/dashboard/creator";
 
   return (
-    <div className="flex flex-col items-center text-center">
-      <div className="flex size-16 items-center justify-center rounded-2xl bg-surface-container-high shadow-[0_0_32px_rgba(200,242,50,0.12)]">
-        <svg
-          className="size-9 text-primary-container"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2.5}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-          />
-        </svg>
+    <div className="flex flex-col items-start">
+      <div className="flex size-14 items-center justify-center rounded-2xl bg-primary-container text-on-primary">
+        <BadgeCheck className="size-7" aria-hidden="true" />
       </div>
 
-      <h1 className="font-sora text-[28px] font-extrabold text-on-surface leading-tight mt-6">
-        You&apos;re all set!
+      <p className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-primary-container">Profile complete</p>
+      <h1 className="mt-3 font-sora text-3xl font-bold leading-tight tracking-tight text-on-surface sm:text-4xl">
+        Your workspace is ready.
       </h1>
-      <p className="text-[15px] text-on-surface-variant mt-3 max-w-[400px]">
-        Your profile is saved on this device. Connect your wallet each visit to
-        access your dashboard.
+      <p className="mt-3 max-w-lg text-sm leading-6 text-on-surface-variant sm:text-base">
+        Your {role} profile is saved on this device. Connect your wallet when you return to keep access secure.
       </p>
 
-      <div className="flex flex-col sm:flex-row gap-3 w-full mt-8">
+      <div className="mt-7 grid w-full gap-3 sm:grid-cols-2">
+        <div className="flex items-center gap-3 rounded-xl border border-outline-variant p-4 text-sm text-on-surface"><ShieldCheck className="size-5 text-primary-container" aria-hidden="true" /> Profile saved</div>
+        <div className="flex items-center gap-3 rounded-xl border border-outline-variant p-4 text-sm text-on-surface"><WalletCards className="size-5 text-primary-container" aria-hidden="true" /> Wallet-ready access</div>
+      </div>
+
+      <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row">
         <button
           type="button"
           onClick={() => onNavigate(dashboard)}
-          className="flex-1 h-[48px] bg-primary-container text-on-primary font-semibold text-[14px] rounded-full hover:opacity-90 transition-opacity"
+          className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-primary-container px-5 text-sm font-semibold text-on-primary transition-[opacity,transform] duration-100 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-container focus-visible:ring-offset-2 focus-visible:ring-offset-surface-container active:translate-y-px"
         >
-          Enter Dashboard →
+          Enter dashboard <ArrowRight className="size-4" aria-hidden="true" />
         </button>
         <button
           type="button"
           onClick={() => onNavigate("/marketplace")}
-          className="flex-1 h-[48px] border border-on-surface text-on-surface font-semibold text-[14px] rounded-full hover:bg-surface-container-high transition-colors"
+          className="min-h-12 flex-1 rounded-xl border border-outline-variant px-5 text-sm font-semibold text-on-surface transition-colors duration-100 hover:bg-surface-container-high focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-container"
         >
           Browse Marketplace
         </button>

@@ -16,6 +16,7 @@ type CreatorFormProps = {
   data: CreatorFormData;
   onChange: (data: CreatorFormData) => void;
   onSubmit: () => void;
+  onBack: () => void;
   onSkip: () => void;
 };
 
@@ -89,6 +90,7 @@ export function CreatorForm({
   data,
   onChange,
   onSubmit,
+  onBack,
   onSkip,
 }: CreatorFormProps) {
   const [errors, setErrors] = useState<Errors>({});
@@ -149,7 +151,7 @@ export function CreatorForm({
       errors[field] && touched.has(field)
         ? "border-[#ef4444]"
         : "border-[var(--db-outline-variant)]"
-    } rounded-xl px-4 text-[14px] font-geist text-[var(--db-on-surface)] outline-none transition-all focus:border-[var(--db-primary-container)] focus:ring-4 focus:ring-[var(--db-primary-container)]/10 placeholder:text-[var(--db-on-surface-variant)]`;
+    } rounded-xl px-4 text-[14px] font-geist text-[var(--db-on-surface)] outline-none transition-[border-color,box-shadow] duration-100 focus:border-[var(--db-primary-container)] focus:ring-4 focus:ring-[var(--db-primary-container)]/10 placeholder:text-[var(--db-on-surface-variant)]`;
 
   const charsLeft = BIO_MAX - data.bio.length;
   const nearLimit = charsLeft <= 20;
@@ -167,10 +169,12 @@ export function CreatorForm({
 
         <div className="space-y-5">
           <div>
-            <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
+            <label htmlFor="creator-name" className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
               Display Name
             </label>
             <input
+              id="creator-name"
+              autoComplete="name"
               className={inputClass("displayName")}
               placeholder="e.g. Alex Creator"
               value={data.displayName}
@@ -186,10 +190,11 @@ export function CreatorForm({
 
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
-              <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
+              <label htmlFor="creator-category" className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                 Category
               </label>
               <select
+                id="creator-category"
                 className={inputClass("category")}
                 value={data.category}
                 onChange={(e) => handleChange("category", e.target.value)}
@@ -209,10 +214,12 @@ export function CreatorForm({
               )}
             </div>
             <div className="flex-1">
-              <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
+              <label htmlFor="creator-country" className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                 Country
               </label>
               <select
+                id="creator-country"
+                autoComplete="country-name"
                 className={inputClass("country")}
                 value={data.country}
                 onChange={(e) => handleChange("country", e.target.value)}
@@ -235,7 +242,7 @@ export function CreatorForm({
 
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
-              <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
+              <label htmlFor="creator-audience" className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                 Audience Size
               </label>
               <div className="relative">
@@ -244,6 +251,7 @@ export function CreatorForm({
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--db-on-surface-variant)]"
                 />
                 <select
+                  id="creator-audience"
                   className={`${inputClass("audienceSize")} pl-9`}
                   value={data.audienceSize}
                   onChange={(e) => handleChange("audienceSize", e.target.value)}
@@ -264,7 +272,7 @@ export function CreatorForm({
               )}
             </div>
             <div className="flex-1">
-              <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
+              <label htmlFor="creator-social" className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                 Primary Social Link
               </label>
               <div className="relative">
@@ -273,6 +281,8 @@ export function CreatorForm({
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--db-on-surface-variant)]"
                 />
                 <input
+                  id="creator-social"
+                  autoComplete="url"
                   className={`${inputClass("socialLink")} pl-9`}
                   placeholder="https://"
                   type="url"
@@ -290,10 +300,11 @@ export function CreatorForm({
           </div>
 
           <div>
-            <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
+            <label htmlFor="creator-bio" className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
               Short Bio
             </label>
             <textarea
+              id="creator-bio"
               className={`${inputClass("bio")} min-h-[96px] resize-none py-3`}
               placeholder="Tell brands what makes your content unique..."
               rows={4}
@@ -320,22 +331,29 @@ export function CreatorForm({
             )}
           </div>
 
-          <div className="flex gap-3 pt-2">
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
             <button
               type="button"
-              onClick={onSkip}
-              className="h-[52px] px-6 rounded-full border border-[var(--db-outline-variant)] text-[var(--db-on-surface)] font-geist text-[14px] font-semibold hover:bg-[var(--db-surface-high)] transition-colors"
+              onClick={onBack}
+              className="h-[52px] px-6 rounded-full border border-[var(--db-outline-variant)] text-[var(--db-on-surface)] font-geist text-[14px] font-semibold hover:bg-[var(--db-surface-high)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--db-primary-container)]"
             >
-              Skip for Now
+              Back
             </button>
             <button
               type="submit"
-              className="flex-1 h-[52px] rounded-full bg-[var(--db-primary-container)] text-[var(--db-on-primary)] font-geist text-[14px] font-semibold inline-flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity"
+              className="flex-1 h-[52px] rounded-full bg-[var(--db-primary-container)] text-[var(--db-on-primary)] font-geist text-[14px] font-semibold inline-flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--db-primary-container)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--db-surface)] active:translate-y-px"
             >
               Complete Profile
               <ArrowRight size={16} />
             </button>
           </div>
+          <button
+            type="button"
+            onClick={onSkip}
+            className="mt-4 min-h-10 w-full text-sm font-medium text-[var(--db-on-surface-variant)] transition-colors duration-100 hover:text-[var(--db-on-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--db-primary-container)]"
+          >
+            Skip profile setup for now
+          </button>
         </div>
       </div>
     </form>

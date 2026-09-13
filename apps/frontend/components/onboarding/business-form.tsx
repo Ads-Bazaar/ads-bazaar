@@ -121,7 +121,7 @@ export function BusinessForm({
       errors[field] && touched.has(field)
         ? "border-[#ef4444]"
         : "border-[var(--db-outline-variant)]"
-    } rounded-xl px-4 text-[14px] font-geist text-[var(--db-on-surface)] outline-none transition-all focus:border-[var(--db-primary-container)] focus:ring-4 focus:ring-[var(--db-primary-container)]/10 placeholder:text-[var(--db-on-surface-variant)]`;
+    } rounded-xl px-4 text-[14px] font-geist text-[var(--db-on-surface)] outline-none transition-[border-color,box-shadow] duration-100 focus:border-[var(--db-primary-container)] focus:ring-4 focus:ring-[var(--db-primary-container)]/10 placeholder:text-[var(--db-on-surface-variant)]`;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -137,10 +137,12 @@ export function BusinessForm({
 
           <div className="space-y-5">
             <div>
-              <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
+              <label htmlFor="business-name" className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                 Business Name
               </label>
               <input
+                id="business-name"
+                autoComplete="organization"
                 className={inputClass("name")}
                 placeholder="e.g. Atlas Digital Group"
                 value={data.name}
@@ -156,10 +158,11 @@ export function BusinessForm({
 
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
+                <label htmlFor="business-industry" className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                   Industry
                 </label>
                 <select
+                  id="business-industry"
                   className={inputClass("industry")}
                   value={data.industry}
                   onChange={(e) => handleChange("industry", e.target.value)}
@@ -179,10 +182,12 @@ export function BusinessForm({
                 )}
               </div>
               <div className="flex-1">
-                <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
+                <label htmlFor="business-country" className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                   Country
                 </label>
                 <select
+                  id="business-country"
+                  autoComplete="country-name"
                   className={inputClass("country")}
                   value={data.country}
                   onChange={(e) => handleChange("country", e.target.value)}
@@ -204,7 +209,7 @@ export function BusinessForm({
             </div>
 
             <div>
-              <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
+              <label htmlFor="business-email" className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                 Business Email
               </label>
               <div className="relative">
@@ -213,6 +218,8 @@ export function BusinessForm({
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--db-on-surface-variant)]"
                 />
                 <input
+                  id="business-email"
+                  autoComplete="email"
                   className={`${inputClass("email")} pl-9`}
                   placeholder="hello@yourbusiness.com"
                   type="email"
@@ -229,7 +236,7 @@ export function BusinessForm({
             </div>
 
             <div>
-              <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
+              <label htmlFor="business-website" className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                 Website or Social Link
               </label>
               <div className="relative">
@@ -238,6 +245,8 @@ export function BusinessForm({
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--db-on-surface-variant)]"
                 />
                 <input
+                  id="business-website"
+                  autoComplete="url"
                   className={`${inputClass("website")} pl-9`}
                   placeholder="https://"
                   type="url"
@@ -254,10 +263,11 @@ export function BusinessForm({
             </div>
 
             <div>
-              <label className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
+              <label htmlFor="business-description" className="block font-geist text-[13px] font-medium text-[var(--db-on-surface-variant)] mb-1.5">
                 Brief Description
               </label>
               <textarea
+                id="business-description"
                 className={`${inputClass("description")} min-h-[96px] resize-none py-3`}
                 placeholder="Tell us about your brand vision..."
                 rows={4}
@@ -270,13 +280,13 @@ export function BusinessForm({
               <button
                 type="button"
                 onClick={onBack}
-                className="h-[52px] px-6 rounded-full border border-[var(--db-outline-variant)] text-[var(--db-on-surface)] font-geist text-[14px] font-semibold hover:bg-[var(--db-surface-high)] transition-colors"
+                className="h-[52px] px-6 rounded-full border border-[var(--db-outline-variant)] text-[var(--db-on-surface)] font-geist text-[14px] font-semibold hover:bg-[var(--db-surface-high)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--db-primary-container)]"
               >
                 Back
               </button>
               <button
                 type="submit"
-                className="flex-1 h-[52px] rounded-full bg-[var(--db-primary-container)] text-[var(--db-on-primary)] font-geist text-[14px] font-semibold inline-flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity"
+                className="flex-1 h-[52px] rounded-full bg-[var(--db-primary-container)] text-[var(--db-on-primary)] font-geist text-[14px] font-semibold inline-flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--db-primary-container)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--db-surface)] active:translate-y-px"
               >
                 Continue to Dashboard
                 <ArrowRight size={16} />
